@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607204104) do
+ActiveRecord::Schema.define(version: 20150607225418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,15 @@ ActiveRecord::Schema.define(version: 20150607204104) do
     t.integer  "listing_id"
     t.integer  "owner_id"
     t.integer  "price"
-    t.boolean  "airbnb",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "airbnb",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "description"
+    t.string   "location"
+    t.integer  "bedrooms"
+    t.integer  "bathrooms"
+    t.string   "images",      default: [],                 array: true
+    t.string   "amenities",   default: [],                 array: true
   end
 
 end
