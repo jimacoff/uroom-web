@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  
-  
+
+
   get 'listings/listing'
+
+  post 'listings/orbit'
 
   get 'search/results'
 

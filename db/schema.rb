@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608214139) do
+ActiveRecord::Schema.define(version: 20150609154208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,5 +34,16 @@ ActiveRecord::Schema.define(version: 20150608214139) do
     t.integer  "beds"
     t.integer  "accommodates"
   end
+
+  create_table "planets", force: :cascade do |t|
+    t.integer  "listing_id", null: false
+    t.integer  "crew_size",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date     "start_date", null: false
+    t.date     "end_date",   null: false
+  end
+
+  add_index "planets", ["listing_id"], name: "index_planets_on_listing_id", using: :btree
 
 end
