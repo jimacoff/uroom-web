@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'listings/listing'
+  get 'listings/show'
 
   post 'listings/orbit'
 

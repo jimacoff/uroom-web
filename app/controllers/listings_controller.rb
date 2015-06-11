@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
 
-  def listing
+  def show
     #show
     # get parameters
     @id = params[:id].to_i
@@ -19,51 +19,11 @@ class ListingsController < ApplicationController
     else
       @listing = Listing.find(@id)
     end
-  end
 
-  def orbit
-    # Create planet from listing
-    # Where:
-    #   - Same listing
-    #   - Same crew size
-    #   - Same start month & year
-    #   - Same end month & year
-    @crew_size = params[:roommates].to_i + 1
-    @start_date = start_date()
-    @end_date = end_date()
-    @listing = Listing.find_by(listing_id: params[:id].to_i)
-    @planet = Planet.where(listing_id: @listing.id)
-                          .where(crew_size: @crew_size)
-                          .where(start_date: @start_date)
-                          .where(end_date: @end_date).take
-    if @planet.nil?
-      @planet = Planet.new
-      @planet.listing = @listing
-      @planet.start_date = @start_date
-      @planet.end_date = @end_date
-      @planet.crew_size = @crew_size
-      if @planet.save
-        redirect_to()
-      else
-        # add parameters
-        flash[:hash] = "Could not find planet"
-        redirect_to("listing")
-      end
-    end
+    # check if user has planet for this
   end
 
   private
-    def start_date()
-      # :year, :month, :day
-      @start_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
-      return @start_date
-    end
-
-    def end_date()
-      lease_length = params[:lease_length].to_i
-      @end_date = @start_date + lease_length.months
-      return @end_date
-    end
 
     def parse_airbnb()
       listing = Listing.find_by(listing_id: @id)
