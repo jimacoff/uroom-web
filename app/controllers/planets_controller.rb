@@ -6,6 +6,9 @@ class PlanetsController < ApplicationController
   def orbit
     # create if needed
     # else add it to user-planet join table
+    @month = params[:month].to_i
+    @year = params[:year].to_i
+    @lease_length = params[:lease_length].to_i
     @start_date = start_date()
     @end_date = end_date()
     @listing = Listing.find_by(listing_id: params[:id].to_i)
@@ -24,18 +27,18 @@ class PlanetsController < ApplicationController
     # Add to user
     # redirect_to
     redirect_to(:controller => "listing", :action => "show")
+    # pass additional parameters
   end
 
   private
     def start_date()
       # :year, :month, :day
-      @start_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
+      @start_date = Date.new(@year, @month, 1)
       return @start_date
     end
 
     def end_date()
-      lease_length = params[:lease_length].to_i
-      @end_date = @start_date + lease_length.months
+      @end_date = @start_date + @lease_length.months
       return @end_date
     end
 end
