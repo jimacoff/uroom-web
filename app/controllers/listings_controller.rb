@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
 
   def show
+
     #show
     # get parameters
     @id = params[:id].to_i
@@ -21,6 +22,12 @@ class ListingsController < ApplicationController
     end
 
     # check if user has planet for this
+    orbits = []
+    user.orbits.each do |orbit|
+      if orbit.planet.listing == @listing
+        orbits << orbit
+      end
+    end
   end
 
   private

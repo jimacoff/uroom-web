@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :orbits
   has_many :planets, through: :orbits
+  belongs_to :crew
 end

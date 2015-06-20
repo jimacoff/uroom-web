@@ -1,6 +1,11 @@
 class PlanetsController < ApplicationController
 
   def show
+    # show other users and your crew
+  end
+
+  def land
+    # Request booking (needs crew id)
   end
 
   def orbit
@@ -25,6 +30,10 @@ class PlanetsController < ApplicationController
     end
 
     # Add to user
+    user.planets << @planet
+    @planet.users << user
+    # Get orbit by Orbit.where(user & planet)
+
     # redirect_to
     redirect_to(:controller => "listing", :action => "show")
     # pass additional parameters
