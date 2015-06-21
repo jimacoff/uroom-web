@@ -31,7 +31,7 @@ class PlanetsController < ApplicationController
 
     # Add to user
     user.planets << @planet
-    @planet.users << user
+    orbit = Orbit.where("user_id = ? OR planet_id = ?", user.id, @planet.id)
     # Get orbit by Orbit.where(user & planet)
 
     # redirect_to

@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20150620195333) do
   enable_extension "plpgsql"
 
   create_table "crews", force: :cascade do |t|
-    t.integer  "orbit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,10 +43,12 @@ ActiveRecord::Schema.define(version: 20150620195333) do
   create_table "orbits", force: :cascade do |t|
     t.integer  "planet_id"
     t.integer  "user_id"
+    t.integer  "crew_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "orbits", ["crew_id"], name: "index_orbits_on_crew_id", using: :btree
   add_index "orbits", ["planet_id"], name: "index_orbits_on_planet_id", using: :btree
   add_index "orbits", ["user_id"], name: "index_orbits_on_user_id", using: :btree
 
