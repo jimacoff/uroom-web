@@ -2,6 +2,11 @@ class PlanetsController < ApplicationController
 
   def show
     # show other users and your crew
+    # should be ajax partial
+    @planet = Planet.find(params[:id])
+    @users = @planet.users
+    orbit = @planet.orbits.find_by(user: current_user)
+    @crew = orbit.crew
   end
 
   def land
@@ -31,8 +36,7 @@ class PlanetsController < ApplicationController
 
     # Add to user
     user.planets << @planet
-    orbit = Orbit.where("user_id = ? OR planet_id = ?", user.id, @planet.id)
-    # Get orbit by Orbit.where(user & planet)
+    # This should add user to planets and create the orbit
 
     # redirect_to
     redirect_to(:controller => "listing", :action => "show")
