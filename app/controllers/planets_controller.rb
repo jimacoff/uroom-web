@@ -1,5 +1,8 @@
 class PlanetsController < ApplicationController
 
+# Show other users and your crew (if applicabile) for a planet
+# Used as an ajax partial
+# Could possibly move methods to model
   def show
     # show other users and your crew
     # should be ajax partial
@@ -9,8 +12,13 @@ class PlanetsController < ApplicationController
     @crew = orbit.crew
   end
 
+
+# Landing l
   def land
     # Request booking (needs crew id)
+    # Each user
+
+    #
   end
 
   def orbit

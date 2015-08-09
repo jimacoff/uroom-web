@@ -4,6 +4,9 @@ class SearchController < ApplicationController
 
   AirbnbListing = Struct.new(:title, :price, :id, :url_with_date, :images, :latitude, :longitude)
 
+  # Get search results for a search query
+  # Listings are stored in array @listings
+  # Currently, this searh mechanism is for Airbnb searches
   def results
     # Get the paramters
     @location = airbnb_location()
@@ -26,6 +29,12 @@ class SearchController < ApplicationController
   end
 
   private
+    # Main search function
+    # Creates Airbnb request based on search paramemters
+    # Parses results page
+    # Does not save Airbnb listing to our database
+    # Saving of listing happens with Planets for Airbnb listings
+    # Planet is created for Airbnb listing if user clicks on the listing
     def search_airbnb
       agent = Mechanize.new
       checkin = airbnb_checkin()
@@ -53,6 +62,7 @@ class SearchController < ApplicationController
 
     end
 
+    # Formats checkin month for Airbnb search query
     def airbnb_checkin
       if @month < 10
         return "0#{@month}"
@@ -61,6 +71,7 @@ class SearchController < ApplicationController
       end
     end
 
+    # Formates checkout month for Airbnb search query
     def airbnb_checkout
       month = (@month + @lease_length) % 12
 
@@ -77,6 +88,7 @@ class SearchController < ApplicationController
       end
     end
 
+    # Formats location for Airbnb search query
     def airbnb_location()
       location = params[:location]
       loc_commas = location.gsub!(", ", "--")
@@ -94,6 +106,7 @@ class SearchController < ApplicationController
       return location
     end
 
+    # Parses out monthly price from listing html
     def airbnb_format_price(price)
       ActionController::Base.helpers.sanitize(price).scan(/\d/).join('')
     end
