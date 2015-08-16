@@ -13,7 +13,9 @@ class PlanetsController < ApplicationController
   end
 
 
-# Landing l
+# Landing a planet listing
+# Final step
+# This is where planet is assigned to a crew
   def land
     # Request booking (needs crew id)
     # Each user
