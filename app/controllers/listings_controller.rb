@@ -21,13 +21,14 @@ class ListingsController < ApplicationController
       @listing = Listing.find(@id)
     end
 
+    # Uncomment when user features established
     # check if user has planet for this
-    orbits = []
-    user.orbits.each do |orbit|
-      if orbit.planet.listing == @listing
-        orbits << orbit
-      end
-    end
+    # orbits = []
+    # user.orbits.each do |orbit|
+    #   if orbit.planet.listing == @listing
+    #     orbits << orbit
+    #   end
+    # end
   end
 
   private
@@ -77,7 +78,7 @@ class ListingsController < ApplicationController
       end
 
       amenities = []
-      info_json = JSON.parse(metas[(metas.size - 2)]["content"])
+      info_json = JSON.parse(metas[(metas.size - 5)]["content"])
       info_json["airEventData"]["amenities"].each do |n|
         amenities << amenities_hash[n]
       end
@@ -86,10 +87,10 @@ class ListingsController < ApplicationController
       #         Images         #
       # First image is header image
       images = []
-      images << page.at(".with-photos.with-modal").at("//img").at("@src").text.strip
       info_json["photoData"].each do |data|
         images << data["url"]
       end
+
       #############################
 
       #      Home Details         #
