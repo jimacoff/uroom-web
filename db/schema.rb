@@ -96,7 +96,8 @@ ActiveRecord::Schema.define(version: 20150817221206) do
     t.datetime "updated_at",                          null: false
     t.integer  "crew_id"
     t.string   "username",                            null: false
-    t.string   "name",                                null: false
+    t.string   "first_name",                          null: false
+    t.string   "last_name",                           null: false
   end
 
   add_index "users", ["crew_id"], name: "index_users_on_crew_id", using: :btree

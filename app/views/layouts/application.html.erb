@@ -11,7 +11,7 @@
   <p class="alert"><%= flash[:alert] %></p>
 
   <% if user_signed_in? %>
-  <p>Hello <%= current_user.name %>! <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
+  <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
   <% else %>
   <p><%= link_to "Sign in", new_user_session_path, :method => 'get' %></p>
   <% end %>
