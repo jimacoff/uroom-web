@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   get 'listings/show'
 
   post 'listings/orbit'
