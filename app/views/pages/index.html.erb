@@ -1,15 +1,188 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
-<%= form_tag({controller: "search", action: "results"}, method: "get") do %>
-    <%= label_tag(:location, "Where do you want to stay?") %>
-    <%= text_field_tag(:location, nil, {:placeholder => "San Francisco", :required => true}) %>
-    <%= render(:partial => "shared/google") %>
-    <%= select_month(Date.today) %>
-    <%= select_year(Date.today) %>
-    <%= label_tag(:lease_length, "Lease Length", {:class => "icon-clock"}) %>
-    <%= select_tag(:lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length )) %>
-    <%= text_field_tag(:min, nil, {:placeholder => "Min Price"}) %>
-    <%= text_field_tag(:max, nil, {:placeholder => "Max Price"}) %>
-    <%= text_field_tag(:roommates, nil, {:placeholder => "Number of Roommates"}) %>
-    <%= submit_tag("Search") %>
-<% end %>
+<header>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-3">
+              <div id="logo">
+                  <a href="index.html"><img src="img/logo.png" width="160" height="34" alt="City tours" data-retina="true" class="logo_normal"></a>
+                  <a href="index.html"><img src="img/logo_sticky.png" width="160" height="34" alt="City tours" data-retina="true" class="logo_sticky"></a>
+              </div>
+          </div>
+          <nav class="col-md-9 col-sm-9 col-xs-9">
+              <ul id="top_tools">
+                  <li>
+                      <div class="dropdown dropdown-access">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">Sign in</a>
+                          <div class="dropdown-menu">
+                              <div class="row">
+                                  <div class="col-md-12 col-sm-12 col-xs-12">
+                                      <a href="#" class="bt_facebook">
+                                          <i class="icon-facebook"></i>Facebook </a>
+                                  </div>
+                              </div>
+                              <div class="login-or">
+                                  <hr class="hr-or">
+                                  <span class="span-or">or</span>
+                              </div>
+                              <div class="form-group">
+                                  <input type="text" class="form-control" id="inputUsernameEmail" placeholder="Email">
+                              </div>
+                              <div class="form-group">
+                                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                              </div>
+                              <a id="forgot_pw" href="#">Forgot password?</a>
+                              <input type="submit" name="" value="Sign in" id="Sign_in" class="button_drop">
+                              <input type="submit" name="" value="Sign up" id="Sign_up" class="button_drop outline">
+                          </div>
+                      </div><!-- End Dropdown access -->
+                  </li>
+                  <li>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+  </div><!-- container -->
+</header><!-- End Header -->
+
+<section id="search_container">
+  <div id="search">
+    <div class="tab-content">
+      <div class="tab-pane active" id="tours">
+
+        <div class="row">
+          <%= form_tag({controller: "search", action: "results"}, method: "get") do %>
+          <div class="col-md-8">
+              <div class="form-group">
+                    <%= label_tag(:location, "Where do you want to stay?") %>
+                    <%= text_field_tag :location, nil, placeholder: "i.e. San Francisco",
+                                                      required: true, class: "form-control" %>
+              </div>
+          </div>
+
+          <%= render(partial: "shared/google") %>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag(:start_date, "Start Month") %>
+            </br>
+              <%= select_month(Date.today + 1.month, class: "ddslick", name: "month") %>
+              <%= select_year(Date.today, class: "ddslick", name: "year") %>
+            </div>
+          </div>
+        </div> <!-- End row -->
+
+        <div class="row">
+        	<div class="col-md-3">
+            	<div class="form-group">
+                    <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
+                    <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "ddslick", name: "category" ) %>
+                </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label><i class=" icon-clock"></i> Min Rent</label>
+                <%= text_field_tag(:min, nil, {placeholder: "100", class: "form-control"}) %>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label><i class=" icon-clock"></i> Min Rent</label>
+                <%= text_field_tag(:max, nil, {placeholder: "Max Price", class: "form-control"}) %>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-sm-3 col-xs-6">
+            <div class="form-group">
+              <label>Roommates</label>
+                <div class="numbers-row">
+                  <%= text_field_tag(:roommates, nil, {value: 1, class: "qty2 form-control", name:"roommates"}) %>
+                </div>
+            </div>
+          </div>
+
+          <%= submit_tag "Search", {class:"btn_1 green"} %>
+        </div><!-- End row -->
+        <% end %>
+      </div><!-- End rab -->
+    </div>
+  </div>
+</section><!-- End hero -->
+
+    <div class="container margin_60">
+
+        <div class="main_title">
+            <h2>How it works</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 wow">
+                <div class="feature_home">
+                    <i class="icon_set_1_icon-41"></i>
+                    <h3>Like a listing</h3>
+                    <p>
+                         Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 wow">
+                <div class="feature_home">
+                    <i class="icon_set_1_icon-30"></i>
+                    <h3>Form a crew</h3>
+                    <p>
+                         Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 wow">
+                <div class="feature_home">
+                    <i class="icon_set_1_icon-57"></i>
+                    <h3>Split shared costs</h3>
+                    <p>
+                         Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                    </p>
+                </div>
+            </div>
+
+        </div><!--End row -->
+
+        <hr>
+
+    </div><!-- End container -->
+
+	    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-3">
+                    <h3>Need help?</h3>
+                    <a href="tel://6104252853" id="phone">(610) 425-2853</a>
+                    <a href="mailto:hello@roomieapp.io" id="email_footer">hello@roomieapp.io</a>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                         <li><a href="#">Terms and condition</a></li>
+                    </ul>
+                </div>
+            </div><!-- End row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="social_footer">
+                        <ul>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-instagram"></i></a></li>
+                        </ul>
+                        <p>© Roomie App, Inc. 2015</p>
+                    </div>
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </footer><!-- End footer -->
