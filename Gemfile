@@ -19,6 +19,8 @@ gem 'mechanize'
 gem 'devise'
 gem 'omniauth-facebook'
 
+gem 'geocoder'
+
 gem 'mandrill-api'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

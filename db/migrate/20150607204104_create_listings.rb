@@ -7,10 +7,9 @@ class CreateListings < ActiveRecord::Migration
       t.integer :price
 
       t.string :description
-      t.string :address
       t.integer :bedrooms
-      t.bathrooms :float
-      
+      t.float :bathrooms
+
       t.timestamps null: false
     end
   end
