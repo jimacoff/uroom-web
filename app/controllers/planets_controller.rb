@@ -52,16 +52,4 @@ class PlanetsController < ApplicationController
     redirect_to(:controller => "listing", :action => "show")
     # pass additional parameters
   end
-
-  private
-    def start_date()
-      # :year, :month, :day
-      @start_date = Date.new(@year, @month, 1)
-      return @start_date
-    end
-
-    def end_date()
-      @end_date = @start_date + @lease_length.months
-      return @end_date
-    end
 end
