@@ -15,15 +15,15 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-3">
                 <div id="logo">
-                    <a href="index.html"><img src="img/logo.png" width="160" height="34" alt="City tours" data-retina="true" class="logo_normal"></a>
-                    <a href="index.html"><img src="img/logo_sticky.png" width="160" height="34" alt="City tours" data-retina="true" class="logo_sticky"></a>
+                  <%= image_tag "logo.png", width: 160, height: 34, data: { src: "logo.png", src_retina: "logo@2x.png" }, class: "logo_normal" %>
+                  <%= image_tag "logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky" %>
                 </div>
             </div>
             <nav class="col-md-9 col-sm-9 col-xs-9">
                 <ul id="top_tools">
                     <li>
                       <% if user_signed_in? %>
-                        <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
+                        <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete', style: "color: black;"%></p>
                       <% else %>
                         <%= render 'users/shared/login_dropdown' %>
                       <% end %>
