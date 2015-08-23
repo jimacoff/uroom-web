@@ -17,8 +17,8 @@ class CreateListings < ActiveRecord::Migration
       t.string :amenities, array: true, defaults: []
 
       # Address
-      t.text :address
-      t.text :address_2
+      t.text :address, default: ""
+      t.text :address_2, default: ""
       t.text :city
       t.text :state
       t.integer :zipcode

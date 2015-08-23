@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20150823192001) do
     t.float    "bathrooms"
     t.string   "images",       default: [],              array: true
     t.string   "amenities",                              array: true
-    t.text     "address"
-    t.text     "address_2"
+    t.text     "address",      default: ""
+    t.text     "address_2",    default: ""
     t.text     "city"
     t.text     "state"
     t.integer  "zipcode"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150823192001) do
   end
 
   add_index "orbits", ["listing_id"], name: "index_orbits_on_listing_id", using: :btree
+  add_index "orbits", ["user_id", "listing_id"], name: "index_orbits_on_user_id_and_listing_id", unique: true, using: :btree
   add_index "orbits", ["user_id"], name: "index_orbits_on_user_id", using: :btree
 
   create_table "user_crew_memberships", force: :cascade do |t|

@@ -10,5 +10,6 @@ class CreateOrbits < ActiveRecord::Migration
       
       t.timestamps null: false
     end
+    add_index :orbits, [:user_id, :listing_id], unique: true
   end
 end
