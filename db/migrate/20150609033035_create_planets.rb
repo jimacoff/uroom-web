@@ -4,7 +4,9 @@ class CreatePlanets < ActiveRecord::Migration
       # Has many users
       # Has many crews (groups)
       t.belongs_to :listing, index: true, null: false
-      t.integer :crew_size, null: false
+      t.date :start_date, null: false
+      t.date :end_date, null:false
+
       t.timestamps null: false
 
     end

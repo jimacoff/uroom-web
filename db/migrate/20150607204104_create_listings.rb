@@ -5,7 +5,12 @@ class CreateListings < ActiveRecord::Migration
       t.integer :listing_id
       t.integer :owner_id
       t.integer :price
-      t.boolean :airbnb, :default => false
+
+      t.string :description
+      t.string :address
+      t.integer :bedrooms
+      t.bathrooms :float
+      
       t.timestamps null: false
     end
   end
