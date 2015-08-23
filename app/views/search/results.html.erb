@@ -1,5 +1,6 @@
 <h1>Search#results</h1>
 <p>Find me in app/views/search/results.html.erb</p>
 <% @listing = @listings.first %> </br>
-<%= link_to("Listing Page", controller: "listings", action: "show", id: @listing.id, month: @month, year: @year, lease_length: @lease_length, roommates: @roommates) %>
-<%= @listing %>
+<% if @listing %>
+  <%= link_to("Listing Page", controller: "listings", action: "show", id: @listing.id, month: @month, year: @year, lease_length: @lease_length, roommates: @roommates) %>
+<% end %>
