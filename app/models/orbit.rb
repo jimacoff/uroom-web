@@ -1,5 +1,5 @@
 class Orbit < ActiveRecord::Base
-  belongs_to :planet
+  belongs_to :listing
   belongs_to :user
-  belongs_to :crew
+  # belongs_to :crew
 end

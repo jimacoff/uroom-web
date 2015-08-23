@@ -4,10 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :orbits
-  has_many :planets, through: :orbits
-  belongs_to :crew
   has_many :crew_requests
+  has_many :user_crew_memberships
+  has_many :crews, through: :user_crew_memberships
+
+  has_many :orbits
+  has_many :listings, through: :orbits
+
+  # has_many :crew_requests
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

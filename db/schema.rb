@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823034629) do
+ActiveRecord::Schema.define(version: 20150823192001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "booking_requests", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "crew_requests", force: :cascade do |t|
     t.integer  "user_id"
@@ -32,9 +27,15 @@ ActiveRecord::Schema.define(version: 20150823034629) do
   add_index "crew_requests", ["user_id"], name: "index_crew_requests_on_user_id", using: :btree
 
   create_table "crews", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "size"
+    t.integer  "listing_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "crews", ["listing_id"], name: "index_crews_on_listing_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
     t.string   "title"
@@ -42,45 +43,46 @@ ActiveRecord::Schema.define(version: 20150823034629) do
     t.integer  "owner_id"
     t.integer  "price"
     t.string   "description"
+    t.string   "policy"
+    t.integer  "accommodates"
     t.integer  "bedrooms"
     t.float    "bathrooms"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
     t.string   "images",       default: [],              array: true
-    t.string   "amenities",    default: [],              array: true
-    t.string   "rules"
-    t.integer  "accommodates"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.string   "amenities",                              array: true
     t.text     "address"
     t.text     "address_2"
     t.text     "city"
     t.text     "state"
     t.integer  "zipcode"
     t.text     "country"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "orbits", force: :cascade do |t|
-    t.integer  "planet_id"
+    t.integer  "listing_id"
+    t.integer  "user_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "has_crew"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orbits", ["listing_id"], name: "index_orbits_on_listing_id", using: :btree
+  add_index "orbits", ["user_id"], name: "index_orbits_on_user_id", using: :btree
+
+  create_table "user_crew_memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "crew_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "orbits", ["crew_id"], name: "index_orbits_on_crew_id", using: :btree
-  add_index "orbits", ["planet_id"], name: "index_orbits_on_planet_id", using: :btree
-  add_index "orbits", ["user_id"], name: "index_orbits_on_user_id", using: :btree
-
-  create_table "planets", force: :cascade do |t|
-    t.integer  "listing_id", null: false
-    t.date     "start_date", null: false
-    t.date     "end_date",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "planets", ["listing_id"], name: "index_planets_on_listing_id", using: :btree
+  add_index "user_crew_memberships", ["crew_id"], name: "index_user_crew_memberships_on_crew_id", using: :btree
+  add_index "user_crew_memberships", ["user_id"], name: "index_user_crew_memberships_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",                            null: false
@@ -100,15 +102,13 @@ ActiveRecord::Schema.define(version: 20150823034629) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "crew_id"
     t.string   "provider"
     t.string   "uid"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["crew_id"], name: "index_users_on_crew_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

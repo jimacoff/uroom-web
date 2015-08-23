@@ -1,7 +1,6 @@
 class Crew < ActiveRecord::Base
-  has_many :users
-  has_many :rejected_users, :class_name => "User"
-  has_many :potential_users, :class_name => "User"
-  has_many :orbits
+  belongs_to :listing
   has_many :crew_requests
+  has_many :user_crew_memberships
+  has_many :users, through :user_crew_memberships
 end
