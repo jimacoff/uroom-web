@@ -17,6 +17,7 @@ class SearchController < ApplicationController
     @max_price = params[:max].to_i * @people
 
     # Search Listings
+    @listings = Listing.all
   end
 
 end
