@@ -1,9 +1,5 @@
 class SearchController < ApplicationController
 
-  require 'mechanize'
-
-  AirbnbListing = Struct.new(:title, :price, :id, :url_with_date, :images, :latitude, :longitude)
-
   # Get search results for a search query
   # Listings are stored in array @listings
   def results
