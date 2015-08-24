@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :orbits
   has_many :listings, through: :orbits
 
-  # has_many :crew_requests
+  has_many :owned_listings, class_name: "Listing", foreign_key: "owner_id"
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

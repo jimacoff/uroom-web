@@ -2,8 +2,7 @@ class CreateListings < ActiveRecord::Migration
   def change
     create_table :listings do |t|
       t.string :title
-      t.integer :listing_id
-      t.integer :owner_id
+      t.references :owner, index: true
       t.integer :price
 
       t.string :description

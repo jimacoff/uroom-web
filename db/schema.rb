@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150823192001) do
 
   create_table "listings", force: :cascade do |t|
     t.string   "title"
-    t.integer  "listing_id"
     t.integer  "owner_id"
     t.integer  "price"
     t.string   "description"
@@ -60,6 +59,8 @@ ActiveRecord::Schema.define(version: 20150823192001) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
 
   create_table "orbits", force: :cascade do |t|
     t.integer  "listing_id"
