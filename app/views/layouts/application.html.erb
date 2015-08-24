@@ -23,7 +23,7 @@
                 <ul id="top_tools">
                     <li>
                       <% if user_signed_in? %>
-                        <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete', style: "color: black;"%></p>
+                        <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></p>
                       <% else %>
                         <%= render 'users/shared/login_dropdown' %>
                       <% end %>
@@ -36,8 +36,9 @@
     </div><!-- container -->
   </header><!-- End Header -->
 
-  <p class="notice"><%= flash[:notice] %></p>
-  <p class="alert"><%= flash[:alert] %></p>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 
 
 
