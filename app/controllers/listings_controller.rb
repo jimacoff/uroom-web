@@ -1,10 +1,30 @@
 class ListingsController < ApplicationController
   include ListingsHelper
-  before_action :authenticate_user!, only: [:orbit, :land, :update_date]
+  before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :orbit, :land, :update_date]
+
+  def new
+    @listing = Listing.new
+  end
+
+  def create
+    listing = Listing.new(listing_params)
+    listing.owner = current_user
+
+    if listing.save
+      redirect_to listing
+    else
+      flash[:error] = "Could not create listing."
+      render 'new'
+    end
+  end
 
   def show
     # get parameters
-    get_params
+    if params[:listing]
+      get_params
+    else
+      @listing = Listing.find(params[:id])
+    end
     # If user is orbiting show others orbiting
 
     # Uncomment when user features established
@@ -15,6 +35,26 @@ class ListingsController < ApplicationController
     #     orbits << orbit
     #   end
     # end
+  end
+
+  def edit
+    @listing = Listing.find(params[:id])
+  end
+  
+  def update
+    @listing = Listing.find(params[:id])
+    if @listing.update_attributes(listing_params)
+      redirect_to @listing
+    else
+      flash[:error] = "Could not update listing."
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destory
+    # Redirect to dashboard
   end
 
   # Orbit - user, listing, start_date, end_date, has_crew
@@ -82,6 +122,21 @@ class ListingsController < ApplicationController
                                   date: @date,
                                   roommates: @roommates,
                                   lease_length: @lease_length
+    end
+
+    def listing_params
+      params.require(:listing).permit(:title, :description,
+                                              :policy,
+                                              :address,
+                                              :address_2,
+                                              :city,
+                                              :state,
+                                              :country,
+                                              :zipcode,
+                                              :price,
+                                              :accommodates,
+                                              :bedrooms,
+                                              :bathrooms)
     end
 
 end
