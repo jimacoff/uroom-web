@@ -20,7 +20,7 @@ class ListingsController < ApplicationController
 
   def show
     # get parameters
-    if params[:listing]
+    if params[:date]
       get_params
     else
       @listing = Listing.find(params[:id])
@@ -40,7 +40,7 @@ class ListingsController < ApplicationController
   def edit
     @listing = Listing.find(params[:id])
   end
-  
+
   def update
     @listing = Listing.find(params[:id])
     if @listing.update_attributes(listing_params)
@@ -108,7 +108,7 @@ class ListingsController < ApplicationController
   private
 
     def get_params
-      @listing = Listing.find(params[:listing])
+      @listing = Listing.find(params[:id])
       @roommates = params[:roommates].to_i
       @lease_length = params[:lease_length].to_i
       @date = params[:date]
@@ -118,7 +118,7 @@ class ListingsController < ApplicationController
     end
 
     def reload_page
-      redirect_to action: :show,  listing: @listing,
+      redirect_to action: :show,  id: @listing,
                                   date: @date,
                                   roommates: @roommates,
                                   lease_length: @lease_length
