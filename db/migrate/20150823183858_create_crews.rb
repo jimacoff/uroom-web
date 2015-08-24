@@ -5,6 +5,7 @@ class CreateCrews < ActiveRecord::Migration
       t.date :end_date
       t.integer :size
       t.belongs_to :listing, index: true
+      t.references :admin, index: true
       t.timestamps null: false
     end
   end

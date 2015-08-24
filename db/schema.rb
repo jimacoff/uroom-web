@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(version: 20150823192001) do
     t.date     "end_date"
     t.integer  "size"
     t.integer  "listing_id"
+    t.integer  "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "crews", ["admin_id"], name: "index_crews_on_admin_id", using: :btree
   add_index "crews", ["listing_id"], name: "index_crews_on_listing_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
