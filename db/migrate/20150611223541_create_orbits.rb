@@ -6,8 +6,8 @@ class CreateOrbits < ActiveRecord::Migration
 
       t.date :start_date
       t.date :end_date
-      t.boolean :has_crew
-      
+      t.boolean :has_crew, default: false
+
       t.timestamps null: false
     end
     add_index :orbits, [:user_id, :listing_id], unique: true

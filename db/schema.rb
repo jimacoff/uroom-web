@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20150823192001) do
     t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "has_crew"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "has_crew",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "orbits", ["listing_id"], name: "index_orbits_on_listing_id", using: :btree
