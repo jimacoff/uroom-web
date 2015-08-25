@@ -4,9 +4,11 @@ class CreateOrbits < ActiveRecord::Migration
       t.belongs_to :listing, index: true
       t.belongs_to :user, index: true
 
-      t.date :start_date
-      t.date :end_date
-      t.boolean :has_crew, default: false
+      t.date :start_date, index: true
+      t.date :end_date, index: true
+      t.integer :number_of_roommates, index: true
+
+      t.boolean :has_crew, default: false, index: true
       t.boolean :ready_to_land, default: false
       t.boolean :landed, default: false
 

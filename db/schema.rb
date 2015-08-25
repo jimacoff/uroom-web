@@ -69,14 +69,19 @@ ActiveRecord::Schema.define(version: 20150823192001) do
     t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "has_crew",      default: false
-    t.boolean  "ready_to_land", default: false
-    t.boolean  "landed",        default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "number_of_roommates"
+    t.boolean  "has_crew",            default: false
+    t.boolean  "ready_to_land",       default: false
+    t.boolean  "landed",              default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
+  add_index "orbits", ["end_date"], name: "index_orbits_on_end_date", using: :btree
+  add_index "orbits", ["has_crew"], name: "index_orbits_on_has_crew", using: :btree
   add_index "orbits", ["listing_id"], name: "index_orbits_on_listing_id", using: :btree
+  add_index "orbits", ["number_of_roommates"], name: "index_orbits_on_number_of_roommates", using: :btree
+  add_index "orbits", ["start_date"], name: "index_orbits_on_start_date", using: :btree
   add_index "orbits", ["user_id", "listing_id"], name: "index_orbits_on_user_id_and_listing_id", unique: true, using: :btree
   add_index "orbits", ["user_id"], name: "index_orbits_on_user_id", using: :btree
 
