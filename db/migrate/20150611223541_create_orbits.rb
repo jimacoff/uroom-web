@@ -7,6 +7,8 @@ class CreateOrbits < ActiveRecord::Migration
       t.date :start_date
       t.date :end_date
       t.boolean :has_crew, default: false
+      t.boolean :ready_to_land, default: false
+      t.boolean :landed, default: false
 
       t.timestamps null: false
     end
