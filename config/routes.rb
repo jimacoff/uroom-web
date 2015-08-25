@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :listings
 
   post 'listings/orbit'
+  post 'listings/unorbit'
+  post 'crews/create'
 
   get 'search/results'
 

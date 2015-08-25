@@ -2,6 +2,40 @@ class ListingsController < ApplicationController
   include ListingsHelper
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :orbit, :land, :update_date]
 
+
+  # If user is signed in & dates are passed
+  # => If no crew
+  # => # => Show other orbiters
+  # => # => If not following, allow following
+  # => # => If following
+  # => # => # => allow change of dates
+  # => # => # => allow unfollow
+  # => If has crew
+  # => # => show crew options
+
+  # If signed in & NO dates
+  # => Prompt dates when following
+  # => Show number of orbiters
+
+  # If not signed in
+  # => No following
+  # => Show number of orbiters
+
+  def show
+    # get parameters
+    @listing = Listing.find(params[:id])
+    @orbit = Orbit.find_by(user: current_user, listing: @listing)
+    @follower_count = Orbit.where(listing: @listing).count
+
+    if params[:date]
+      get_params
+      if user_signed_in?
+        @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false })
+        @followers -= [current_user] if @followers
+      end
+    end
+  end
+
   def new
     @listing = Listing.new
   end
@@ -16,25 +50,6 @@ class ListingsController < ApplicationController
       flash[:error] = "Could not create listing."
       render 'new'
     end
-  end
-
-  def show
-    # get parameters
-    if params[:date]
-      get_params
-    else
-      @listing = Listing.find(params[:id])
-    end
-    # If user is orbiting show others orbiting
-
-    # Uncomment when user features established
-    # check if user has planet for this
-    # orbits = []
-    # user.orbits.each do |orbit|
-    #   if orbit.planet.listing == @listing
-    #     orbits << orbit
-    #   end
-    # end
   end
 
   def edit
@@ -63,7 +78,7 @@ class ListingsController < ApplicationController
     @user_orbit = Orbit.find_by(user: current_user, listing: @listing)
 
     if @user_orbit.nil?
-      orbit = Orbit.new(user: @user,  listing: @listing,
+      orbit = Orbit.new(user: current_user,  listing: @listing,
                                       start_date: @start_date,
                                       end_date: @end_date)
       if orbit.save

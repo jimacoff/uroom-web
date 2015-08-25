@@ -1,5 +1,16 @@
 
 <h1><%= @listing.title %></h1>
 <div class="section">
-  <h2><%= button_to 'Orbit', action: "orbit", id: @listing, date: @date, lease_length: @lease_length, roommates: @roommates %></h2>
+  <% if !@orbit %>
+    <h2><%= button_to 'Follow', action: "orbit", id: @listing, date: @date, lease_length: @lease_length, roommates: @roommates %></h2>
+  <% else %>
+    <h2><%= button_to 'Unfollow', action: "unorbit", id: @listing, date: @date, lease_length: @lease_length, roommates: @roommates %></h2>
+  <% end %>
+  <% if user_signed_in? && @followers %>
+    <%= form_for :crew, url: {controller: 'crews', action: 'create', orbit: @orbit} do |f| %>
+      <%= f.select :users, options_for_select(@followers), {}, {multiple: true, class: 'chzn-select'} %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+
 </div>

@@ -13,7 +13,7 @@ class CrewsController < ApplicationController
     crew.end_date = orbit.end_date
 
     crew_requests = []
-    params[:users].each do |user_id|
+    params[:crew][:users].each do |user_id|
       crew_request = CrewRequest.new
       crew_request.user_id = user_id
       crew_request.crew = crew
@@ -24,7 +24,7 @@ class CrewsController < ApplicationController
     if crew.save
       crew_requests.each do |request| request.save  end
       orbit.update_attributes(has_crew: true)
-      # redirect to listing
+      redirect_to crew.listing
     else
       # render listing page
     end
