@@ -33,6 +33,13 @@ class ListingsController < ApplicationController
         @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false })
         @followers -= [current_user] if @followers
       end
+    else
+      if @orbit.present?
+        @start_date = @orbit.start_date
+        @end_date = @orbit.end_date
+        @date = @start_date
+        # calculate lease length
+      end
     end
   end
 

@@ -9,14 +9,14 @@
   <link href='http://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 </head>
-<body>
-  <header>
+<body style="padding-top: 50px;">
+  <header id="plain">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-3">
                 <div id="logo">
-                  <%= image_tag "logo.png", width: 160, height: 34, data: { src: "logo.png", src_retina: "logo@2x.png" }, class: "logo_normal" %>
-                  <%= image_tag "logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky" %>
+                  <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_normal", style: "margin-bottom: 20px;"), root_path %>
+                  <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky"), root_path %>
                 </div>
             </div>
             <nav class="col-md-9 col-sm-9 col-xs-9">

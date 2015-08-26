@@ -9,7 +9,7 @@ class SearchController < ApplicationController
     @month = params[:date]["month"].to_i
     @year = params[:date]["year"].to_i
     @lease_length = params[:lease_length].to_i
-    @roommates = params[:roommates].to_i
+    @roommates = params[:roommates].to_i if params[:roommates]
 
     @min_price_1 = params[:min].to_i * 2
     @max_price_1 = params[:max].to_i * 2

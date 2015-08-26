@@ -70,7 +70,7 @@
       							</a>
       						</div>
       						<div class="hotel_title">
-      							<h3><strong><%= link_to listing.title, listing_path(id: listing, date: @date, lease_length: @lease_length, roommates: @roommates) %></strong></h3>
+      							<h3><strong><%= link_to listing.title, listing_path(id: listing, date: @date, lease_length: @lease_length) %></strong></h3>
                     <h6><%= listing.city%>, <%= listing.state %></h6>
       							<div class="wishlist">
       								<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Follow this listing</span></span></a>

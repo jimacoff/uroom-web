@@ -6,11 +6,11 @@
               <div class="col-md-8 col-sm-8">
                   <h1><%= @listing.title %></h1>
                   <span><%= @listing.full_address %></span><br>
-                  <span>Hosted by - <%= @listing.owner.full_name %></span>
+                  <span>Host - <%= @listing.owner.full_name %></span>
               </div>
               <div class="col-md-4 col-sm-4">
                   <div id="price_single_main" class="hotel">
-                      from/per night <span><sup>$</sup>95</span>
+                      from/per month <span style="color: white;"><sup>$</sup><%= @listing.price %></span>
                   </div>
               </div>
           </div>
@@ -25,20 +25,18 @@
 <div class="container margin_60">
 <div class="row">
     <div class="col-md-8" id="single_tour_desc">
-        <div id="single_tour_feat">
-            <ul>
-                <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
-                <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
-                <li><i class="icon_set_2_icon-110"></i>Poll</li>
-                <li><i class="icon_set_1_icon-59"></i>Breakfast</li>
-                <li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-                <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
-                <li><i class="icon_set_1_icon-27"></i>Parking</li>
-            </ul>
-        </div>
         <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a></p><!-- Map button for tablets/mobiles -->
 
-        <hr>
+        <% if @orbit.present? %>
+          <div class="row">
+              <div class="col-md-3">
+                  <h3>Other Followers</h3>
+              </div>
+              <!-- Set Dates -->
+
+          </div><!-- End row  -->
+          <hr>
+        <% end %>
 
         <div class="row">
             <div class="col-md-3">
@@ -46,32 +44,12 @@
             </div>
             <div class="col-md-9">
                 <p>
-                    Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
+                    <%= @listing.description %>
                 </p>
-                <h4>Hotel facilities</h4>
+                <h4>Title</h4>
                 <p>
                     Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
                 </p>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_ok">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                            <li>Quidam percipitur instructior an eum</li>
-                            <li>Ut est saepe munere ceteros</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                            <li>Quidam percipitur instructior an eum</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_ok">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                            <li>Quidam percipitur instructior an eum</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                        </ul>
-                    </div>
-                </div><!-- End row  -->
             </div><!-- End col-md-9  -->
         </div><!-- End row  -->
 
@@ -142,40 +120,36 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="form-group">
-                    <label><i class="icon-calendar-7"></i> Check in</label>
+                    <label><i class="icon-calendar-7"></i> Move in</label>
                     <input class="date-pick form-control" data-date-format="M d, D" type="text">
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">
                  <div class="form-group">
-                    <label><i class="icon-calendar-7"></i> Check out</label>
+                    <label><i class="icon-calendar-7"></i> Move out</label>
                     <input class="date-pick form-control" data-date-format="M d, D" type="text">
                 </div>
             </div>
         </div>
-
-        <a class="btn_full" href="cart_hotel.html">Change follow dates</a>
-        <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Unfollow</a>
+        <% if @orbit.present? %>
+          <a class="btn_full" href="#">Change follow dates</a>
+          <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+        <% else %>
+        <!-- Need to use the dates in current view not params -->
+          <%= link_to "Follow", listings_orbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full" %>
+        <% end %>
     </div><!--/box_style_1 -->
-
-    <div class="box_style_4">
-        <i class="icon_set_1_icon-90"></i>
-        <h4><span>Book</span> by phone</h4>
-        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
-        <small>Monday to Friday 9.00am - 7.30pm</small>
-    </div>
-
-    </aside>
+    <% if @orbit.present? %>
+      <div class="box_style_4">
+          <h4><span>Create a Crew</span></h4>
+      </div>
+    <% end %>
+  </aside><!--End aside -->
 </div><!--End row -->
 </div><!--End container -->
 
 
 <div class="section">
-  <% if !@orbit %>
-    <h2><%= button_to 'Follow', action: "orbit", id: @listing, date: @date, lease_length: @lease_length, roommates: @roommates %></h2>
-  <% else %>
-    <h2><%= button_to 'Unfollow', action: "unorbit", id: @listing, date: @date, lease_length: @lease_length, roommates: @roommates %></h2>
-  <% end %>
   <% if user_signed_in? && @followers %>
     <%= form_for :crew, url: {controller: 'crews', action: 'create', orbit: @orbit} do |f| %>
       <%= f.select :users, options_for_select(@followers), {}, {multiple: true, class: 'chzn-select'} %>
