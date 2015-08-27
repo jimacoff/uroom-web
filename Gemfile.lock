@@ -136,6 +136,8 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.18.2)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     rack (1.6.1)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -236,6 +238,7 @@ DEPENDENCIES
   mechanize
   omniauth-facebook
   pg
+  pundit
   rails (= 4.2.1)
   rails_admin
   sass-rails

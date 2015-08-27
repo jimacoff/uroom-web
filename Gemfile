@@ -19,6 +19,7 @@ gem 'mechanize'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'rails_admin'
+gem 'pundit'
 gem 'geocoder'
 
 gem 'mandrill-api'
