@@ -1,0 +1,10 @@
+<h2>My Properties</h2>
+<% @listings.in_groups_of 5 do |rows| %>
+  <div class="row">
+    <% rows.each do |listing| %>
+      <% if listing %>
+        <%= render 'listing', listing: listing %>
+      <% end %>
+    <% end %>
+  </div><!-- End row -->
+<% end %>

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'crews/create'
 
   get 'search/results'
+  get 'dashboard/myproperties' => 'dashboard#properties'
+  get 'dashboard' => 'dashboard#index'
 
   root to: "pages#index"
 

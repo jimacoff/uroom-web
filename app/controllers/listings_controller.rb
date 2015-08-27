@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   include ListingsHelper
+  layout "dashboard", only: [:edit]
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :orbit, :land, :update_date]
 
 

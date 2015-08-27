@@ -1,0 +1,19 @@
+<div class="col-md-6 col-sm-6 wow">
+  <div class="hotel_container">
+    <div class="img_container">
+      <a href="#">
+        <%= image_tag listing.images.first, width: 800, height: 533, class: "img-responsive", alt: "" %>
+        <div class="short_info hotel">
+          Per Month<span class="price"><sup>$</sup><%= listing.price %></span>
+        </div>
+      </a>
+    </div>
+    <div class="hotel_title">
+      <h3><strong><%= link_to listing.title, edit_listing_path(id: listing) %></strong></h3>
+      <h6><%= listing.city%>, <%= listing.state %></h6>
+      <div class="wishlist">
+        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Follow this listing</span></span></a>
+      </div><!-- End wish list-->
+    </div>
+  </div><!-- End box tour -->
+</div><!-- End col-md-6 -->
