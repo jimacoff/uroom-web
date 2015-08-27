@@ -10,4 +10,12 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def flash_present?
+    exists = false
+    flash.each do |message_type, message|
+      exists = true if message.present?
+    end
+    return exists
+  end
 end
