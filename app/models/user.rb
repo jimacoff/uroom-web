@@ -11,14 +11,11 @@ class User < ActiveRecord::Base
   has_many :orbits
   has_many :listings, through: :orbits
 
+  has_many :crew_approval_requests
   has_many :owned_listings, class_name: "Listing", foreign_key: "owner_id"
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def landlord?
-    self.orbits.count > 0
   end
 
   def self.from_omniauth(auth)

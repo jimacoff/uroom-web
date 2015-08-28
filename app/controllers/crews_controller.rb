@@ -99,4 +99,70 @@ class CrewsController < ApplicationController
     # redirect to listing page
   end
 
+  def ready_to_land
+    @crew = Crew.find(:crew)
+
+    orbit = Orbit.find_by(user: current_user, listing: @crew.listing)
+    orbit.ready_to_land = true
+    orbit.save
+
+    all_are_ready = true
+    @crew.users.each do |user|
+      orbit = Orbit.find_by(user: user, listing: crew.listing)
+      if orbit.ready_to_land == false
+        all_are_ready = false
+      end
+    end
+
+    if orbit.save
+      if all_are_ready
+        @crew.ready_to_land = true
+        if @crew.save
+          request_landing
+        else
+          redirect_to @crew.listing
+        end
+      else
+        flash[:success] = "You have been set to ready"
+        redirect_to @crew.listing
+      end
+    else
+      flash[:error] = "Could not set ready"
+      redirect_to @crew.listing
+    end
+  end
+
+  def not_ready_to_land
+    crew = Crew.find(:crew)
+
+    orbit = Orbit.find_by(user: current_user, listing: @crew.listing)
+    orbit.ready_to_land = false
+
+    if orbit.save
+      flash[:notice] = "You are no longer ready to land"
+    else
+      flash[:error] = "Could not set as not ready"
+    end
+    redirect_to crew.listing
+  end
+
+  def request_landing
+    @crew = Crew.find(:crew) if params[:crew]
+
+    approval_request = CrewApprovalRequest.new
+    approval_request.crew         = @crew
+    approval_request.listing      = @crew.listing
+    approval_request.landlord     = @crew.listing.owner
+    approval_request.start_date   = @crew.start_date
+    approval_request.lease_length = @crew.lease_length
+
+    if approval_request.save
+      flash[:success] = "All users are ready, leasing request made"
+    else
+      flash[:error] = "Landing request could not be made"
+    end
+    
+    redirect_to @crew.listing
+  end
+
 end

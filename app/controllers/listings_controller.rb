@@ -125,7 +125,12 @@ class ListingsController < ApplicationController
   end
 
   def land
-
+    # If crew is approved
+    # Set listing to not active
+    # Set tenant crew to current Crew
+    # Set user's tenant listing to this listing
+    # Delete orbit
+    # Redirect to lease registration
   end
 
   private
