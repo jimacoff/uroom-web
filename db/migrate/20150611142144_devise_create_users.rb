@@ -5,6 +5,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :username,           null: false, unique: true
       t.string :first_name,         null: false
       t.string :last_name,          null: false
+      t.boolean :landlord,       default: false
+
+      t.string :merchant_account_id
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

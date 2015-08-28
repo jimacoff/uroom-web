@@ -3,7 +3,10 @@ class CreateListings < ActiveRecord::Migration
     create_table :listings do |t|
       t.string :title
       t.references :owner, index: true
-      t.integer :price
+
+      t.decimal :price
+      t.decimal :security_deposit
+      t.boolean :active, index: true, default: false
 
       t.string :description
       t.string :policy
@@ -12,7 +15,7 @@ class CreateListings < ActiveRecord::Migration
       t.integer :bedrooms
       t.float :bathrooms
 
-      t.string :images, array: true, default: []
+      t.string :images,    array: true, default: []
       t.string :amenities, array: true, defaults: []
 
       # Address

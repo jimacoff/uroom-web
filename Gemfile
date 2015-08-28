@@ -21,6 +21,8 @@ gem 'omniauth-facebook'
 gem 'rails_admin'
 gem 'pundit'
 gem 'geocoder'
+gem 'braintree'
+gem 'gon' # Use controller variables in javascript
 
 gem 'mandrill-api'
 # Use jquery as the JavaScript library

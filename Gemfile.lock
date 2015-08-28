@@ -44,6 +44,8 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    braintree (2.47.0)
+      builder (>= 2.0.0)
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -72,6 +74,11 @@ GEM
     geocoder (1.2.9)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gon (6.0.1)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     haml (4.0.7)
       tilt
     hashie (3.4.2)
@@ -186,6 +193,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     remotipart (1.2.1)
+    request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     safe_yaml (1.0.4)
@@ -229,9 +237,11 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (>= 3.3.5.1)
+  braintree
   byebug (~> 6.0.1)
   devise
   geocoder
+  gon
   jbuilder (~> 2.0)
   jquery-rails
   mandrill-api
