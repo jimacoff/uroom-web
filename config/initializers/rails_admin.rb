@@ -4,7 +4,7 @@ RailsAdmin.config do |config|
 
   ## == Devise ==
   config.authenticate_with do
-    raise ActionController::RoutingError.new('Not Found') unless user_signed_in?
+    raise ActionController::RoutingError.new('Not Found') unless user_signed_in? && current_user.try(:admin?)
     warden.authenticate! scope: :user
   end
   config.current_user_method(&:current_user)

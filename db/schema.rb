@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827213120) do
+ActiveRecord::Schema.define(version: 20150828024657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(version: 20150827213120) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["unlock_token"], name: "index_admins_on_unlock_token", unique: true, using: :btree
 
+  create_table "crew_approval_requests", force: :cascade do |t|
+    t.integer  "crew_id",                     null: false
+    t.integer  "listing_id",                  null: false
+    t.integer  "landlord_id",                 null: false
+    t.boolean  "accepted",    default: false
+    t.boolean  "rejected",    default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "crew_approval_requests", ["crew_id"], name: "index_crew_approval_requests_on_crew_id", using: :btree
+  add_index "crew_approval_requests", ["landlord_id"], name: "index_crew_approval_requests_on_landlord_id", using: :btree
+  add_index "crew_approval_requests", ["listing_id"], name: "index_crew_approval_requests_on_listing_id", using: :btree
+
   create_table "crew_requests", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "crew_id"
@@ -48,39 +62,75 @@ ActiveRecord::Schema.define(version: 20150827213120) do
   create_table "crews", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "lease_length"
     t.integer  "size"
+    t.boolean  "ready_to_land", default: false
+    t.boolean  "approved",      default: false
+    t.boolean  "landed",        default: false
     t.integer  "listing_id"
-    t.integer  "admin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "crew_admin_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
-  add_index "crews", ["admin_id"], name: "index_crews_on_admin_id", using: :btree
+  add_index "crews", ["crew_admin_id"], name: "index_crews_on_crew_admin_id", using: :btree
   add_index "crews", ["listing_id"], name: "index_crews_on_listing_id", using: :btree
+
+  create_table "lease_transactions", force: :cascade do |t|
+    t.string   "description",                                             null: false
+    t.decimal  "amount",          precision: 8, scale: 2,                 null: false
+    t.date     "applicable_date"
+    t.date     "due_date"
+    t.integer  "listing_id"
+    t.text     "unit_address",                                            null: false
+    t.integer  "user_id"
+    t.text     "tenant_name",                                             null: false
+    t.text     "tenant_email",                                            null: false
+    t.integer  "landlord_id"
+    t.text     "landlord_name",                                           null: false
+    t.text     "landlord_email",                                          null: false
+    t.boolean  "paid",                                    default: false
+    t.text     "payment_method"
+    t.date     "paid_date"
+    t.text     "street_address"
+    t.text     "locality"
+    t.text     "region"
+    t.integer  "postal_code"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+  end
+
+  add_index "lease_transactions", ["landlord_id"], name: "index_lease_transactions_on_landlord_id", using: :btree
+  add_index "lease_transactions", ["listing_id"], name: "index_lease_transactions_on_listing_id", using: :btree
+  add_index "lease_transactions", ["user_id"], name: "index_lease_transactions_on_user_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
     t.string   "title"
     t.integer  "owner_id"
-    t.integer  "price"
+    t.decimal  "price",            precision: 8, scale: 2
+    t.decimal  "security_deposit", precision: 8, scale: 2
+    t.boolean  "active",                                   default: false
     t.string   "description"
     t.string   "policy"
+    t.boolean  "furnished",                                default: false
     t.integer  "accommodates"
     t.integer  "bedrooms"
     t.float    "bathrooms"
-    t.string   "images",       default: [],              array: true
-    t.string   "amenities",                              array: true
-    t.text     "address",      default: ""
-    t.text     "address_2",    default: ""
+    t.string   "images",                                   default: [],                 array: true
+    t.string   "amenities",                                                             array: true
+    t.text     "address",                                  default: ""
+    t.text     "address_2",                                default: ""
     t.text     "city"
     t.text     "state"
     t.integer  "zipcode"
     t.text     "country"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
+  add_index "listings", ["active"], name: "index_listings_on_active", using: :btree
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
 
   create_table "orbits", force: :cascade do |t|
@@ -118,6 +168,8 @@ ActiveRecord::Schema.define(version: 20150827213120) do
     t.string   "username",                               null: false
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
+    t.boolean  "landlord",               default: false
+    t.string   "merchant_account_id"
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"

@@ -4,13 +4,14 @@ class CreateListings < ActiveRecord::Migration
       t.string :title
       t.references :owner, index: true
 
-      t.decimal :price
-      t.decimal :security_deposit
-      t.boolean :active, index: true, default: false
+      t.decimal :price,             precision: 8, scale: 2
+      t.decimal :security_deposit,  precision: 8, scale: 2
+      t.boolean :active,            index: true, default: false
 
       t.string :description
       t.string :policy
 
+      t.boolean :furnished, default: false
       t.integer :accommodates
       t.integer :bedrooms
       t.float :bathrooms

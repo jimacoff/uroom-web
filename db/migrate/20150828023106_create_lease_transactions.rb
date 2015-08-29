@@ -3,7 +3,7 @@ class CreateLeaseTransactions < ActiveRecord::Migration
     create_table :lease_transactions do |t|
       # Basic transaction information
       t.string :description,       null: false
-      t.decimal :amount,           null: false
+      t.decimal :amount,           null: false, precision: 8, scale: 2
       t.date :applicable_date
       t.date :due_date
 
