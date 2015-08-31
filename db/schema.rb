@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828024657) do
+ActiveRecord::Schema.define(version: 20150830214204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20150828024657) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["unlock_token"], name: "index_admins_on_unlock_token", unique: true, using: :btree
+
+  create_table "chats", force: :cascade do |t|
+    t.integer  "crew_id"
+    t.boolean  "includes_landlord", default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "chats", ["crew_id"], name: "index_chats_on_crew_id", using: :btree
 
   create_table "crew_approval_requests", force: :cascade do |t|
     t.integer  "crew_id",                     null: false
@@ -132,6 +141,17 @@ ActiveRecord::Schema.define(version: 20150828024657) do
 
   add_index "listings", ["active"], name: "index_listings_on_active", using: :btree
   add_index "listings", ["owner_id"], name: "index_listings_on_owner_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "text",       default: ""
+    t.integer  "chat_id"
+    t.integer  "sender_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "messages", ["chat_id"], name: "index_messages_on_chat_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "orbits", force: :cascade do |t|
     t.integer  "listing_id"
