@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   resources :listings
   resources :transactions, only: [:new, :create]
+  resources :messages, only: [:create]
 
   post 'listings/orbit'
   post 'listings/unorbit'

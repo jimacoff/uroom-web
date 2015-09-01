@@ -27,16 +27,43 @@
     <div class="col-md-8" id="single_tour_desc">
         <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a></p><!-- Map button for tablets/mobiles -->
 
-        <% if @orbit.present? %>
+        <% if @crew.present? %>
+          <div class="row">
+              <div class="col-md-3">
+                  <h3>Your Crew</h3>
+              </div>
+              <div class="col-md-3">
+                <%= render 'chats/chat', chat: @chat%>
+                <div id="messages">
+                  <%= render @crew.chat.messages %>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <%= form_for @message, url: messages_path(@message, listing: @listing, chat: @chat), remote: true do |f| %>
+                  <div>
+                    <%= f.text_area :text, rows: 5, cols: 40 %>
+                  </div>
+                  <div style="display:none">
+                    <%= hidden_field_tag :socket_id %>
+                  </div>
+                  <div>
+                    <%= f.submit 'Send' %>
+                  </div>
+                <% end %>
+              </div>
+              <!-- Set Dates -->
+          </div><!-- End row  -->
+          <hr>
+          <% elsif @orbit.present? %>
           <div class="row">
               <div class="col-md-3">
                   <h3>Other Followers</h3>
               </div>
               <!-- Set Dates -->
-
           </div><!-- End row  -->
           <hr>
         <% end %>
+
 
         <div class="row">
             <div class="col-md-3">

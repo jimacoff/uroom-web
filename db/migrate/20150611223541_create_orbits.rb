@@ -3,6 +3,7 @@ class CreateOrbits < ActiveRecord::Migration
     create_table :orbits do |t|
       t.belongs_to :listing,            index: true
       t.belongs_to :user,               index: true
+      t.belongs_to :crew,               index: true
 
       t.date :start_date,               index: true
       t.date :end_date,                 index: true

@@ -27,6 +27,9 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
     @orbit = Orbit.find_by(user: current_user, listing: @listing)
     @follower_count = Orbit.where(listing: @listing).count
+    @crew = @orbit.crew if @orbit.present?
+    @chat = @crew.chat if @crew
+    @message = Message.new
 
     if params[:date]
       get_params

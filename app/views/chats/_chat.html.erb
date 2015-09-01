@@ -1,0 +1,18 @@
+<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+<script>
+
+  var pusher = new Pusher('87a966498799a786ec56');
+  pusher.connection.bind('connected', function () {
+    var socket_id = pusher.connection.socket_id;
+
+    $('#socket_id').val(socket_id);
+  });
+  var channel = pusher.subscribe('<%= chat.id %>');
+
+  channel.bind('new_message', function (data) {
+    // Code smell - Duplicated view
+    // It's exactly app/views/chat_messages/_chat_message.html
+    $('#messages').append('<p>' + data.sender + ': ' + data.text + '</p>');
+  });
+
+</script>

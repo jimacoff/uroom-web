@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 20150830214204) do
   create_table "orbits", force: :cascade do |t|
     t.integer  "listing_id"
     t.integer  "user_id"
+    t.integer  "crew_id"
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "number_of_roommates"
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 20150830214204) do
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "orbits", ["crew_id"], name: "index_orbits_on_crew_id", using: :btree
   add_index "orbits", ["end_date"], name: "index_orbits_on_end_date", using: :btree
   add_index "orbits", ["has_crew"], name: "index_orbits_on_has_crew", using: :btree
   add_index "orbits", ["listing_id"], name: "index_orbits_on_listing_id", using: :btree

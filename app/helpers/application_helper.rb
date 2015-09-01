@@ -18,4 +18,5 @@ module ApplicationHelper
     end
     return exists
   end
+
 end

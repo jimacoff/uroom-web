@@ -7,6 +7,9 @@ class CrewsController < ApplicationController
     crew.admin = current_user
     crew.users << current_user
     orbit = Orbit.find(params[:orbit])
+    
+    orbit.crew = crew
+    orbit.save
 
     crew.listing = orbit.listing
     crew.start_date = orbit.start_date
@@ -161,7 +164,7 @@ class CrewsController < ApplicationController
     else
       flash[:error] = "Landing request could not be made"
     end
-    
+
     redirect_to @crew.listing
   end
 

@@ -23,6 +23,8 @@ gem 'pundit'
 gem 'geocoder'
 gem 'braintree'
 gem 'gon' # Use controller variables in javascript
+gem 'pusher'
+gem 'figaro'
 
 gem 'mandrill-api'
 # Use jquery as the JavaScript library
