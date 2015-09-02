@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :transactions, only: [:new, :create]
   resources :messages, only: [:create]
 
+  resources :signatures, only: [:show, :create] do
+    collection do
+      post 'callbacks'
+    end
+  end
+
   post 'listings/orbit'
   post 'listings/unorbit'
   post 'listings/land'

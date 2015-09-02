@@ -25,6 +25,7 @@ gem 'braintree'
 gem 'gon' # Use controller variables in javascript
 gem 'pusher'
 gem 'figaro'
+gem 'hellosign-ruby-sdk'
 
 gem 'mandrill-api'
 # Use jquery as the JavaScript library

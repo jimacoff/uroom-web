@@ -84,6 +84,10 @@ GEM
     haml (4.0.7)
       tilt
     hashie (3.4.2)
+    hellosign-ruby-sdk (3.2.1)
+      faraday
+      mime-types
+      multi_json
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.6.0.1)
@@ -258,6 +262,7 @@ DEPENDENCIES
   figaro
   geocoder
   gon
+  hellosign-ruby-sdk
   jbuilder (~> 2.0)
   jquery-rails
   mandrill-api

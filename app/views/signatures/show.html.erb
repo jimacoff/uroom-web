@@ -1,0 +1,7 @@
+<%= form_tag signatures_path, method: :post do %>
+  <%= label_tag 'Name' %>
+  <%= text_field_tag :name %>
+  <%= label_tag 'Email' %>
+  <%= text_field_tag :email %>
+  <%= submit_tag 'Create Embedded Signature Request' %>
+<% end %>

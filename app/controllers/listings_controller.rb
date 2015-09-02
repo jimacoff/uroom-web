@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   include ListingsHelper
   layout "dashboard", only: [:edit]
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :orbit, :land, :update_date]
+  skip_before_action :verify_authenticity_token, only: [:callbacks]
 
 
   # If user is signed in & dates are passed
@@ -135,22 +136,12 @@ class ListingsController < ApplicationController
     # Set user's tenant listing to this listing
     # Delete orbit
     # Redirect to lease registration
-    client = HelloSign::Client.new :api_key => 'SIGN_IN_AND_CONFIRM_EMAIL_TO_SEE_YOUR_API_KEY_HERE'
-    client.create_embedded_signature_request(
-        :test_mode => 1,
-        :client_id => 'YOUR_CLIENT_ID',
-        :subject => 'My First embedded signature request',
-        :message => 'Awesome, right?',
-        :signers => [
-            {
-                :email_address => 'tonyfrancisv@gmail.com',
-                :name => 'Me'
-            }
-        ],
-        :files => ['NDA.pdf']
-    )
-    client.get_embedded_sign_url :signature_id => 'SIGNATURE_ID'
-    render 'land'
+
+    # Create Lease Object
+    # Create Signatures
+  end
+
+  def callbacks
   end
 
   private
