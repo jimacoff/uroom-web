@@ -146,6 +146,8 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.18.2)
+    puma (2.11.1)
+      rack (>= 1.1, < 2.0)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     pusher (0.14.5)
@@ -262,6 +264,7 @@ DEPENDENCIES
   mechanize
   omniauth-facebook
   pg
+  puma
   pundit
   pusher
   rails (= 4.2.1)
