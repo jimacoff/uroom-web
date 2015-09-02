@@ -1,0 +1,11 @@
+<script type="text/javascript" src="//s3.amazonaws.com/cdn.hellofax.com/js/embedded.js"></script>
+<script type="text/javascript">
+    HelloSign.init("{CLIENT_ID}");
+    HelloSign.open({
+        url: "SIGN_URL",
+        allowCancel: true,
+        messageListener: function(eventData) {
+            alert("HelloSign event received");
+        }
+    });
+</script>

@@ -128,12 +128,29 @@ class ListingsController < ApplicationController
   end
 
   def land
+    @listing = Listing.find(params[:id])
     # If crew is approved
     # Set listing to not active
     # Set tenant crew to current Crew
     # Set user's tenant listing to this listing
     # Delete orbit
     # Redirect to lease registration
+    client = HelloSign::Client.new :api_key => 'SIGN_IN_AND_CONFIRM_EMAIL_TO_SEE_YOUR_API_KEY_HERE'
+    client.create_embedded_signature_request(
+        :test_mode => 1,
+        :client_id => 'YOUR_CLIENT_ID',
+        :subject => 'My First embedded signature request',
+        :message => 'Awesome, right?',
+        :signers => [
+            {
+                :email_address => 'tonyfrancisv@gmail.com',
+                :name => 'Me'
+            }
+        ],
+        :files => ['NDA.pdf']
+    )
+    client.get_embedded_sign_url :signature_id => 'SIGNATURE_ID'
+    render 'land'
   end
 
   private

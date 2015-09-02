@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   post 'listings/orbit'
   post 'listings/unorbit'
+  post 'listings/land'
   post 'crews/create'
+
 
   get 'search/results'
   get 'dashboard/myproperties' => 'dashboard#properties'
