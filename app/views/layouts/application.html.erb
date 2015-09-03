@@ -10,7 +10,12 @@
   <link href='http://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 </head>
-<body style="padding-top: 58px;">
+<body>
+  <div>
+    <% flash.each do |message_type, message| %>
+      <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+  </div>
   <header id="plain">
     <div class="container">
         <div class="row">
@@ -36,10 +41,6 @@
         </div>
     </div><!-- container -->
   </header><!-- End Header -->
-
-  <% flash.each do |message_type, message| %>
-    <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
 
 
 

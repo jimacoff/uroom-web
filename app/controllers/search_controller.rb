@@ -11,14 +11,12 @@ class SearchController < ApplicationController
     @lease_length = params[:lease_length].to_i
     @roommates = params[:roommates].to_i if params[:roommates]
 
-    @min_price_1 = params[:min].to_i * 2
+
     @max_price_1 = params[:max].to_i * 2
-
-    @min_price_2 = params[:min].to_i * 3
     @max_price_2 = params[:max].to_i * 3
-
-    @min_price_3 = params[:min].to_i * 4
     @max_price_3 = params[:max].to_i * 4
+
+    @coordinates = Geocoder.coordinates(params[:location])
 
     # Search Listings
     @listings = Listing.near(params[:location])
