@@ -4,19 +4,19 @@ class CrewsController < ApplicationController
 
   def create
     crew = Crew.new
-    crew.admin = current_user
+    crew.crew_admin = current_user
     crew.users << current_user
     orbit = Orbit.find(params[:orbit])
-    
+
     orbit.crew = crew
-    orbit.save
+    #orbit.save
 
     crew.listing = orbit.listing
     crew.start_date = orbit.start_date
     crew.end_date = orbit.end_date
 
     crew_requests = []
-    params[:crew][:users].each do |user_id|
+    params[:users].each do |user_id|
       crew_request = CrewRequest.new
       crew_request.user_id = user_id
       crew_request.crew = crew
@@ -27,10 +27,12 @@ class CrewsController < ApplicationController
     if crew.save
       crew_requests.each do |request| request.save  end
       orbit.update_attributes(has_crew: true) # current_user's orbit
-      redirect_to crew.listing
+      flash[:success] = "Sent crew requests!"
     else
       # render listing page
+      flash[:error] = "Failed to create crew."
     end
+    redirect_to crew.listing
   end
 
   # Create new crew request

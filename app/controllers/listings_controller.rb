@@ -31,11 +31,14 @@ class ListingsController < ApplicationController
     @crew = @orbit.crew if @orbit.present?
     @chat = @crew.chat if @crew
     @message = Message.new
+    @followers = @listing.users
+    @followers = @followers -= [current_user]
 
     if params[:date]
       get_params
       if user_signed_in?
         @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false })
+
         @followers -= [current_user] if @followers
       end
     else

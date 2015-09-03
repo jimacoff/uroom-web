@@ -13,4 +13,16 @@
  *= require_tree .
  *= require_self
  *= main.css.scss
+ *= require slick
+ *= require slick-theme
  */
+
+ .flash-head {
+   position: fixed;
+   margin: auto;
+   width: 100%;
+   height: 75px;
+   top: 0;
+   z-index: 999999999;
+   background-color: black;
+ }

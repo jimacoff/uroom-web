@@ -1,0 +1,58 @@
+<div class="your-class">
+    <% followers.each do |follower| %>
+      <div class="follower" style="height: 85px; width: 85px;" onclick="selectUser(this)" id="<%= follower.id %>"></div>
+    <% end %>
+</div>
+
+<h2>Selected:</h2>
+<div class="selected-users row">
+  <div class="holder" style="height: 85px; width: 85px;"></div>
+  <div class="holder" style="height: 85px; width: 85px;"></div>
+</div>
+
+<%= link_to "Create Crew", crews_create_path(orbit: orbit), method: :post, class: "btn_full_outline", id: "create-crew-button" %>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+     $('.your-class').slick({
+       slidesToShow: 3,
+       draggable: false,
+       infinite: false,
+       variableWidth: true,
+     });
+   });
+ </script>
+
+ <script type="text/javascript">
+   document.addEventListener('click', function(event) {
+      if(event.target.id === "create-crew-button") {
+          var href = event.target.href;
+          href += "&users%5B%5D=" + selected.join("&ampusers%5B%5D=")
+          // change the URL
+          event.target.href = href;
+          event.preventDefault();
+      }
+  }, true);
+ </script>
+
+
+<script type="text/javascript">
+var selected = [];
+function selectUser(divObj) {
+  var id = divObj.getAttribute('id');
+  var contained = $.inArray(id, selected);
+  if (contained < 0) {
+    var $selectedUser = $(divObj).clone().removeClass("slick-slide slick-active slick-current").addClass("selected").removeAttr('onclick');
+    $selectedUser.prependTo(".selected-users");
+    $(".holder").last().remove();
+    selected.push(id);
+    divObj.style.boxShadow = "0 0 0 4px green, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)";
+  } else {
+    selected.splice($.inArray(id, selected),1);
+    $(".selected-users").find("#" + id).remove('#' + id);
+    $(".selected-users").append("<div class='holder' style='height: 85px; width: 85px;''></div>");
+    divObj.style.boxShadow = "0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)";
+  }
+};
+</script>
+<!-- users%5B%5D=2&amp -->
