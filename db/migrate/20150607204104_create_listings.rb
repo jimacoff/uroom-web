@@ -4,8 +4,8 @@ class CreateListings < ActiveRecord::Migration
       t.string :title
       t.references :owner, index: true
 
-      t.decimal :price,             precision: 8, scale: 2
-      t.decimal :security_deposit,  precision: 8, scale: 2
+      t.decimal :price,             precision: 15, scale: 2
+      t.decimal :security_deposit,  precision: 15, scale: 2
       t.boolean :active,            index: true, default: false
 
       t.string :description
@@ -16,8 +16,13 @@ class CreateListings < ActiveRecord::Migration
       t.integer :bedrooms
       t.float :bathrooms
 
-      t.string :images,    array: true, default: []
-      t.string :amenities, array: true, defaults: []
+      t.text :images,    array: true, default: []
+
+      t.text :included_appliances,      default: "None"
+      t.text :pet_policy,               default: "Allowed"
+      t.text :utility_notes,            default: ""
+      t.text :parking_notes,            default: "Not included"
+
 
       # Address
       t.text :address, default: ""

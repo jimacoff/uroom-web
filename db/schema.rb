@@ -116,27 +116,30 @@ ActiveRecord::Schema.define(version: 20150830214204) do
   create_table "listings", force: :cascade do |t|
     t.string   "title"
     t.integer  "owner_id"
-    t.decimal  "price",            precision: 8, scale: 2
-    t.decimal  "security_deposit", precision: 8, scale: 2
-    t.boolean  "active",                                   default: false
+    t.decimal  "price",               precision: 15, scale: 2
+    t.decimal  "security_deposit",    precision: 15, scale: 2
+    t.boolean  "active",                                       default: false
     t.string   "description"
     t.string   "policy"
-    t.boolean  "furnished",                                default: false
+    t.boolean  "furnished",                                    default: false
     t.integer  "accommodates"
     t.integer  "bedrooms"
     t.float    "bathrooms"
-    t.string   "images",                                   default: [],                 array: true
-    t.string   "amenities",                                                             array: true
-    t.text     "address",                                  default: ""
-    t.text     "address_2",                                default: ""
+    t.text     "images",                                       default: [],                          array: true
+    t.text     "included_appliances",                          default: "None"
+    t.text     "pet_policy",                                   default: "Allowed"
+    t.text     "utility_notes",                                default: ""
+    t.text     "parking_notes",                                default: "Not included"
+    t.text     "address",                                      default: ""
+    t.text     "address_2",                                    default: ""
     t.text     "city"
     t.text     "state"
     t.integer  "zipcode"
     t.text     "country"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
   end
 
   add_index "listings", ["active"], name: "index_listings_on_active", using: :btree
