@@ -10,7 +10,7 @@
               </div>
               <div class="col-md-4 col-sm-4">
                   <div id="price_single_main" class="hotel">
-                      from/per month <span style="color: white;"><sup>$</sup><%= @listing.price %></span>
+                      per month <span style="color: white;"><sup>$</sup><%= @listing.price %></span>
                   </div>
               </div>
           </div>
@@ -73,13 +73,9 @@
                 <h3>Description</h3>
             </div>
             <div class="col-md-9">
-                <p>
+                <h4>
                     <%= @listing.description %>
-                </p>
-                <h4>Title</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-                </p>
+                </h4>
             </div><!-- End col-md-9  -->
         </div><!-- End row  -->
 
@@ -87,58 +83,64 @@
 
         <div class="row">
             <div class="col-md-3">
-                <h3>Rooms Types</h3>
+                <h3>Details</h3>
             </div>
             <div class="col-md-9">
-              <h4>Single Room</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-                </p>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_icons">
-                            <li><i class="icon_set_1_icon-86"></i> Free wifi</li>
-                            <li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
-                            <li><i class="icon_set_2_icon-106"></i> Safety  box</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_ok">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                            <li>Quidam percipitur instructior an eum</li>
-                        </ul>
-                    </div>
-                </div><!-- End row  -->
-
-
-                 <hr>
-
-                 <h4>Double Room</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-                </p>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_icons">
-                            <li><i class="icon_set_1_icon-86"></i> Free wifi</li>
-                            <li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
-                            <li><i class="icon_set_2_icon-106"></i> Safety  box</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list_ok">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>No scripta electram necessitatibus sit</li>
-                            <li>Quidam percipitur instructior an eum</li>
-                        </ul>
-                    </div>
-                </div><!-- End row  -->
+              <h5><strong>Accommodates:</strong> <%= "#{@listing.accommodates}" %></h5>
+              <h5><strong>Bedrooms:</strong> <%= "#{@listing.bedrooms}" %></h5>
+              <h5><strong>Bathrooms:</strong> <%= "#{@listing.bathrooms}" %></h5>
+            </br>
+              <h5><strong>Included Appliances:</strong> <%= @listing.included_appliances %></h5>
+              <h5><strong>Pets Policy:</strong> <%= @listing.pet_policy %></h5>
+              <h5><strong>Utility Notes:</strong> <%= @listing.utility_notes %></h5>
+              <h5><strong>Parking Notes:</strong> <%= @listing.parking_notes %></h5>
 
             </div><!-- End col-md-9  -->
         </div><!-- End row  -->
+        <hr>
+        <div class="row">
+          <div id="Img_carousel" class="slider-pro">
+              <div class="sp-slides">
+
+                  <div class="sp-slide">
+                      <img alt="" class="sp-image" src="../src/css/images/blank.gif"
+                      data-src="img/slider_single_tour/1_medium.jpg"
+                      data-small="img/slider_single_tour/1_small.jpg"
+                      data-medium="img/slider_single_tour/1_medium.jpg"
+                      data-large="img/slider_single_tour/1_large.jpg"
+                      data-retina="img/slider_single_tour/1_large.jpg">
+                  </div>
+                  <div class="sp-slide">
+                      <img alt="" class="sp-image" src="../src/css/images/blank.gif"
+                      data-src="img/slider_single_tour/2_medium.jpg"
+                      data-small="img/slider_single_tour/2_small.jpg"
+                      data-medium="img/slider_single_tour/2_medium.jpg"
+                      data-large="img/slider_single_tour/2_large.jpg"
+                      data-retina="img/slider_single_tour/2_large.jpg">
+                      <h3 class="sp-layer sp-black sp-padding" data-horizontal="40" data-vertical="40" data-show-transition="left">
+                      Lorem ipsum dolor sit amet </h3>
+                      <p class="sp-layer sp-white sp-padding" data-horizontal="40" data-vertical="100" data-show-transition="left" data-show-delay="200">
+                           consectetur adipisicing elit
+                      </p>
+                      <p class="sp-layer sp-black sp-padding" data-horizontal="40" data-vertical="160" data-width="350" data-show-transition="left" data-show-delay="400">
+                           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </p>
+                  </div>
+              </div>
+              <div class="sp-thumbnails">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/1_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/2_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/3_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/4_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/5_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/6_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/7_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/8_medium.jpg">
+                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/9_medium.jpg">
+              </div>
+          </div>
+        </div>
+
     </div><!--End  single_tour_desc-->
 
     <aside class="col-md-4">
@@ -148,26 +150,40 @@
     <div class="box_style_1 expose">
         <h3 class="inner">Follow</h3>
         <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <div class="form-group">
-                    <label><i class="icon-calendar-7"></i> Move in</label>
-                    <input class="date-pick form-control" data-date-format="M d, D" type="text">
-                </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <%= label_tag(:start_date, "Move-in Month") %>
+            </br>
+              <%= select_month(Date.today + 1.month, class: "dd-container", name: "month") %>
+              <%= select_year(Date.today, class: "dd-container", name: "year") %>
             </div>
-            <div class="col-md-6 col-sm-6">
-                 <div class="form-group">
-                    <label><i class="icon-calendar-7"></i> Move out</label>
-                    <input class="date-pick form-control" data-date-format="M d, D" type="text">
-                </div>
-            </div>
+          </div>
         </div>
-        <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
-        <% if @orbit.present? %>
-          <a class="btn_full" href="#">Change follow dates</a>
-          <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+        <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                  <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
+                  </br>
+                  <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>
+              </div>
+        </div>
+        </div>
+        <% if @crew.present? %>
+          <div class="row">
+          <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+          </div>
+        <% elsif @orbit.present? %>
+          <div class="row">
+            <a class="btn_full" href="#">Change follow dates</a>
+          </div>
+          <div class="row">
+            <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+          </div>
         <% else %>
         <!-- Need to use the dates in current view not params -->
-          <%= link_to "Follow", listings_orbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full" %>
+          <div class="row">
+            <%= link_to "Follow", listings_orbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full" %>
+          </div>
         <% end %>
     </div><!--/box_style_1 -->
     <% if @orbit.present? %>
@@ -178,3 +194,21 @@
   </aside><!--End aside -->
 </div><!--End row -->
 </div><!--End container -->
+<script type="text/javascript">
+$( document ).ready(function( $ ) {
+  $( '#Img_carousel' ).sliderPro({
+    width: 960,
+    height: 500,
+    fade: true,
+    arrows: true,
+    buttons: false,
+    fullScreen: false,
+    smallSize: 500,
+    startSlide: 0,
+    mediumSize: 1000,
+    largeSize: 3000,
+    thumbnailArrows: true,
+    autoplay: false
+  });
+});
+</script>

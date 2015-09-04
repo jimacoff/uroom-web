@@ -20,8 +20,8 @@
             <div class="form-group">
               <%= label_tag(:start_date, "Move-in Month") %>
             </br>
-              <%= select_month(Date.today + 1.month, class: "ddslick", name: "month") %>
-              <%= select_year(Date.today, class: "ddslick", name: "year") %>
+              <%= select_month(Date.today + 1.month, class: "dd-container", name: "month") %>
+              <%= select_year(Date.today, class: "dd-container", name: "year") %>
             </div>
           </div>
 
@@ -97,3 +97,11 @@
         <hr>
 
     </div><!-- End container -->
+
+    <script type="text/javascript">
+      $("ddslick").each(function(){
+         $(this).ddslick({
+             showSelectedHTML: true
+         });
+     });
+    </script>
