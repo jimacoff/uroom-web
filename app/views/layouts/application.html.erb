@@ -6,9 +6,6 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div>
@@ -16,70 +13,21 @@
       <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
   </div>
-  <header id="plain">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                <div id="logo">
-                  <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_normal", style: "margin-bottom: 20px;"), root_path %>
-                  <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky"), root_path %>
-                </div>
-            </div>
-            <nav class="col-md-9 col-sm-9 col-xs-9">
-                <ul id="top_tools">
-                    <li>
-                      <% if user_signed_in? %>
-                        <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></p>
-                      <% else %>
-                        <%= render 'users/shared/login_dropdown' %>
-                      <% end %>
-                    </li>
-                    <li>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div><!-- container -->
-  </header><!-- End Header -->
+
+<%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_normal", style: "margin-bottom: 20px;"), root_path %>
+<%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky"), root_path %>
+
+    <% if user_signed_in? %>
+      <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></p>
+    <% else %>
+      <%= render 'users/shared/login_dropdown' %>
+    <% end %>
+
 
 
 
   <%= yield %>
   <%= debug(params) if Rails.env.development? %>
-
-  <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-3">
-                <h3>Need help?</h3>
-                <a href="tel://6104252853" id="phone">(610) 425-2853</a>
-                <a href="mailto:hello@roomieapp.io" id="email_footer">hello@roomieapp.io</a>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <h3>About</h3>
-                <ul>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                     <li><a href="#">Terms and condition</a></li>
-                </ul>
-            </div>
-        </div><!-- End row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div id="social_footer">
-                    <ul>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-instagram"></i></a></li>
-                    </ul>
-                    <p>© Roomie App, Inc. 2015</p>
-                </div>
-            </div>
-        </div><!-- End row -->
-    </div><!-- End container -->
-</footer><!-- End footer -->
 
 </body>
 </html>

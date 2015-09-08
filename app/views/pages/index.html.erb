@@ -1,107 +1,43 @@
-<section id="search_container">
-  <div id="search">
-    <div class="tab-content">
-      <div class="tab-pane active">
-        <div class="row">
+
           <%= form_tag({controller: "search", action: "results"}, method: "get") do %>
-          <div class="col-md-8">
-              <div class="form-group">
+
                     <%= label_tag(:location, "Where do you want to stay?") %>
                     <%= text_field_tag :location, nil, placeholder: "i.e. San Francisco",
                                                       required: true, class: "form-control" %>
-              </div>
-          </div>
+
 
           <%= render(partial: "shared/google") %>
-        </div> <!-- End row -->
-
-        <div class="row">
-          <div class="col-md-3" style="margin-right: -50px;">
-            <div class="form-group">
               <%= label_tag(:start_date, "Move-in Month") %>
-            </br>
               <%= select_month(Date.today + 1.month, class: "dd-container", name: "month") %>
               <%= select_year(Date.today, class: "dd-container", name: "year") %>
-            </div>
-          </div>
 
-        	<div class="col-md-2">
-            	<div class="form-group">
                     <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
-                    </br>
-                    <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
-                </div>
-          </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label><i class=" icon-clock"></i> Max Rent</label>
+                    <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
+
                 <%= text_field_tag(:max, nil, {placeholder: "Max Price", class: "form-control"}) %>
-            </div>
-          </div>
+
 
           <%= submit_tag "Search", { class:"btn_1 green" } %>
-        </div><!-- End row -->
         <% end %>
-      </div><!-- End rab -->
-    </div>
-  </div>
-</section><!-- End hero -->
 
-    <div class="container margin_60">
+      <h3>Follow a listing</h3>
+      <p>
+           Search listings by time-frame, cost, and furnishing.
+           When you find one that fits your needs, follow it!
+      </p>
 
-        <div class="main_title">
-            <h2>How it works</h2>
-        </div>
+      <h3>Form a crew</h3>
+      <p>
+           See who else if following the listing for the time period.
+           Select others and form a crew by sending crew requests.
+           If they accept, you now have a crew!
+      </p>
 
-        <div class="row">
-
-            <div class="col-md-4 wow">
-                <div class="feature_home">
-                    <i class="icon_set_1_icon-41"></i>
-                    <h3>Follow a listing</h3>
-                    <p>
-                         Search listings by time-frame, cost, and furnishing.
-                         When you find one that fits your needs, follow it!
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4 wow">
-                <div class="feature_home">
-                    <i class="icon_set_1_icon-30"></i>
-                    <h3>Form a crew</h3>
-                    <p>
-                         See who else if following the listing for the time period.
-                         Select others and form a crew by sending crew requests.
-                         If they accept, you now have a crew!
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4 wow">
-                <div class="feature_home">
-                    <i class="icon_set_1_icon-57"></i>
-                    <h3>Secure the lease</h3>
-                    <p>
-                         Once your entire crew is ready, land the listing.
-                         The owner can now approve your request so you can
-                         sign the lease, and pay the security deposit.
-                         Welcome to your new home!
-                    </p>
-                </div>
-            </div>
-
-        </div><!--End row -->
-
-        <hr>
-
-    </div><!-- End container -->
-
-    <script type="text/javascript">
-      $("ddslick").each(function(){
-         $(this).ddslick({
-             showSelectedHTML: true
-         });
-     });
-    </script>
+      <h3>Secure the lease</h3>
+      <p>
+           Once your entire crew is ready, land the listing.
+           The owner can now approve your request so you can
+           sign the lease, and pay the security deposit.
+           Welcome to your new home!
+      </p>
