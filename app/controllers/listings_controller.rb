@@ -144,9 +144,6 @@ class ListingsController < ApplicationController
     # Create Signatures
   end
 
-  def callbacks
-  end
-
   private
 
     def get_params
