@@ -6,28 +6,78 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
-  <div>
-    <% flash.each do |message_type, message| %>
-      <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
+  <body class="page-homepage navigation-fixed-top page-slider horizontal-search" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
+  <!-- Wrapper -->
+  <div class="wrapper">
+
+      <div class="navigation">
+
+          <div class="container">
+              <header class="navbar" id="top" role="banner">
+                  <div class="navbar-header">
+                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <div class="navbar-brand nav" id="brand">
+                          <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }), root_path %>
+                      </div>
+                  </div>
+                  <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+                      <ul class="nav navbar-nav">
+
+                          <li>
+                            <% if user_signed_in? %>
+                            Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
+                          <% else %>
+                            <%= render 'users/shared/login_dropdown' %>
+                          <% end %>
+                        </li>
+                      </ul>
+                  </nav><!-- /.navbar collapse-->
+                  <div class="add-your-property">
+                      <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
+                  </div>
+              </header><!-- /.navbar -->
+          </div><!-- /.container -->
+      </div><!-- /.navigation -->
+      <% flash.each do |message_type, message| %>
+        <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+
+      <div id="page-content" style="margin-top: 100px;">
+        <%= yield %>
+
+      </div>
+
+
+
+
+
+      <!-- Page Footer -->
+      <footer id="page-footer">
+          <div class="inner">
+              <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
+              <% if Rails.env.development? %>
+                <aside id="footer-main">
+                  <%= debug(params) %>
+                </aside><!-- /#footer-main -->
+              <% end %>
+              <aside id="footer-copyright">
+                  <div class="container">
+                      <span>Copyright Roomie App, Inc, © 2015. All Rights Reserved.</span>
+                      <span class="pull-right">Need help?     hello@roomieapp.io</span>
+                  </div>
+              </aside>
+          </div><!-- /.inner -->
+      </footer>
+      <!-- end Page Footer -->
   </div>
 
-<%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_normal", style: "margin-bottom: 20px;"), root_path %>
-<%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }, class: "logo_sticky"), root_path %>
-
-    <% if user_signed_in? %>
-      <p>Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></p>
-    <% else %>
-      <%= render 'users/shared/login_dropdown' %>
-    <% end %>
-
-
-
-
-  <%= yield %>
-  <%= debug(params) if Rails.env.development? %>
-
-</body>
+  <div id="overlay"></div>
+  </body>
 </html>
