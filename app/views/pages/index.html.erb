@@ -1,43 +1,110 @@
+    <div id="bg">
+    </div>
+    <!-- end Slider -->
 
-          <%= form_tag({controller: "search", action: "results"}, method: "get") do %>
+    <div class="search-box-wrapper">
+        <div class="search-box-inner">
+            <div class="container">
+                <div class="search-box map">
+                    <div id="form-map-sale" class="form-map form-search clearfix">
+                        <div class="row">
+                          <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= select_tag :location, options_for_select([['San Francisco', 1], ['New York', 2]], selected: :location, name: "form-sale-city" ) %>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= select_month(Date.today + 1.month, name: "month") %>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= select_year(Date.today, name: "year", start_year: Date.today.year, end_year: 1.years.from_now.year) %>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= text_field_tag(:max, nil, {placeholder: "Max Price", class: "form-control"}) %>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= submit_tag "Search", { class:"btn btn-default", style: "background-color: #073855;" } %>
+                            </div>
+                          <% end %>
+                        </div>
+                    </div><!-- /#form-map -->
+                </div><!-- /.search-box -->
+            </div><!-- /.container -->
+        </div><!-- /.search-box-inner -->
+        <div class="background-image"><img class="opacity-20" src="assets/img/searchbox-bg.jpg"></div>
+    </div>
+    <!-- end Search Box -->
 
-                    <%= label_tag(:location, "Where do you want to stay?") %>
-                    <%= text_field_tag :location, nil, placeholder: "i.e. San Francisco",
-                                                      required: true, class: "form-control" %>
+    <!-- Page Content -->
+    <div id="page-content">
+        <section id="banner">
+            <div class="block has-dark-background background-color-default-darker center text-banner">
+                <div class="container">
+                    <h1 class="no-bottom-margin no-border">Discover freedom.</h1>
+                </div>
+            </div>
+        </section><!-- /#banner -->
+        <section id="our-services" class="block">
+            <div class="container">
+                <header class="section-title"><h2>How it Works</h2></header>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-box equal-height">
+                            <figure class="icon"><i class="fa fa-folder"></i></figure>
+                            <aside class="description">
+                                <header><h3>Follow Listings</h3></header>
+                                <p>
+                                     Search listings by time-frame, cost, and furnishing.
+                                     When you find one that fits your needs, follow it!
+                                </p>
+                            </aside>
+                        </div><!-- /.feature-box -->
+                    </div><!-- /.col-md-4 -->
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-box equal-height">
+                            <figure class="icon"><i class="fa fa-users"></i></figure>
+                            <aside class="description">
+                                <header><h3>Form a Crew</h3></header>
+                                <p>
+                                     See who else if following the listing for the time period.
+                                     Select others and form a crew by sending crew requests.
+                                     If they accept, you now have a crew!
+                                </p>
+                            </aside>
+                        </div><!-- /.feature-box -->
+                    </div><!-- /.col-md-4 -->
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature-box equal-height">
+                            <figure class="icon"><i class="fa fa-money"></i></figure>
+                            <aside class="description">
+                                <header><h3>Land the Listing</h3></header>
+                                <p>
+                                     Once your entire crew is ready, land the listing.
+                                     The owner can now approve your request so you can
+                                     sign the lease. Welcome to your new home!
+                                </p>
+                            </aside>
+                        </div><!-- /.feature-box -->
+                    </div><!-- /.col-md-4 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /#our-services -->
+
+        <aside id="advertising" class="block">
+            <div class="container">
+                <a href="submit.html">
+                    <div class="banner">
+                        <div class="wrapper">
+                            <span class="title">Do you want your property to be listed here?</span>
+                            <span class="submit">Submit it now! <i class="fa fa-plus-square"></i></span>
+                        </div>
+                    </div><!-- /.banner-->
+                </a>
+            </div>
+        </aside><!-- /#adveritsing-->
 
 
-          <%= render(partial: "shared/google") %>
-              <%= label_tag(:start_date, "Move-in Month") %>
-              <%= select_month(Date.today + 1.month, class: "dd-container", name: "month") %>
-              <%= select_year(Date.today, class: "dd-container", name: "year") %>
-
-                    <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
-
-                    <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
-
-                <%= text_field_tag(:max, nil, {placeholder: "Max Price", class: "form-control"}) %>
-
-
-          <%= submit_tag "Search", { class:"btn_1 green" } %>
-        <% end %>
-
-      <h3>Follow a listing</h3>
-      <p>
-           Search listings by time-frame, cost, and furnishing.
-           When you find one that fits your needs, follow it!
-      </p>
-
-      <h3>Form a crew</h3>
-      <p>
-           See who else if following the listing for the time period.
-           Select others and form a crew by sending crew requests.
-           If they accept, you now have a crew!
-      </p>
-
-      <h3>Secure the lease</h3>
-      <p>
-           Once your entire crew is ready, land the listing.
-           The owner can now approve your request so you can
-           sign the lease, and pay the security deposit.
-           Welcome to your new home!
-      </p>
+    </div>
+    <!-- end Page Content -->
