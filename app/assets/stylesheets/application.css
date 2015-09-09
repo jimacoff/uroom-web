@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  *= main.css.scss
  *= require slick
  *= require slick-theme
