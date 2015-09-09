@@ -262,6 +262,7 @@ DEPENDENCIES
   byebug (~> 6.0.1)
   devise
   figaro
+  font-awesome-rails
   geocoder
   gon
   hellosign-ruby-sdk
