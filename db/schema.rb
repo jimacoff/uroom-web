@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 20150830214204) do
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
     t.boolean  "landlord",               default: false
+    t.text     "about",                  default: ""
     t.string   "merchant_account_id"
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
