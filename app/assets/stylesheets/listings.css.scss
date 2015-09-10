@@ -3,6 +3,112 @@
   They will automatically be included in application.css.
 */
 
+.image-container {
+  width:100%;
+  height:650px;
+  display:block;
+  position:relative;
+  overflow:hidden;
+}
+
+.image-container img {
+  position:absolute;
+  object-fit: cover;
+  top:0;
+  left:0;
+  width:100%;
+}
+
+.listing-header {
+  max-height: 650px;
+  width: auto;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-size:cover;
+}
+/* Parallax bg */
+.parallax-window {
+  min-height: 470px;
+	background: transparent;
+	position:relative;
+}
+.parallax-content-1{
+   display: table;
+   width:100%;
+   height:470px;
+}
+.parallax-content-1 > div{
+  display: table-cell;
+  padding:0 15%;
+   vertical-align: middle;
+	text-align:center;
+	color:#fff;
+	font-size:16px;
+}
+.parallax-content-1 div h1, .parallax-content-1 div h3{
+	font-size:48px;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#fff;
+}
+#price_single_main.hotel{
+	padding-top:40px;
+}
+.parallax-content-1 div h1{
+	margin-bottom:0;
+	padding-top:40px;
+}
+.parallax-content-1 div h1:before,.parallax-content-1 div h1:after {
+	display: inline-block;
+    width: 50px;
+    height: 1px;
+    content: '';
+    vertical-align: middle;
+    background: rgba(255,255,255,0.5);
+}
+.parallax-content-1 div h1:before{
+    margin-right: 10px;
+}
+
+.parallax-content-1 div h1:after {
+    margin-left: 10px;
+}
+
+.parallax-content-1 div a i{
+	color:#fff;
+	opacity:0.5;
+	font-size:72px;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.parallax-content-1 div a:hover i{
+	opacity:1;
+}
+
+.parallax-content-2{
+	position:absolute;
+	left:0;
+	bottom:0;
+	z-index:15;
+  padding:18px 0 20px 0;
+	color:#fff;
+	font-size:13px;
+  background-color: rgba(0,0,0,0.5);
+	width:100%;
+}
+.parallax-content-2 div h1{
+	font-size:36px;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#fff;
+	margin:0;
+}
+
+.parallax-content-2 .rating{font-size:14px;}
+
+// Crew Selection
+
 .styled-select {
   width: 240px;
    height: 34px;
