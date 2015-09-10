@@ -1,39 +1,91 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!-- Page Content -->
+    <div id="page-content" style="margin-top: 150px;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+        <div class="container">
+            <div class="row">
+            <!-- sidebar -->
+            <div class="col-md-3 col-sm-2">
+                <section id="sidebar">
+                    <header><h3>Account</h3></header>
+                    <aside>
+                        <ul class="sidebar-navigation">
+                            <li ><a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a></li>
+                            <li class="active"><%= link_to :edit_profile do %>
+                              <i class="fa fa-home"></i><span>My Account</span></a>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </aside>
+                </section><!-- /#sidebar -->
+            </div><!-- /.col-md-3 -->
+            <!-- end Sidebar -->
+            <!-- My Properties -->
+                <div class="col-md-9 col-sm-10">
+                    <section id="profile">
+                        <header><h1>Profile</h1></header>
+                        <div class="account-profile">
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9">
+                                      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                                        <%= devise_error_messages! %>
+                                        <section id="contact">
+                                            <h3>Contact</h3>
+                                            <dl class="contact-fields">
+                                                <dt><%= f.label :first_name %></dt>
+                                                <dd><div class="form-group">
+                                                    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                                                </div><!-- /.form-group --></dd>
+                                                <dt><%= f.label :last_name %></dt>
+                                                <dd><div class="form-group">
+                                                    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                                                </div><!-- /.form-group --></dd>
+                                                <dt><%= f.label :email %></dt>
+                                                <dd><div class="form-group">
+                                                    <%= f.email_field :email, class: "form-control", id: "form-account-email" %>
+                                                </div><!-- /.form-group --></dd>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                                            </dl>
+                                        </section>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+                                    <section id="change-password">
+                                        <header><h2>Change Your Password</h2></header>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+                                              <dl class="contact-fields">
+                                                  <dt><label for="form-account-name">Current Password</label></dt>
+                                                  <dd><div class="form-group">
+                                                      <%= f.password_field :current_password, autocomplete: "off" %>
+                                                  </div><!-- /.form-group --></dd>
+                                                  <dt><label for="form-account-phone">New Password</label></dt>
+                                                  <dd><div class="form-group">
+                                                      <%= f.password_field :password, autocomplete: "off" %>
+                                                  </div><!-- /.form-group --></dd>
+                                                  <dt><label for="form-account-email">Confirm New Password</label></dt>
+                                                  <dd><div class="form-group">
+                                                      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                                                  </div><!-- /.form-group --></dd>
+                                              </dl>
+                                        <div class="form-group clearfix">
+                                            <%= f.submit "Update Account", class: "btn btn-default", style: "float: right;", id: "form-account-password-submit" %>
+                                        </div><!-- /.form-group -->
+                                    </section>
+                                  <% end %>
+                                </br>
+                                  <section id="change-password">
+                                      <header><h2>Deactivate Account</h2></header>
+                                      <dl class="contact-fields">
+                                          <dt><label style="padding-top: 10px;">This cannot be undone!</label></dt>
+                                          <dd><div class="form-group">
+                                              <%= button_to "Deactivate Account", registration_path(resource_name), class: "btn btn-default", style: "float: right;", data: { confirm: "Are you sure?" }, method: :delete%></p>
+                                          </div><!-- /.form-group --></dd>
+                                      </dl>
+                                  </section>
+                                </div><!-- /.col-md-9 -->
+                            </div><!-- /.row -->
+                        </div><!-- /.account-profile -->
+                    </section><!-- /#profile -->
+                </div><!-- /.col-md-9 -->
+                <!-- end My Properties -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
