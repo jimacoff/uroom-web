@@ -29,18 +29,27 @@
                   </div>
                   <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                       <ul class="nav navbar-nav">
-
-                          <li>
-                            <% if user_signed_in? %>
-                            Hello <%= current_user.first_name %>! <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
-                          <% else %>
-                            <%= render 'users/shared/login_dropdown' %>
-                          <% end %>
+                        <% if user_signed_in? %>
+                        <li class="has-child"> <%= current_user.first_name %>
+                            <ul class="child-navigation">
+                                <li><%= link_to "Dashboard", dashboard_path %></li>
+                                <li><%= link_to "Account Settings", edit_user_registration_path %></li>
+                                <li><%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></li>
+                            </ul>
                         </li>
+                        <% else %>
+                        <li>
+                          <ul>
+                            <%= render 'users/shared/login_dropdown' %>
+                        </ul>
+                        </li>
+                        <% end %>
                       </ul>
                   </nav><!-- /.navbar collapse-->
                   <div class="add-your-property">
-                      <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
+                    <%= link_to new_listing_path, class: "btn btn-default" do %>
+                      <i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
+                    <% end %>
                   </div>
               </header><!-- /.navbar -->
           </div><!-- /.container -->
@@ -49,10 +58,9 @@
         <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
 
-      <div id="page-content" style="margin-top: 100px;">
         <%= yield %>
 
-      </div>
+
 
 
 
