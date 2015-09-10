@@ -1,44 +1,220 @@
-<h1>Create a new listing</h1>
+<div id="page-content" style="margin-top: 150px;">
 
-    <%= form_for(@listing) do |f| %>
-      <%= render 'shared/error_messages' %>
+        <div class="container">
+            <header><h1>Add Your Property</h1></header>
+            <%= form_for @listing do |f| %>
+              <%= render 'shared/error_messages' %>
 
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
+                <div class="row">
+                    <div class="block">
+                        <div class="col-md-9 col-sm-9">
+                            <section id="submit-form">
+                                <section id="basic-information">
+                                    <header><h2>Basic Information</h2></header>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <%= f.label :title %>
+                                                <%= f.text_field :title, class: 'form-control' %>
+                                            </div><!-- /.form-group -->
 
-      <%= f.label :price %>
-      <%= f.number_field :price, class: 'form-control' %>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <%= f.label :price %>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <%= f.number_field :price, class: 'form-control' %>
+                                                </div>
+                                            </div><!-- /.form-group -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :description %>
+                                        <%= f.text_area :description, rows: 8, class: 'form-control' %>
+                                    </div><!-- /.form-group -->
+                                </section><!-- /#basic-information -->
+                                <section>
+                                    <div class="row">
+                                        <div class="block clearfix">
+                                            <div class="col-md-6 col-sm-6">
+                                                <section id="summary">
+                                                    <header><h2>Summary</h2></header>
+                                                    <div class="form-group">
+                                                        <label for="submit-location">Property Type</label>
+                                                        <select name="type" id="submit-location">
+                                                            <option value="1">Apartment</option>
+                                                            <option value="2">Condominium</option>
+                                                            <option value="3">Cottage</option>
+                                                            <option value="4">Flat</option>
+                                                            <option value="5">House</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <%= f.label :bedrooms %>
+                                                                <%= f.number_field :bedrooms, class: 'form-control' %>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <%= f.label :bathroms %>
+                                                                <%= f.number_field :bathrooms, class: 'form-control' %>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                    </div><!-- /.row -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <%= f.label :accommodates %>
+                                                                <%= f.number_field :accommodates, class: 'form-control' %>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <%= f.label :security_deposit %>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">$</span>
+                                                                    <%= f.text_field :security_deposit, class: 'form-control' %>
+                                                                </div>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                    </div><!-- /.row -->
+                                                    <div class="form-group">
+                                                        <%= f.label :included_appliances %>
+                                                        <%= f.text_field :included_appliances, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <%= f.label :utility_notes %>
+                                                        <%= f.text_field :utility_notes, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <%= f.label :parking_notes %>
+                                                        <%= f.text_field :parking_notes, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <%= f.label :pet_policy %>
+                                                        <%= f.text_field :pet_policy, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <%= f.check_box :furnished %> Furnished<i class="fa fa-question-circle tool-tip"  data-toggle="tooltip" data-placement="right" title="Is the property already furnished for the lease period?"></i>
+                                                        </label>
+                                                    </div>
 
-      <%= f.label :accommodates %>
-      <%= f.number_field :accommodates, class: 'form-control' %>
+                                                </section><!-- /#summary -->
+                                            </div><!-- /.col-md-6 -->
+                                            <div class="col-md-6 col-sm-6">
+                                                <section id="place-on-map">
+                                                    <header class="section-title">
+                                                        <h2>Location</h2>
 
-      <%= f.label :bedrooms %>
-      <%= f.number_field :bedrooms, class: 'form-control' %>
+                                                    </header>
+                                                    <div class="form-group">
+                                                        <%= f.label :address %>
+                                                        <%= f.text_field :address, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <%= f.label :address_2 %>
+                                                        <%= f.text_field :address_2, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <%= f.label :city %>
+                                                        <%= f.text_field :city, class: 'form-control' %>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <!-- <label for="submit-property-type">State</label>
+                                                                <select name="type" id="submit-property-type">
+                                                                    <option value="1">CA</option>
+                                                                    <option value="2">NY</option>
+                                                                </select> -->
+                                                                <%= f.label :state %>
+                                                                <%= f.text_field :state, class: 'form-control' %>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                              <%= f.label :zipcode %>
+                                                              <%= f.number_field :zipcode, class: 'form-control' %>
+                                                            </div><!-- /.form-group -->
+                                                        </div><!-- /.col-md-6 -->
+                                                    </div><!-- /.row -->
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        <label for="submit-description">Other Notes</label>
+                                                        <textarea class="form-control" rows="6" name="submit-description" required></textarea>
+                                                    </div><!-- /.form-group -->
+                                                </section><!-- /#place-on-map -->
+                                            </div><!-- /.col-md-6 -->
+                                        </div><!-- /.block -->
 
-      <%= f.label :bathrooms %>
-      <%= f.number_field :bathrooms, class: 'form-control' %>
+                                    </div><!-- /.row -->
 
-      <%= f.label :description %>
-      <%= f.text_field :description, class: 'form-control' %>
+                                </section>
 
-      <%= f.label :address %>
-      <%= f.text_field :address, class: 'form-control' %>
 
-      <%= f.label :address_2 %>
-      <%= f.text_field :address_2, class: 'form-control' %>
+                                <section class="block" id="gallery">
+                                    <header><h2>Gallery</h2></header>
+                                    <div class="center">
+                                        <div class="form-group">
+                                            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="Browse Images">
+                                            <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
+                                        </div>
+                                    </div>
+                                </section>
 
-      <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control' %>
+                                <hr>
+                            </section>
+                        </div><!-- /.col-md-9 -->
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">1</figure>
+                                <div class="description">
+                                    <h4>Enter Information About Property</h4>
+                                    <p>Type information about your property. Be descriptive.
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
+                      </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">2</figure>
+                                <div class="description">
+                                    <h4>Add Some More Details</h4>
+                                    <p>Add the address and anything else tenants should know.
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
+                    </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="block">
+                        <div class="col-md-9 col-sm-9">
+                            <div class="center">
+                                <div class="form-group">
+                                    <%= f.submit "Create Listing", class: "btn btn-primary large" %>
+                                  <% end %>
+                                </div><!-- /.form-group -->
+                                <figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">3</figure>
+                                <div class="description">
+                                    <h4>Review Information and Proceed to Payment</h4>
+                                    <p>Carefully check entered information and than click button to submit them.
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
+                    </div>
+                </div>
+        </div><!-- /.container -->
 
-      <%= f.label :state %>
-      <%= f.text_field :state, class: 'form-control' %>
-
-      <%= f.label :country %>
-      <%= f.text_field :country, class: 'form-control' %>
-
-      <%= f.label :zipcode %>
-      <%= f.number_field :zipcode, class: 'form-control' %>
-
-      <%= f.submit "Create Listing", class: "btn btn-primary" %>
-
-    <% end %>
+  </div>

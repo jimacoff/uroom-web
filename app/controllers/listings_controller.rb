@@ -33,12 +33,12 @@ class ListingsController < ApplicationController
     @message = Message.new
     @followers = @listing.users
     @followers = @followers -= [current_user]
+    @new_orbit = Orbit.new
 
     if params[:date]
       get_params
       if user_signed_in?
         @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false })
-
         @followers -= [current_user] if @followers
       end
     else
@@ -48,6 +48,10 @@ class ListingsController < ApplicationController
         @date = @start_date
         # calculate lease length
       end
+    end
+
+    if @start_date.nil?
+      @start_date = Date.today + 1.month
     end
   end
 

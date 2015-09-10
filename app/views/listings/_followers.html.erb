@@ -3,13 +3,18 @@
       <div class="follower" style="height: 85px; width: 85px;" onclick="selectUser(this)" id="<%= follower.id %>"></div>
     <% end %>
 
-<h2>Selected:</h2>
+<% if followers.any? %>
+<h3>Selected:</h3>
 <div class="selected-users row">
   <div class="holder" style="height: 85px; width: 85px;"></div>
   <div class="holder" style="height: 85px; width: 85px;"></div>
+  <%= link_to "Create Crew", crews_create_path(orbit: orbit), method: :post, class: "btn_full_outline", id: "create-crew-button" %>
 </div>
+<% else %>
+  <h4>No one else is following yet</h4>
+<% end %>
 
-<%= link_to "Create Crew", crews_create_path(orbit: orbit), method: :post, class: "btn_full_outline", id: "create-crew-button" %>
+
 
 <script type="text/javascript">
    $(document).ready(function(){

@@ -1,199 +1,213 @@
-
-<section class="parallax-window" data-parallax="scroll" data-image-src="https://a0.muscache.com/im/pictures/54309004/523395fc_original.jpg">
+<div class="image-container">
+  <img class="listing-header" src="https://a0.muscache.com/im/pictures/54309004/523395fc_original.jpg">
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
               <div class="col-md-8 col-sm-8">
                   <h1><%= @listing.title %></h1>
-                  <span><%= @listing.full_address %></span><br>
-                  <span>Host - <%= @listing.owner.full_name %></span>
+                  <span><%= @listing.full_address %></span>
               </div>
-              <div class="col-md-4 col-sm-4">
-                  <div id="price_single_main" class="hotel">
-                      per month <span style="color: white;"><sup>$</sup><%= @listing.price %></span>
-                  </div>
+              <div class="col-md-2 col-sm-2" style="float: right; margin-top: 10px; margin-right: 10px;">
+                <h1>$<%= @listing.price %></h1>
               </div>
           </div>
       </div>
   </div>
-</section><!-- End section -->
+</img>
+</div>
+<div id="page-content" style="margin-top: 25px;">
+<div class="container">
+            <div class="row">
+                <!-- Property Detail Content -->
+                <div class="col-md-9 col-sm-9">
+                    <section id="property-detail">
+                        <!-- <header class="property-title">
+                            <h1></h1>
+                            <figure></figure>
+                        </header> -->
+                        <section id="property-gallery">
+                            <div class="owl-carousel property-carousel">
+                                <div class="property-slide">
+                                    <a href="assets/img/properties/property-detail-01.jpg" class="image-popup">
+                                        <div class="overlay"><h3>Front View</h3></div>
+                                        <img alt="" src="assets/img/properties/property-detail-01.jpg">
+                                    </a>
+                                </div><!-- /.property-slide -->
+                                <div class="property-slide">
+                                    <a href="assets/img/properties/property-detail-02.jpg" class="image-popup">
+                                        <div class="overlay"><h3>Bedroom</h3></div>
+                                        <img alt="" src="assets/img/properties/property-detail-02.jpg">
+                                    </a>
+                                </div><!-- /.property-slide -->
+                                <div class="property-slide">
+                                    <a href="assets/img/properties/property-detail-03.jpg" class="image-popup">
+                                        <div class="overlay"><h3>Bathroom</h3></div>
+                                        <img alt="" src="assets/img/properties/property-detail-03.jpg">
+                                    </a>
+                                </div><!-- /.property-slide -->
+                            </div><!-- /.property-carousel -->
+                        </section>
+
+                        <% if @crew.present? %>
+                                <section id="crew">
+                                    <header><h2>Your Crew</h2></header>
+                                    <div class="col-md-6">
+                                      <%= render 'chats/chat', chat: @chat%>
+                                      <div id="messages">
+                                        <%= render @crew.chat.messages %>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <%= form_for @message, url: messages_path(@message, listing: @listing, chat: @chat), remote: true do |f| %>
+                                        <div>
+                                          <%= f.text_area :text, rows: 5, cols: 40 %>
+                                        </div>
+                                        <div style="display:none">
+                                          <%= hidden_field_tag :socket_id %>
+                                        </div>
+                                        <div>
+                                          <%= f.submit 'Send' %>
+                                        </div>
+                                      <% end %>
+                                    </div>
+                                </section><!-- /#crew -->
+
+                        <% elsif @orbit.present? %>
+                              <section id="followers">
+                                <header><h2>Make a Crew</h2></header>
+                                    <%= render 'followers', followers: @followers, orbit: @orbit %>
+                              </section><!-- /#crew -->
+                        <% end %>
+
+                                <section id="description">
+                                    <header><h2>Property Description</h2></header>
+                                    <h4>
+                                        <%= @listing.description %>
+                                    </h4>
+                                </section><!-- /#description -->
+                                <section id="property-features">
+                                    <header><h2>Additional Notes</h2></header>
+                                    <ul class="list-unstyled property-features-list">
+                                        <li><strong>Accommodates: &nbsp;</strong> <%= @listing.accommodates %></li>
+
+                                        <li><strong>Bedrooms: &nbsp;</strong> <%= @listing.bedrooms %></li>
+                                        <li><strong>Furnished: &nbsp;</strong> <%= @listing.furnished ? "Yes" : "No" %></li>
+                                        <li><strong>Bathrooms: &nbsp;</strong> <%= @listing.bathrooms %></li>
+
+                                        <li><strong>Security Deposit: &nbsp;</strong> $<%= @listing.security_deposit %></li>
+
+                                        <% if @listing.included_appliances.present? %>
+                                        <li><strong>Included Appliances: &nbsp;</strong> <%= @listing.included_appliances %></li>
+                                        <% end%>
+
+                                        <li><strong>Pet Policy: &nbsp;</strong> <%= @listing.pet_policy %></li>
+                                        <li><strong>Parking Notes: &nbsp;</strong> <%= @listing.parking_notes %></li>
+
+                                        <% if @listing.utility_notes.present? %>
+                                        <li><strong>Utilities Notes: &nbsp;</strong> <%= @listing.utility_notes %></li>
+                                        <% end%>
+
+
+                                    </ul>
+                                </section><!-- /#property-features -->
+
+                                <!-- <section id="property-map">
+                                    <header><h2>Map</h2></header>
+                                    <div class="property-detail-map-wrapper">
+                                        <div class="property-detail-map" id="property-detail-map"></div>
+                                    </div>
+                                </section>< /#property-map -->
+
+                                <section class="agent-form">
+                                  <header><h2>About the Owner</h2></header>
+                                        <aside class="agent-info clearfix">
+                                            <figure><a href="agent-detail.html"><img alt="" src="assets/img/agent-01.jpg"></a></figure>
+                                            <div class="agent-contact-info">
+                                                <h3>Robert Farley</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum,
+                                                    bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt.
+                                                    Duis euismod placerat rhoncus.
+                                                </p>
+                                                <hr>
+                                                <a href="agent-detail.html" class="link-arrow">Full Profile</a>
+                                            </div>
+                                        </aside><!-- /.agent-info -->
+                                </section><!-- /.agent-form -->
+                              </section><!-- /#property-detail -->
+                </div><!-- /.row -->
+
+                <!-- sidebar -->
+                <div class="col-md-3 col-sm-3">
+                    <section id="sidebar">
+                        <aside id="edit-search">
+                            <header><h3>Follow</h3></header>
+                            <% if @crew.present? %>
+                                  <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
+                                    <%= hidden_field_tag :id , @listing.id %>
+                                    <div class="form-group">
+                                      <%= label_tag(:start_date, "Move in") %>
+                                      <%= select_month(@start_date.month, name: "month", disabled: true) %>
+                                    </div><!-- /.form-group -->
+                                    <div class="form-group">
+                                      <%= select_year(@start_date.year, name: "year", disabled: true) %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
+                                      <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length, disabled: true) %>
+                                    </div>
+                                  </br>
+                                  <% end %>
+                                  <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+                            <% elsif @orbit.present? %>
+                                  <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
+                                    <%= hidden_field_tag :id , @listing.id %>
+                                    <div class="form-group">
+                                      <%= label_tag(:start_date, "Move in") %>
+                                      <%= select_month(@start_date.month, name: "month") %>
+                                    </div><!-- /.form-group -->
+                                    <div class="form-group">
+                                      <%= select_year(@start_date.year, name: "year") %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
+                                      <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length) %>
+                                    </div>
+                                  </br>
+                                    <%= submit_tag "Update Orbit", { class:"btn btn-default" } %>
+                                  <% end %>
+                                  <div class="form-group">
+                                      <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default", style: "background-color: #073855; width: 263px;"%>
+                                  </div>
+                            <% else %>
+                                  <%= form_tag({controller: "listings", action: "orbit"}, method: "post", class: "form-group") do %>
+                                    <%= hidden_field_tag :id , @listing.id %>
+                                    <div class="form-group">
+                                      <%= label_tag(:start_date, "Move in") %>
+                                      <%= select_month(@start_date.month, name: "month") %>
+                                    </div><!-- /.form-group -->
+                                    <div class="form-group">
+                                      <%= select_year(@start_date.year, name: "year") %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
+                                      <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>
+                                    </div>
+                                    <%= submit_tag "Follow", { class:"btn btn-default" } %>
+                                  <% end %>
+                            <% end %>
+                        </aside><!-- /#edit-search -->
+                    </section><!-- /#sidebar -->
+                </div><!-- /.col-md-3 -->
+                <!-- end Sidebar -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
 
 <div class="collapse" id="collapseMap">
    <div id="map" class="map"></div>
 </div><!-- End Map -->
 
-<div class="container margin_60">
-<div class="row">
-    <div class="col-md-8" id="single_tour_desc">
-        <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a></p><!-- Map button for tablets/mobiles -->
-
-        <% if @crew.present? %>
-          <div class="row">
-              <div class="col-md-3">
-                  <h3>Your Crew</h3>
-              </div>
-              <div class="col-md-3">
-                <%= render 'chats/chat', chat: @chat%>
-                <div id="messages">
-                  <%= render @crew.chat.messages %>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <%= form_for @message, url: messages_path(@message, listing: @listing, chat: @chat), remote: true do |f| %>
-                  <div>
-                    <%= f.text_area :text, rows: 5, cols: 40 %>
-                  </div>
-                  <div style="display:none">
-                    <%= hidden_field_tag :socket_id %>
-                  </div>
-                  <div>
-                    <%= f.submit 'Send' %>
-                  </div>
-                <% end %>
-              </div>
-              <!-- Set Dates -->
-          </div><!-- End row  -->
-          <hr>
-          <% elsif @orbit.present? %>
-          <div class="row">
-              <div class="col-md-3">
-                  <h3>Other Followers</h3>
-              </div>
-              <div class="col-md-6">
-                  <%= render 'followers', followers: @followers, orbit: @orbit %>
-              </div>
-              <!-- Set Dates -->
-          </div><!-- End row  -->
-          <hr>
-        <% end %>
-
-
-        <div class="row">
-            <div class="col-md-3">
-                <h3>Description</h3>
-            </div>
-            <div class="col-md-9">
-                <h4>
-                    <%= @listing.description %>
-                </h4>
-            </div><!-- End col-md-9  -->
-        </div><!-- End row  -->
-
-        <hr>
-
-        <div class="row">
-            <div class="col-md-3">
-                <h3>Details</h3>
-            </div>
-            <div class="col-md-9">
-              <h5><strong>Accommodates:</strong> <%= "#{@listing.accommodates}" %></h5>
-              <h5><strong>Bedrooms:</strong> <%= "#{@listing.bedrooms}" %></h5>
-              <h5><strong>Bathrooms:</strong> <%= "#{@listing.bathrooms}" %></h5>
-            </br>
-              <h5><strong>Included Appliances:</strong> <%= @listing.included_appliances %></h5>
-              <h5><strong>Pets Policy:</strong> <%= @listing.pet_policy %></h5>
-              <h5><strong>Utility Notes:</strong> <%= @listing.utility_notes %></h5>
-              <h5><strong>Parking Notes:</strong> <%= @listing.parking_notes %></h5>
-
-            </div><!-- End col-md-9  -->
-        </div><!-- End row  -->
-        <hr>
-        <div class="row">
-          <div id="Img_carousel" class="slider-pro">
-              <div class="sp-slides">
-
-                  <div class="sp-slide">
-                      <img alt="" class="sp-image" src="../src/css/images/blank.gif"
-                      data-src="img/slider_single_tour/1_medium.jpg"
-                      data-small="img/slider_single_tour/1_small.jpg"
-                      data-medium="img/slider_single_tour/1_medium.jpg"
-                      data-large="img/slider_single_tour/1_large.jpg"
-                      data-retina="img/slider_single_tour/1_large.jpg">
-                  </div>
-                  <div class="sp-slide">
-                      <img alt="" class="sp-image" src="../src/css/images/blank.gif"
-                      data-src="img/slider_single_tour/2_medium.jpg"
-                      data-small="img/slider_single_tour/2_small.jpg"
-                      data-medium="img/slider_single_tour/2_medium.jpg"
-                      data-large="img/slider_single_tour/2_large.jpg"
-                      data-retina="img/slider_single_tour/2_large.jpg">
-                      <h3 class="sp-layer sp-black sp-padding" data-horizontal="40" data-vertical="40" data-show-transition="left">
-                      Lorem ipsum dolor sit amet </h3>
-                      <p class="sp-layer sp-white sp-padding" data-horizontal="40" data-vertical="100" data-show-transition="left" data-show-delay="200">
-                           consectetur adipisicing elit
-                      </p>
-                      <p class="sp-layer sp-black sp-padding" data-horizontal="40" data-vertical="160" data-width="350" data-show-transition="left" data-show-delay="400">
-                           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      </p>
-                  </div>
-              </div>
-              <div class="sp-thumbnails">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/1_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/2_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/3_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/4_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/5_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/6_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/7_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/8_medium.jpg">
-                  <img alt="" class="sp-thumbnail" src="img/slider_single_tour/9_medium.jpg">
-              </div>
-          </div>
-        </div>
-
-    </div><!--End  single_tour_desc-->
-
-    <aside class="col-md-4">
-    <p class="hidden-sm hidden-xs">
-        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
-    </p>
-    <div class="box_style_1 expose">
-        <h3 class="inner">Follow</h3>
-        <div class="row">
-          <div class="col-md-8">
-            <div class="form-group">
-              <%= label_tag(:start_date, "Move-in Month") %>
-            </br>
-              <%= select_month(Date.today + 1.month, class: "dd-container", name: "month") %>
-              <%= select_year(Date.today, class: "dd-container", name: "year") %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                  <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
-                  </br>
-                  <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>
-              </div>
-        </div>
-        </div>
-        <% if @crew.present? %>
-          <div class="row">
-          <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
-          </div>
-        <% elsif @orbit.present? %>
-          <div class="row">
-            <a class="btn_full" href="#">Change follow dates</a>
-          </div>
-          <div class="row">
-            <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
-          </div>
-        <% else %>
-        <!-- Need to use the dates in current view not params -->
-          <div class="row">
-            <%= link_to "Follow", listings_orbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full" %>
-          </div>
-        <% end %>
-    </div><!--/box_style_1 -->
-    <% if @orbit.present? %>
-      <div class="box_style_4">
-          <h4><span>Create a Crew</span></h4>
-      </div>
-    <% end %>
-  </aside><!--End aside -->
-</div><!--End row -->
-</div><!--End container -->
 <script type="text/javascript">
 $( document ).ready(function( $ ) {
   $( '#Img_carousel' ).sliderPro({
@@ -212,3 +226,4 @@ $( document ).ready(function( $ ) {
   });
 });
 </script>
+  </div>
