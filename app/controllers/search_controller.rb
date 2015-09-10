@@ -26,7 +26,7 @@ class SearchController < ApplicationController
 
     # Search Listings
     # .where(['available_start >= ? AND available_end <= ?', @start_date, @end_date])
-    @listings = Listing.near(params[:location])
+    @listings = Listing.near("Pittsburgh, PA")
     @listings_1 = Listing.near(params[:location])
     @listings_2 = Listing.near(params[:location])
     @listings_3 = Listing.near(params[:location])
