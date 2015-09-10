@@ -1,17 +1,106 @@
+<div id="page-content" style="margin-top: 100px;">
+<div class="container">
+            <div class="row">
+							<!-- sidebar -->
+							<div class="col-md-3 col-sm-3">
+									<section id="sidebar">
+											<aside id="edit-search">
+													<header><h3>Search Properties</h3></header>
+														<%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-search", role: "form", id: "form-sidebar") do %>
+
+															<div class="form-group">
+																	<%= select_tag :location, options_for_select([['San Francisco', 1], ['New York', 2]], selected: :location, name: "form-sale-city" ) %>
+															</div><!-- /.form-group -->
+															<div class="form-group">
+																	<%= select_month(Date.today + 1.month, name: "month") %>
+															</div><!-- /.form-group -->
+															<div class="form-group">
+																	<%= select_year(Date.today, name: "year", start_year: Date.today.year, end_year: 1.years.from_now.year) %>
+															</div><!-- /.form-group -->
+															<div class="form-group">
+																	  <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
+															</div><!-- /.form-group -->
+															<div class="form-group">
+																  <%= text_field_tag(:max, nil, {placeholder: "Max Price"}) %>
+																	<!-- <div class="price-range">
+																			<input id="price-input" type="text" name="price" value="1000;299000">
+																	</div> -->
+															</div>
+															<div class="form-group">
+																	<%= submit_tag "Search", { class:"btn btn-default"} %>
+															</div><!-- /.form-group -->
+															<% end %>
+											</aside><!-- /#edit-search -->
+
+									</section><!-- /#sidebar -->
+							</div><!-- /.col-md-3 -->
+							<!-- end Sidebar -->
+                <!-- Results -->
+                <div class="col-md-9 col-sm-9">
+                    <section id="results">
+                        <header><h1>Properties Listing</h1></header>
+
+                        <section id="properties">
+													<% @listings.in_groups_of 3 do |triplets| %>
+														<div class="row">
+										          <% triplets.each do |listing| %>
+																<% if listing %>
+																	<div class="col-md-4 col-sm-4">
+			                                <div class="property">
+																					<%= link_to listing_path(id: listing.id, date: @date, lease_length: @lease_length)  do %>
+																						<div class="property-image">
+																								<img alt="" src="assets/img/properties/property-09.jpg">
+																						</div>
+			                                        <div class="overlay">
+			                                            <div class="info">
+			                                                <div class="tag price" style="float: right;">$ <%= listing.price %></div>
+																											<h3><%= listing.title %></h3>
+			                                                <figure><%= listing.city%>, <%= listing.state %></figure>
+			                                            </div>
+			                                            <ul class="additional-info">
+																											<li>
+																													<header>Furnished:</header>
+																													<figure><%= listing.furnished ? "Yes" : "No" %></figure>
+																											</li>
+			                                                <li>
+			                                                    <header>Beds:</header>
+			                                                    <figure><%= listing.bedrooms %></figure>
+			                                                </li>
+			                                                <li>
+			                                                    <header>Baths:</header>
+			                                                    <figure><%= listing.bathrooms %></figure>
+			                                                </li>
+			                                            </ul>
+			                                        </div>
+			                                    <% end %>
+			                                </div><!-- /.property -->
+			                            </div><!-- /.col-md-3 -->
+										          	<% end %>
+										          <% end %>
+										        </div><!-- End row -->
+														</br>
+										      <% end %>
+                        <!-- Pagination -->
+                        <!-- <div class="center"> -->
+                            <!-- <ul class="pagination">
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                            </ul> /.pagination-->
+                        <!-- </div>/.center-->
+
+                        </section><!-- /#properties-->
+                    </section><!-- /#results -->
+                </div><!-- /.col-md-9 -->
+                <!-- end Results -->
 
 
-      <% @listings.in_groups_of 2 do |pairs| %>
-          <% pairs.each do |listing| %>
-            <% if listing %>
-                      <%= image_tag listing.images.first, width: 800, height: 533, class: "img-responsive", alt: "" %>
-        								Per Month<span class="price"><sup>$</sup><%= listing.price %></span>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
 
-      							<h3><strong><%= link_to listing.title, listing_path(id: listing, date: @date, lease_length: @lease_length) %></strong></h3>
-                    <h6><%= listing.city%>, <%= listing.state %></h6>
-            <% end %>
-          <% end %>
-        </div><!-- End row -->
-      <% end %>
+
 
  <style>
        #map {
@@ -142,3 +231,4 @@
 		 });
  </script>
  <!-- Map -->
+ </div>
