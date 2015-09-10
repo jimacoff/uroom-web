@@ -1,0 +1,82 @@
+
+<!-- Page Content -->
+<div id="page-content" style="margin-top: 150px;">
+
+    <div class="container">
+        <div class="row">
+        <!-- sidebar -->
+        <div class="col-md-3 col-sm-2">
+            <section id="sidebar">
+                <header><h3>Account</h3></header>
+                <aside>
+                    <ul class="sidebar-navigation">
+                        <li class="active"><%= link_to :edit_profile do %>
+                          <i class="fa fa-user"></i><span>Profile</span></a>
+                        </li>
+                        <% end %>
+                        <li><%= link_to edit_user_registration_path do %>
+                          <i class="fa fa-home"></i><span>My Account</span></a>
+                        </li>
+                        <% end %>
+                    </ul>
+                </aside>
+            </section><!-- /#sidebar -->
+        </div><!-- /.col-md-3 -->
+        <!-- end Sidebar -->
+            <!-- My Properties -->
+            <div class="col-md-9 col-sm-10">
+                <section id="profile">
+                    <header><h1>Profile</h1></header>
+                    <div class="account-profile">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <img alt="" class="image" src="assets/img/agent-01.jpg">
+                            </div>
+                            <div class="col-md-9 col-sm-9">
+                              <%= form_for(current_user, url: update_profile_path, html: { method: :put }) do |f| %>
+
+                                    <section id="contact">
+                                        <h2><%= current_user.full_name %></h2>
+                                    </section>
+                                    <section id="about-me">
+                                        <h3>About Me</h3>
+                                        <div class="form-group">
+                                          <%= f.text_area :about, rows: 5, class: 'form-control' %>
+                                        </div><!-- /.form-group -->
+                                    </section>
+                                    <br>
+                                    <section id="social">
+                                        <h3>My Social Network</h3>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+                                                <input type="text" class="form-control" id="account-social-twitter" name="account-social-twitter">
+                                            </div>
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+                                                <input type="text" class="form-control" id="account-social-facebook" name="account-social-facebook" >
+                                            </div>
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
+                                                <input type="text" class="form-control" id="account-social-pinterest" name="account-social-pinterest">
+                                            </div>
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group clearfix">
+                                            <%= f.submit "Update", class: "btn pull-right btn-default", id: "account-submit" %>
+                                        </div><!-- /.form-group -->
+                                    </section>
+                                <% end %>
+                            </div><!-- /.col-md-9 -->
+                        </div><!-- /.row -->
+                    </div><!-- /.account-profile -->
+                </section><!-- /#profile -->
+            </div><!-- /.col-md-9 -->
+            <!-- end My Properties -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- end Page Content -->

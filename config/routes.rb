@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_scope :user do
+     get 'users/profile' => 'registrations#edit_profile', as: :edit_profile
+     put 'users/profile/update' => 'registrations#update_profile', as: :update_profile
+   end
   resources :listings
   resources :transactions, only: [:new, :create]
   resources :messages, only: [:create]
@@ -14,6 +18,7 @@ Rails.application.routes.draw do
 
   post 'listings/orbit'
   post 'listings/unorbit'
+  post 'listings/update_date'
   post 'listings/land'
   post 'crews/create'
 
