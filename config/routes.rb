@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", omniauth_callbacks: "users/omniauth_callbacks" }
   devise_scope :user do
-     get 'users/profile' => 'registrations#edit_profile', as: :edit_profile
+      get 'users/profile/' => 'users#show', as: :show_profile
+     get 'users/profile/edit' => 'registrations#edit_profile', as: :edit_profile
      put 'users/profile/update' => 'registrations#update_profile', as: :update_profile
    end
   resources :listings
@@ -21,11 +22,17 @@ Rails.application.routes.draw do
   post 'listings/update_date'
   post 'listings/land'
   post 'crews/create'
+  post 'crews/leave' => 'crews/leave_crew'
 
+  get '/requests/accept' => 'crew_requests#accept_request'
+  get '/requests/reject' => 'crew_requests#reject_request'
 
   get 'search/results'
+
+  get 'dashboard' => 'dashboard#crews'
   get 'dashboard/myproperties' => 'dashboard#properties'
-  get 'dashboard' => 'dashboard#index'
+  get 'dashboard/following' => 'dashboard#following'
+  get 'dashboard/requests' => 'dashboard#requests'
 
   root to: "pages#index"
 
