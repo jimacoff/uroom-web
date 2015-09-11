@@ -142,6 +142,16 @@
                 <div class="col-md-3 col-sm-3">
                     <section id="sidebar">
                         <aside id="edit-search">
+                          <% if @listing.owner == current_user %>
+                            <header><h3>Follow Stats</h3></header>
+                            <ul>
+                                <li><strong>Followers: &nbsp;</strong> <%= @listing.users.count %></li>
+                                <li><strong>Created: &nbsp;</strong> <%= @listing.created_at.to_date.to_formatted_s(:long)  %></li>
+                            </ul>
+                            <%= button_to "Edit",
+                                edit_listing_path(id: @listing.id),
+                                class: "btn btn-default", method: "get" %>
+                          <% else %>
                             <header><h3>Follow</h3></header>
                             <% if @crew.present? %>
                                   <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
@@ -197,6 +207,7 @@
                                     <%= submit_tag "Follow", { class:"btn btn-default" } %>
                                   <% end %>
                             <% end %>
+                          <% end %>
                         </aside><!-- /#edit-search -->
                     </section><!-- /#sidebar -->
                 </div><!-- /.col-md-3 -->
