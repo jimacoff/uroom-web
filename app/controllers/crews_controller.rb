@@ -81,6 +81,7 @@ class CrewsController < ApplicationController
   # and is no longer landed
   def leave_crew
     crew = Crew.find(:crew)
+    listing = crew.listing
 
     crew.users.each do |user|
       orbit = Orbit.find_by(user: user, listing: crew.listing)
@@ -101,7 +102,7 @@ class CrewsController < ApplicationController
       crew.destroy
     end
 
-    # redirect to listing page
+    redirect_to listing
   end
 
   def ready_to_land
