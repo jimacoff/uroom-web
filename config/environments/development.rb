@@ -16,7 +16,7 @@ Rails.application.configure do
   # Devise Mailer options
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-  
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # ImageMagick is required for paperclip
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end
