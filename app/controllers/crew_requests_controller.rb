@@ -23,9 +23,10 @@ class CrewRequestsController < ApplicationController
     request.destroy # This might be redundant
 
     if crew.save && orbit.save
-
+      redirect_to orbit.listing
     else
-
+      flash[:error] = "Could not accept request"
+      redirect_to dashboard_requests_path
     end
   end
 
@@ -38,5 +39,7 @@ class CrewRequestsController < ApplicationController
     crew.crew_requests.delete(request)
     crew.save # Might not be necessary
     request.destroy
+
+    redirect_to dashboard_requests_path
   end
 end
