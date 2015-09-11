@@ -145,7 +145,7 @@
                                                     <hr>
                                                     <div class="form-group">
                                                         <label for="submit-description">Other Notes</label>
-                                                        <textarea class="form-control" rows="6" name="submit-description" required></textarea>
+                                                        <textarea class="form-control" rows="6" name="submit-description"></textarea>
                                                     </div><!-- /.form-group -->
                                                 </section><!-- /#place-on-map -->
                                             </div><!-- /.col-md-6 -->
@@ -198,7 +198,6 @@
                             <div class="center">
                                 <div class="form-group">
                                     <%= f.submit "Create Listing", class: "btn btn-primary large" %>
-                                  <% end %>
                                 </div><!-- /.form-group -->
                                 <figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>
                             </div>
@@ -215,6 +214,7 @@
                         </div><!-- /.col-md-3 -->
                     </div>
                 </div>
+              <% end %>
         </div><!-- /.container -->
 
   </div>
