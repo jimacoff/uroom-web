@@ -46,17 +46,36 @@ class ListingsController < ApplicationController
         @start_date = @orbit.start_date
         @end_date = @orbit.end_date
         @date = @start_date
+        @not_available = !(@start_date >= @listing.start_date && @end_date <= @listing.end_date)
         # calculate lease length
       end
     end
 
     if @start_date.nil?
-      @start_date = Date.today + 1.month
+      @start_date = @listing.start_date
+    end
+
+    length = (@listing.end_date.year * 12 + @listing.end_date.month) - (@listing.start_date.year * 12 + @listing.start_date.month)
+
+    @months = []
+    (0..length).each do |m|
+      @months << [@listing.start_date.next_month(m).strftime("%b %Y"), @listing.start_date.next_month(m)]
     end
   end
 
   def new
     @listing = Listing.new
+    @begin_date = Date.today.at_beginning_of_month.next_month
+    @start_months = []
+    (0..11).each do |m|
+      @start_months << [@begin_date.next_month(m).strftime("%b %Y"), @begin_date.next_month(m)]
+    end
+
+    @final_date = Date.today.at_beginning_of_month.next_month.next_month
+    @end_months = []
+    (0..11).each do |m|
+      @end_months << [@final_date.next_month(m).strftime("%b %Y"), @final_date.next_month(m)]
+    end
   end
 
   def create
@@ -69,7 +88,7 @@ class ListingsController < ApplicationController
           gallery.pictures.create(image: image)
         }
     end
-
+    listing.active = true
     listing.gallery = gallery
     if listing.save
       current_user.save
@@ -109,18 +128,18 @@ class ListingsController < ApplicationController
   def orbit
     get_params
     @user_orbit = Orbit.find_by(user: current_user, listing: @listing)
-
+    available = (@start_date >= @listing.start_date && @end_date <= @listing.end_date)
     if @user_orbit.nil?
       orbit = Orbit.new(user: current_user,  listing: @listing,
                                       start_date: @start_date,
                                       end_date: @end_date)
-      if orbit.save
-        flash[:success] = "Liked listing"
+      if available && orbit.save
+        flash[:success] = "Followed listing"
       else
-        flash[:error] = "Could not like listing"
+        flash[:error] = "This listing is not available for those dates"
       end
     else
-      flash[:error] = "You've already liked this listing"
+      flash[:error] = "You've already followed this listing"
     end
     reload_page
   end
@@ -130,7 +149,7 @@ class ListingsController < ApplicationController
     @user_orbit = Orbit.find_by(user: current_user, listing: @listing)
     if @user_orbit.present?
       @user_orbit.destroy
-      flash[:alert] = "You've unliked this listing"
+      flash[:alert] = "You've unfollowed this listing"
     end
     reload_page
   end
@@ -141,10 +160,12 @@ class ListingsController < ApplicationController
     @user_orbit.start_date = @start_date
     @user_orbit.end_date = @end_date
 
-    if @user_orbit.save
-      flash[:success] = "Updated like dates"
+    available = (@start_date >= @listing.start_date && @end_date <= @listing.end_date)
+
+    if available && @user_orbit.save
+      flash[:success] = "Updated follow dates"
     else
-      flash[:error] = "Could not update like dates"
+      flash[:error] = "This listing is not available for those dates"
     end
     reload_page
   end
@@ -168,10 +189,14 @@ class ListingsController < ApplicationController
       @listing = Listing.find(params[:id])
       @roommates = params[:roommates].to_i
       @lease_length = params[:lease_length].to_i
-      @date = params[:date]
+      @date = params[:date].to_date if params[:date]
 
-      @start_date = start_date(@date[:month].to_i, @date[:year].to_i)
-      @end_date = end_date(@start_date, @lease_length)
+      if params[:start_date]
+        @start_date = params[:start_date].to_date
+      else
+        @start_date = @date
+      end
+      @end_date = end_date(@start_date, @lease_length) if @start_date
     end
 
     def reload_page
@@ -193,7 +218,11 @@ class ListingsController < ApplicationController
                                               :price,
                                               :accommodates,
                                               :bedrooms,
-                                              :bathrooms)
+                                              :bathrooms,
+                                              :start_date,
+                                              :end_date,
+                                              :security_deposit,
+                                              :furnished)
     end
 
 end

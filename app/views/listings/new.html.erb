@@ -34,13 +34,38 @@
                                         <%= f.text_area :description, rows: 8, class: 'form-control' %>
                                     </div><!-- /.form-group -->
                                 </section><!-- /#basic-information -->
+                                <section id="availability">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          <header><h2>Availablity Start</h2></header>
+                                            <div class="row">
+                                              <div class="col-md-9">
+                                                <div class="form-group">
+                                                  <%= f.select :start_date, options_for_select(@start_months) %>
+                                                </div><!-- /.form-group -->
+                                              </div>
+                                            </div><!-- /.form-group -->
+
+                                        </div>
+                                        <div class="col-md-6">
+                                          <header><h2>Availablity End</h2></header>
+                                          <div class="row">
+                                            <div class="col-md-9">
+                                              <div class="form-group">
+                                                  <%= f.select :end_date, options_for_select(@end_months) %>
+                                              </div><!-- /.form-group -->
+                                            </div>
+                                          </div><!-- /.form-group -->
+                                        </div>
+                                    </div>
+                                </section><!-- /#availability -->
                                 <section>
                                     <div class="row">
                                         <div class="block clearfix">
                                             <div class="col-md-6 col-sm-6">
                                                 <section id="summary">
                                                     <header><h2>Summary</h2></header>
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label for="submit-location">Property Type</label>
                                                         <select name="type" id="submit-location">
                                                             <option value="1">Apartment</option>
@@ -49,7 +74,7 @@
                                                             <option value="4">Flat</option>
                                                             <option value="5">House</option>
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="row">
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
@@ -76,7 +101,7 @@
                                                                 <%= f.label :security_deposit %>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">$</span>
-                                                                    <%= f.text_field :security_deposit, class: 'form-control' %>
+                                                                    <%= f.number_field :security_deposit, class: 'form-control' %>
                                                                 </div>
                                                             </div><!-- /.form-group -->
                                                         </div><!-- /.col-md-6 -->
@@ -145,7 +170,7 @@
                                                     <hr>
                                                     <div class="form-group">
                                                         <label for="submit-description">Other Notes</label>
-                                                        <textarea class="form-control" rows="6" name="submit-description"></textarea>
+                                                        <textarea class="form-control" rows="5" name="submit-description"></textarea>
                                                     </div><!-- /.form-group -->
                                                 </section><!-- /#place-on-map -->
                                             </div><!-- /.col-md-6 -->
@@ -207,12 +232,6 @@
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
-                                <figure class="step-number">3</figure>
-                                <div class="description">
-                                    <h4>Review Information and Proceed to Payment</h4>
-                                    <p>Carefully check entered information and than click button to submit them.
-                                    </p>
-                                </div>
                             </aside><!-- /.submit-step -->
                         </div><!-- /.col-md-3 -->
                     </div>

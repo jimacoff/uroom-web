@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911031627) do
+ActiveRecord::Schema.define(version: 20150911164840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,32 +122,33 @@ ActiveRecord::Schema.define(version: 20150911031627) do
   add_index "lease_transactions", ["user_id"], name: "index_lease_transactions_on_user_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",                                                                 null: false
     t.integer  "owner_id"
-    t.decimal  "price",               precision: 15, scale: 2
-    t.decimal  "security_deposit",    precision: 15, scale: 2
+    t.decimal  "price",               precision: 15, scale: 2,                          null: false
+    t.decimal  "security_deposit",    precision: 15, scale: 2,                          null: false
     t.boolean  "active",                                       default: false
-    t.string   "description"
-    t.string   "policy"
+    t.string   "description",                                  default: ""
+    t.string   "policy",                                       default: ""
     t.boolean  "furnished",                                    default: false
-    t.integer  "accommodates"
-    t.integer  "bedrooms"
-    t.float    "bathrooms"
-    t.text     "images",                                       default: [],                          array: true
+    t.integer  "accommodates",                                                          null: false
+    t.integer  "bedrooms",                                                              null: false
+    t.float    "bathrooms",                                                             null: false
     t.text     "included_appliances",                          default: "None"
     t.text     "pet_policy",                                   default: "Allowed"
-    t.text     "utility_notes",                                default: ""
+    t.text     "utility_notes",                                default: "Not included"
     t.text     "parking_notes",                                default: "Not included"
-    t.text     "address",                                      default: ""
+    t.text     "address",                                                               null: false
     t.text     "address_2",                                    default: ""
-    t.text     "city"
-    t.text     "state"
-    t.integer  "zipcode"
+    t.text     "city",                                                                  null: false
+    t.text     "state",                                                                 null: false
+    t.integer  "zipcode",                                                               null: false
     t.text     "country"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
+    t.date     "start_date",                                                            null: false
+    t.date     "end_date",                                                              null: false
   end
 
   add_index "listings", ["active"], name: "index_listings_on_active", using: :btree

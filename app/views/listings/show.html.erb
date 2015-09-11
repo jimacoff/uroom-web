@@ -138,7 +138,9 @@
                             <header><h3>Follow Stats</h3></header>
                             <ul>
                                 <li><strong>Followers: &nbsp;</strong> <%= @listing.users.count %></li>
-                                <li><strong>Created: &nbsp;</strong> <%= @listing.created_at.to_date.to_formatted_s(:long)  %></li>
+                                <li><strong>Availablity Start: &nbsp;</strong> <%= @listing.start_date.to_formatted_s(:long)  %></li>
+                                <li><strong>Availablity End: &nbsp;&nbsp;&nbsp;</strong> <%= @listing.end_date.to_formatted_s(:long)  %></li>
+                                <li><strong>Created: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <%= @listing.created_at.to_date.to_formatted_s(:long)  %></li>
                             </ul>
                             <%= button_to "Edit",
                                 edit_listing_path(id: @listing.id),
@@ -146,15 +148,15 @@
                           <% else %>
                             <header><h3>Follow</h3></header>
                             <% if @crew.present? %>
+                              <% if @not_available %>
+                                <h4 style="color: red;">These dates are no longer available</h4></br>
+                              <% end %>
                                   <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
                                     <%= hidden_field_tag :id , @listing.id %>
                                     <div class="form-group">
                                       <%= label_tag(:start_date, "Move in") %>
-                                      <%= select_month(@start_date.month, name: "month", disabled: true) %>
+                                      <%= select_tag("start_date", options_for_select(@months, @start_date), disabled: true) %>
                                     </div><!-- /.form-group -->
-                                    <div class="form-group">
-                                      <%= select_year(@start_date.year, name: "year", disabled: true) %>
-                                    </div>
                                     <div class="form-group">
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length, disabled: true) %>
@@ -163,21 +165,21 @@
                                   <% end %>
                                   <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
                             <% elsif @orbit.present? %>
+                            <% if @not_available %>
+                              <h4 style="color: red;">These dates are no longer available</h4></br>
+                            <% end %>
                                   <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
                                     <%= hidden_field_tag :id , @listing.id %>
                                     <div class="form-group">
                                       <%= label_tag(:start_date, "Move in") %>
-                                      <%= select_month(@start_date.month, name: "month") %>
+                                      <%= select_tag("start_date", options_for_select(@months, @start_date)) %>
                                     </div><!-- /.form-group -->
-                                    <div class="form-group">
-                                      <%= select_year(@start_date.year, name: "year") %>
-                                    </div>
                                     <div class="form-group">
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length) %>
                                     </div>
                                   </br>
-                                    <%= submit_tag "Update Orbit", { class:"btn btn-default" } %>
+                                    <%= submit_tag "Update Dates", { class:"btn btn-default" } %>
                                   <% end %>
                                   <div class="form-group">
                                       <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default", style: "background-color: #073855; width: 263px;"%>
@@ -187,11 +189,8 @@
                                     <%= hidden_field_tag :id , @listing.id %>
                                     <div class="form-group">
                                       <%= label_tag(:start_date, "Move in") %>
-                                      <%= select_month(@start_date.month, name: "month") %>
+                                      <%= select_tag("start_date", options_for_select(@months, @start_date)) %>
                                     </div><!-- /.form-group -->
-                                    <div class="form-group">
-                                      <%= select_year(@start_date.year, name: "year") %>
-                                    </div>
                                     <div class="form-group">
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>

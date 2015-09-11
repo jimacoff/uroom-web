@@ -34,6 +34,31 @@
                                         <%= f.text_area :description, rows: 8, class: 'form-control' %>
                                     </div><!-- /.form-group -->
                                 </section><!-- /#basic-information -->
+                                <section id="availability">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          <header><h2>Availablity Start</h2></header>
+                                            <div class="row">
+                                              <div class="col-md-9">
+                                                <div class="form-group">
+                                                  <%= f.select :start_date, options_for_select(@start_months) %>
+                                                </div><!-- /.form-group -->
+                                              </div>
+                                            </div><!-- /.form-group -->
+
+                                        </div>
+                                        <div class="col-md-6">
+                                          <header><h2>Availablity End</h2></header>
+                                          <div class="row">
+                                            <div class="col-md-9">
+                                              <div class="form-group">
+                                                  <%= f.select :end_date, options_for_select(@end_months) %>
+                                              </div><!-- /.form-group -->
+                                            </div>
+                                          </div><!-- /.form-group -->
+                                        </div>
+                                    </div>
+                                </section><!-- /#availability -->
                                 <section>
                                     <div class="row">
                                         <div class="block clearfix">
