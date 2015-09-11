@@ -2,7 +2,7 @@
 
         <div class="container">
             <header><h1>Add Your Property</h1></header>
-            <%= form_for @listing do |f| %>
+            <%= form_for @listing, multipart: true do |f| %>
               <%= render 'shared/error_messages' %>
 
                 <div class="row">
@@ -160,8 +160,11 @@
                                     <header><h2>Gallery</h2></header>
                                     <div class="center">
                                         <div class="form-group">
-                                            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="Browse Images">
-                                            <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
+                                          <%= f.file_field :pictures, type: :file, multiple: true, class: "file",
+                                          accept: "image/jpeg,image/png", data: {
+                                          show_upload: false, show_caption: false, show_remove: false,
+                                          browse_class: "btn btn-default", browse_label: "Browse Images"} %>
+                                          <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
                                         </div>
                                     </div>
                                 </section>
