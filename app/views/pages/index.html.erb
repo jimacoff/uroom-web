@@ -8,23 +8,22 @@
             <div class="container">
                 <div class="search-box map">
                     <div id="form-map-sale" class="form-map form-search clearfix">
-                        <div class="row">
+                        <div class="row center">
                           <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
                             <div class="col-md-2 col-sm-4">
-                                  <%= select_tag :location, options_for_select([['San Francisco', 1], ['New York', 2]], selected: :location, name: "form-sale-city" ) %>
+                                  <%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], selected: :location, name: "form-sale-city" ) %>
                             </div>
                             <div class="col-md-2 col-sm-4">
-                                  <%= select_month(Date.today + 1.month, name: "month") %>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= select_year(Date.today, name: "year", start_year: Date.today.year, end_year: 1.years.from_now.year) %>
+                                  <%= select_tag("date", options_for_select(@months, @date)) %>
                             </div>
                             <div class="col-md-2 col-sm-4">
                                   <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
                             </div>
                             <div class="col-md-2 col-sm-4">
-                                  <%= text_field_tag(:max, nil, {placeholder: "Max Price", class: "form-control"}) %>
+                                  <%= text_field_tag(:max, nil, {placeholder: "Your Max Rent", class: "form-control"}) %>
                             </div>
+                            <div class="col-md-2 col-sm-4">
+                                  <%= check_box_tag :furnished, 0, checked: true, class: "js-switch" %> Furnished?
                             <div class="col-md-2 col-sm-4">
                                   <%= submit_tag "Search", { class:"btn btn-default", style: "background-color: #073855;" } %>
                             </div>
