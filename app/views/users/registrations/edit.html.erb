@@ -9,11 +9,14 @@
                     <header><h3>Account</h3></header>
                     <aside>
                         <ul class="sidebar-navigation">
-                            <li ><a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a></li>
-                            <li class="active"><%= link_to :edit_profile do %>
-                              <i class="fa fa-home"></i><span>My Account</span></a>
-                            </li>
-                            <% end %>
+                          <li><%= link_to edit_profile_path do %>
+                            <i class="fa fa-user"></i><span>Profile</span></a>
+                          </li>
+                          <% end %>
+                          <li class="active"><%= link_to edit_user_registration_path do %>
+                            <i class="fa fa-home"></i><span>My Account</span></a>
+                          </li>
+                          <% end %>
                         </ul>
                     </aside>
                 </section><!-- /#sidebar -->
@@ -33,11 +36,11 @@
                                             <dl class="contact-fields">
                                                 <dt><%= f.label :first_name %></dt>
                                                 <dd><div class="form-group">
-                                                    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                                                    <%= f.text_field :first_name, class: "form-control" %>
                                                 </div><!-- /.form-group --></dd>
                                                 <dt><%= f.label :last_name %></dt>
                                                 <dd><div class="form-group">
-                                                    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                                                    <%= f.text_field :last_name, class: "form-control" %>
                                                 </div><!-- /.form-group --></dd>
                                                 <dt><%= f.label :email %></dt>
                                                 <dd><div class="form-group">
