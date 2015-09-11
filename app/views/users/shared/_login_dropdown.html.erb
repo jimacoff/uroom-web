@@ -1,13 +1,7 @@
 <div class="dropdown dropdown-access">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link" style="color: black;">Sign in</a>
     <div class="dropdown-menu">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <%= link_to(omniauth_authorize_path(resource_name, :facebook), { class: "bt_facebook" } ) do %>
-                  <i class="icon-facebook"></i> Facebook
-                <% end %>
-            </div>
-        </div>
+        <% "Facebook Login" %>
         <div class="login-or">
             <hr class="hr-or">
             <span class="span-or">or</span>
