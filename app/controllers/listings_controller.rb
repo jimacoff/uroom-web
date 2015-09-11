@@ -62,8 +62,10 @@ class ListingsController < ApplicationController
   def create
     listing = Listing.new(listing_params)
     listing.owner = current_user
+    listing.owner.landlord = true
 
     if listing.save
+      current_user.save
       redirect_to listing
     else
       flash[:error] = "Could not create listing."
