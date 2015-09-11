@@ -1,7 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-  include RegistrationsHelper
-
 
   def edit_profile
     if user_signed_in?
@@ -12,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    current_user.about = params[:user][:about]
+    current_user.update(profile_params)
     if current_user.save
       redirect_to :edit_profile
     else
@@ -22,21 +20,23 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-
   def after_update_path_for(resource)
-      edit_user_registration_path(resource)
-    end
+    edit_user_registration_path(resource)
+  end
 
   private
 
   def sign_up_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :regular_user, :landlord)
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :about, :passowrd, :password_confirmation, :current_password)
+    debugger
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :passowrd, :password_confirmation, :current_password, :about, :avatar)
   end
 
-
+  def profile_params
+    params.require(:user).permit(:avatar, :about)
+  end
 
 end
