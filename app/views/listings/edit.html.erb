@@ -1,7 +1,7 @@
 <div id="page-content" style="margin-top: 150px;">
 
         <div class="container">
-            <header><h1>Add Your Property</h1></header>
+            <header><h1>Edit Your Property</h1></header>
             <%= form_for @listing do |f| %>
               <%= render 'shared/error_messages' %>
 
@@ -160,7 +160,14 @@
                                     <header><h2>Gallery</h2></header>
                                     <div class="center">
                                         <div class="form-group">
-                                            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="Browse Images">
+                                           <% @listing.pictures.each do |picture| %>
+                                            <%= image_tag picture.image.url(:medium), style: "height: 150px; object-fit: scale-down;" %>
+                                           <% end %>
+                                         <hr>
+                                           <%= f.file_field :pictures, type: :file, multiple: true, class: "file",
+                                           accept: "image/jpeg,image/png", data: {
+                                           show_upload: false, show_caption: false, show_remove: false,
+                                           browse_class: "btn btn-default", browse_label: "Browse Images"} %>
                                             <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
                                         </div>
                                     </div>
@@ -198,6 +205,7 @@
                             <div class="center">
                                 <div class="form-group">
                                     <%= f.submit "Update Listing", class: "btn btn-primary large" %>
+                                    <%= button_to "Delete Listing", listings_path(id: @listing.id), method: 'delete', class: 'btn btn-primary large' %>
                                 </div><!-- /.form-group -->
                             </div>
                         </div>
