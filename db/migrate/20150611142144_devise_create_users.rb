@@ -6,6 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :first_name,         null: false
       t.string :last_name,          null: false
       t.boolean :landlord,       default: false
+      t.boolean :regular_user,   default: false
 
       t.text  :about,             default: ""
 
