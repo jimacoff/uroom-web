@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", omniauth_callbacks: "users/omniauth_callbacks" }
   devise_scope :user do
-      get 'users/profile/' => 'users#show', as: :show_profile
-     get 'users/profile/edit' => 'registrations#edit_profile', as: :edit_profile
-     put 'users/profile/update' => 'registrations#update_profile', as: :update_profile
+    get 'users/profile' => 'users#show', as: :show_profile
+    get 'users/profile/edit' => 'registrations#edit_profile', as: :edit_profile
+    put 'users/profile/update' => 'registrations#update_profile', as: :update_profile
    end
   resources :listings
   resources :transactions, only: [:new, :create]

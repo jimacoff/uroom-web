@@ -1,0 +1,40 @@
+
+<!-- Page Content -->
+<div id="page-content" style="margin-top: 150px;">
+
+    <div class="container">
+        <div class="row">
+        <!-- sidebar -->
+        <div class="col-md-3 col-sm-2">
+            <section id="sidebar">
+                <aside>
+                    <%= image_tag @user.avatar.url(:medium), class: "image", id: "avatar-image" %>
+                </aside>
+            </section><!-- /#sidebar -->
+        </div><!-- /.col-md-3 -->
+        <!-- end Sidebar -->
+            <!-- My Properties -->
+            <div class="col-md-9 col-sm-10">
+                <section id="profile">
+                    <header><h1><%= "#{@user.full_name}" %></h1></header>
+                    <div class="account-profile">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9">
+                                    <section id="about-me">
+                                        <h3>About Me</h3>
+                                        <div class="form-group">
+                                          <p><%= @user.about %></p>
+                                        </div><!-- /.form-group -->
+                                    </section>
+                                    <br>
+
+                            </div><!-- /.col-md-9 -->
+                        </div><!-- /.row -->
+                    </div><!-- /.account-profile -->
+                </section><!-- /#profile -->
+            </div><!-- /.col-md-9 -->
+            <!-- end My Properties -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- end Page Content -->

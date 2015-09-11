@@ -71,7 +71,7 @@
                                         </td>
                                         <td>
                                           <% crew.users.each do |other_user| %>
-                                              <%= link_to "#{other_user.username}", show_profile_path(other_user) %></br>
+                                              <%= link_to "#{other_user.username}", show_profile_path(id: other_user) %></br>
                                           <% end %>
                                           <% other_requested_users = [] %>
                                           <% crew.crew_requests.each do |other_request| %>
@@ -82,7 +82,7 @@
                                           <% if other_requested_users.any? %>
                                             Pending:</br>
                                             <% other_requested_users.each do |other_requested_user| %>
-                                                <%= link_to "#{other_requested_user.username}", show_profile_path(other_requested_user) %></br>
+                                                <%= link_to "#{other_requested_user.username}", show_profile_path(id: other_requested_user) %></br>
                                             <% end %>
                                           <% end %>
                                         </td>
