@@ -1,5 +1,5 @@
 <div class="image-container">
-  <img class="listing-header" src="https://a0.muscache.com/im/pictures/54309004/523395fc_original.jpg">
+  <%= image_tag @listing.pictures.first.image.url(:medium), class: "listing-header" %>
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
@@ -25,28 +25,6 @@
                             <h1></h1>
                             <figure></figure>
                         </header> -->
-                        <section id="property-gallery">
-                            <div class="owl-carousel property-carousel">
-                                <div class="property-slide">
-                                    <a href="assets/img/properties/property-detail-01.jpg" class="image-popup">
-                                        <div class="overlay"><h3>Front View</h3></div>
-                                        <img alt="" src="assets/img/properties/property-detail-01.jpg">
-                                    </a>
-                                </div><!-- /.property-slide -->
-                                <div class="property-slide">
-                                    <a href="assets/img/properties/property-detail-02.jpg" class="image-popup">
-                                        <div class="overlay"><h3>Bedroom</h3></div>
-                                        <img alt="" src="assets/img/properties/property-detail-02.jpg">
-                                    </a>
-                                </div><!-- /.property-slide -->
-                                <div class="property-slide">
-                                    <a href="assets/img/properties/property-detail-03.jpg" class="image-popup">
-                                        <div class="overlay"><h3>Bathroom</h3></div>
-                                        <img alt="" src="assets/img/properties/property-detail-03.jpg">
-                                    </a>
-                                </div><!-- /.property-slide -->
-                            </div><!-- /.property-carousel -->
-                        </section>
 
                         <% if @crew.present? %>
                                 <section id="crew">
@@ -111,6 +89,22 @@
 
                                     </ul>
                                 </section><!-- /#property-features -->
+                                <section id="property-gallery">
+                                  <div class="owl-carousel property-carousel">
+                                    <% @listing.pictures.each do |picture| %>
+                                      <div class="property-slide">
+                                        <div style="height: 400px;">
+                                          <%= image_tag picture.image.url(:medium), style: "height: 400px; object-fit: scale-down;" %>
+                                        </div>
+                                      </div><!-- /.property-slide -->
+                                    <% end %>
+                                  </div><!-- /.property-carousel -->
+                              </section>
+                              <script type="text/javascript">
+                                $(window).load(function(){
+                                      initializeOwl(false);
+                                  });
+                              </script>
 
                                 <!-- <section id="property-map">
                                     <header><h2>Map</h2></header>
@@ -122,16 +116,14 @@
                                 <section class="agent-form">
                                   <header><h2>About the Owner</h2></header>
                                         <aside class="agent-info clearfix">
-                                            <figure><a href="agent-detail.html"><img alt="" src="assets/img/agent-01.jpg"></a></figure>
+                                            <figure><%= image_tag @listing.owner.avatar.url(:medium) %></figure>
                                             <div class="agent-contact-info">
-                                                <h3>Robert Farley</h3>
+                                                <h3><%= @listing.owner.full_name %></h3>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum,
-                                                    bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt.
-                                                    Duis euismod placerat rhoncus.
+                                                    <%= @listing.owner.about %>
                                                 </p>
                                                 <hr>
-                                                <a href="agent-detail.html" class="link-arrow">Full Profile</a>
+                                                <%= link_to "Full Profile", show_profile_path(@listing.owner) %>
                                             </div>
                                         </aside><!-- /.agent-info -->
                                 </section><!-- /.agent-form -->
