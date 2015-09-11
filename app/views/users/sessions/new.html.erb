@@ -1,26 +1,28 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+<!-- Page Content -->
+<div id="page-content" style="margin-top: 150px;">
+    <div class="container">
+        <header><h1>Sign In</h1></header>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <div class="form-group">
+                        <%= f.label :email %>
+                        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <%= f.label :password %>
+                        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group clearfix">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label :remember_me %>
+                        <%= f.submit "Log in", class: "btn pull-right btn-default", id: "account-submit" %>
+                    </div><!-- /.form-group -->
+                <% end %>
+                <hr>
+                <div class="center"><%= render "users/shared/links" %></div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- end Page Content -->
