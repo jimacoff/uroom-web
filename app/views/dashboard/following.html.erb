@@ -1,0 +1,88 @@
+<div id="page-content" style="margin-top: 150px;">
+
+        <div class="container">
+            <div class="row">
+            <!-- sidebar -->
+            <div class="col-md-3 col-sm-2">
+                <section id="sidebar">
+                    <header><h3>Account</h3></header>
+                    <aside>
+                      <ul class="sidebar-navigation">
+                        <% if current_user.regular_user %>
+                          <li><%= link_to dashboard_path do %>
+                            <i class="fa fa-user"></i><span>My Crews</span></a>
+                            <% end %>
+                          </li>
+                          <li><%= link_to dashboard_requests_path do %>
+                            <i class="fa fa-home"></i><span>Crew Requests</span></a>
+                            <% end %>
+                          </li>
+                          <li class="active"><%= link_to dashboard_following_path do %>
+                            <i class="fa fa-home"></i><span>Followed Listings</span></a>
+                            <% end %>
+                          </li>
+                        <% end %>
+                        <% if current_user.landlord %>
+                          <li><%= link_to dashboard_myproperties_path do %>
+                            <i class="fa fa-home"></i><span>My Properties</span></a>
+                            <% end %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </aside>
+                </section><!-- /#sidebar -->
+            </div><!-- /.col-md-3 -->
+            <!-- end Sidebar -->
+                <!-- My Properties -->
+                <div class="col-md-9 col-sm-10">
+                    <section id="my-properties">
+                        <header><h1>Followed Listings</h1></header>
+                        <div class="my-properties">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th></th>
+                                        <th>Move in</th>
+                                        <th>Lease Length</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                  <% @orbits.each do |orbit| %>
+                                  <% listing = orbit.listing %>
+                                    <tr>
+                                        <td class="image">
+                                            <a href="property-detail.html"><img alt="" src="assets/img/properties/property-04.jpg"></a>
+                                        </td>
+                                        <td><div class="inner">
+                                            <%= link_to listing do %>
+                                            <h2><%= listing.title %></h2>
+                                            <% end %>
+                                            <figure><%= listing.full_address %></figure>
+                                            <div class="tag price">$ <%= listing.price %></div>
+                                        </div>
+                                        </td>
+                                        <td><%= orbit.start_date.strftime("%B %Y") %></td>
+                                        <td><%= orbit.lease_length %></td>
+                                        <td class="actions">
+                                          <%= link_to listing_path(listing.id), class: "edit" do %>
+                                            <i class="fa fa-pencil"></i>Edit
+                                          <% end %>
+                                        </td>
+                                    </tr>
+                                  <% end %>
+
+                                    </tbody>
+                                </table>
+                            </div><!-- /.table-responsive -->
+                            <!-- Pagination -->
+                        </div><!-- /.my-properties -->
+                    </section><!-- /#my-properties -->
+                </div><!-- /.col-md-9 -->
+                <!-- end My Properties -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
