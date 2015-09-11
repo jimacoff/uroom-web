@@ -1,45 +1,62 @@
-<h2>Sign up</h2>
+<!-- Page Content -->
+    <div id="page-content" style="margin-top: 150px;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+        <div class="container">
+            <header><h1>Create an Account</h1></header>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                      <%= devise_error_messages! %>
+                      <h3>Account Type</h3>
+                      <div class="radio">
+                        <%= f.label :regular_user do %>
+                          <%= f.radio_button :regular_user, 1, checked: true %> Regular User
+                        <% end %>
+                      </div>
+                        <div class="radio">
+                            <%= f.label :landlord do %>
+                              <%= f.radio_button :landlord, 0 %> Landlord
+                            <% end %>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <%= f.label :first_name %>
+                            <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <%= f.label :last_name %>
+                            <%= f.text_field :last_name, class: "form-control", required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <%= f.label :username %><br />
+                            <%= f.text_field :username, class: "form-control", required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <%= f.label :email %>
+                            <%= f.email_field :email, class: "form-control", required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <%= f.label :password %>
+                            <% if @minimum_password_length %>
+                            <em>(<%= @minimum_password_length %> characters minimum)</em>
+                            <% end %><br />
+                            <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <%= f.label :password_confirmation %><br />
+                            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", required: true %>
+                        </div><!-- /.form-group -->
+                        <div class="form-group clearfix">
+                            <%= f.submit "Sign up", class: "btn pull-right btn-default" %>
+                        </div><!-- /.form-group -->
+                    <% end %>
+                    <hr>
+                    <div class="center">
+                        <figure class="note">By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-
-<%= render "users/shared/links" %>
+                        <%= render "users/shared/links" %>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
