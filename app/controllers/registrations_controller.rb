@@ -11,6 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_profile
     current_user.update(profile_params)
+    debugger
     if current_user.save
       redirect_to :edit_profile
     else
