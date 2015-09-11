@@ -10,7 +10,7 @@
                 <header><h3>Account</h3></header>
                 <aside>
                     <ul class="sidebar-navigation">
-                        <li class="active"><%= link_to :edit_profile do %>
+                        <li class="active"><%= link_to edit_profile_path do %>
                           <i class="fa fa-user"></i><span>Profile</span></a>
                         </li>
                         <% end %>
@@ -29,14 +29,14 @@
                     <header><h1>Profile</h1></header>
                     <div class="account-profile">
                         <div class="row">
+                          <%= form_for(current_user, url: update_profile_path, html: { multipart: true, method: "put" }) do |f| %>
                             <div class="col-md-3 col-sm-3">
-                                <img alt="" class="image" src="assets/img/agent-01.jpg">
+                                <%= image_tag current_user.avatar.url(:medium), class: "image", id: "avatar-image" %>
+                                <%= f.file_field :avatar, id: "pictureInput" %>
                             </div>
                             <div class="col-md-9 col-sm-9">
-                              <%= form_for(current_user, url: update_profile_path, html: { method: :put }) do |f| %>
-
                                     <section id="contact">
-                                        <h2><%= current_user.full_name %></h2>
+                                        <h2><%= current_user.username %></h2>
                                     </section>
                                     <section id="about-me">
                                         <h3>About Me</h3>
@@ -69,8 +69,9 @@
                                             <%= f.submit "Update", class: "btn pull-right btn-default", id: "account-submit" %>
                                         </div><!-- /.form-group -->
                                     </section>
-                                <% end %>
+
                             </div><!-- /.col-md-9 -->
+                            <% end %>
                         </div><!-- /.row -->
                     </div><!-- /.account-profile -->
                 </section><!-- /#profile -->
@@ -80,3 +81,20 @@
     </div><!-- /.container -->
 </div>
 <!-- end Page Content -->
+<script>
+$(function() {
+  $('#pictureInput').on('change', function(event) {
+    var files = event.target.files;
+    var image = files[0]
+    var reader = new FileReader();
+    reader.onload = function(file) {
+      var img = new Image();
+      console.log(file);
+      img.src = file.target.result;
+      $('#avatar-image').attr({src: img.src});
+    }
+    reader.readAsDataURL(image);
+    console.log(files);
+  });
+});
+</script>
