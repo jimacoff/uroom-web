@@ -63,7 +63,14 @@ class ListingsController < ApplicationController
     listing = Listing.new(listing_params)
     listing.owner = current_user
     listing.owner.landlord = true
+    gallery = Gallery.create
+    if params[:listing][:pictures]
+        params[:listing][:pictures].each { |image|
+          gallery.pictures.create(image: image)
+        }
+    end
 
+    listing.gallery = gallery
     if listing.save
       current_user.save
       redirect_to listing
@@ -80,6 +87,11 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
     if @listing.update_attributes(listing_params)
+      if params[:listing][:pictures]
+          params[:listing][:pictures].each { |image|
+            @listing.gallery.pictures.create(image: image)
+          }
+      end
       redirect_to @listing
     else
       flash[:error] = "Could not update listing."
@@ -89,8 +101,8 @@ class ListingsController < ApplicationController
 
   def destroy
     @listing = Listing.find(params[:id])
-    @listing.destory
-    # Redirect to dashboard
+    @listing.destroy
+    redirect_to dashboard_myproperties_path
   end
 
   # Orbit - user, listing, start_date, end_date, has_crew
