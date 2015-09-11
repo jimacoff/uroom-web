@@ -15,4 +15,16 @@ class DashboardController < ApplicationController
     @listings = current_user.owned_listings
   end
 
+  def following
+    @orbits = current_user.orbits
+  end
+
+  def requests
+    @request = current_user.crew_requests
+  end
+
+  def crews
+    @crews = current_user.crews
+  end
+
 end
