@@ -207,7 +207,7 @@ $(document).ready(function($) {
             bookmarkButton.removeClass('bookmark-added');
         }
     });
-	
+
     if ($('body').hasClass('navigation-fixed-bottom')){
         $('#page-content').css('padding-top',$('.navigation').height());
     }
