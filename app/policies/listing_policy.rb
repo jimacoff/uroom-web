@@ -26,8 +26,16 @@ class ListingPolicy
     update?
   end
 
-  def destroy
+  def destroy?
     listing.owner == user || user.admin?
+  end
+
+  def orbit?
+    user.regular_user || user.admin?
+  end
+
+  def unorbit?
+    user.regular_user || user.admin?
   end
 
 
