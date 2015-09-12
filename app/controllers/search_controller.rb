@@ -8,6 +8,7 @@ class SearchController < ApplicationController
 
     @lease_length = params[:lease_length].to_i
     @roommates = params[:roommates].to_i if params[:roommates]
+    @all = !!params[:true] ? true : false
 
     @start_date = params[:date].to_date
     @end_date = end_date(@start_date, @lease_length)
@@ -20,18 +21,31 @@ class SearchController < ApplicationController
     @location = @locations[params[:location].to_i]
     @coordinates = Geocoder.coordinates(@location)
 
+    @date = Date.today.at_beginning_of_month.next_month
+    @months = []
+    (0..11).each do |m|
+      @months << [@date.next_month(m).strftime("%b %Y"), @date.next_month(m)]
+    end
+
     # How to handle availability
     # Store available start and end dates (for more complex handling only store unavailable dates)
     # In query check if start date is greater or equal to and end is less than or equal to
 
     # Search Listings
     # .where(['start_date >= ? AND end_date <= ?', @start_date, @end_date])
-    @listings   =     Listing.near(@location).where(['start_date >= ? AND end_date <= ?'], @start_date, @end_date)
-    @listings_1 =     Listing.near(@location).where(['start_date >= ? AND end_date <= ? AND price <= ?'], @start_date, @end_date, @max_price_1)
-    @listings_2 =     Listing.near(@location).where(['start_date >= ? AND end_date <= ? AND price <= ?'], @start_date, @end_date, @max_price_2)
-    @listings_3 =     Listing.near(@location).where(['start_date >= ? AND end_date <= ? AND price <= ?'], @start_date, @end_date, @max_price_3)
-    @listings_more =  Listing.near(@location).where(['start_date >= ? AND end_date <= ? AND price >= ?'], @start_date, @end_date, @max_price_3)
-    debugger
+    max_results = 10
+    if params[:roommates]
+      @tenants = params[:roommates].to_i + 1
+      @max_price = params[:max].to_i * @tenants
+      @listings   =     Listing.near(@location).where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
+                                .where('price <= ?', @max_price).where('accommodates >= ?', @tenants)
+    else
+      @listings   =     Listing.near(@location).where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
+      @listings_1 =     @listings.where('price <= ?', @max_price_1).where('accommodates >= ?', 2).limit(max_results)
+      @listings_2 =     @listings.where('price <= ? AND price > ?', @max_price_2, @max_price_1).where('accommodates >= ?', 3).limit(max_results)
+      @listings_3 =     @listings.where('price <= ? AND price > ?', @max_price_3, @max_price_2).where('accommodates >= ?', 4).limit(max_results)
+      @listings_more =  @listings.where('price > ?', @max_price_3).where('accommodates > ?', 4).limit(max_results)
+    end
   end
 
 end

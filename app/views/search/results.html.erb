@@ -1,4 +1,4 @@
-<div id="page-content" style="margin-top: 100px;">
+<div id="page-content" style="margin-top: 150px;">
 <div class="container">
             <div class="row">
 							<!-- sidebar -->
@@ -9,19 +9,17 @@
 														<%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-search", role: "form", id: "form-sidebar") do %>
 
 															<div class="form-group">
-																	<%= select_tag :location, options_for_select([['San Francisco', 1], ['New York', 2]], selected: :location, name: "form-sale-city" ) %>
+																	<%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], params[:location]), name: "form-sale-city" %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
-																	<%= select_month(Date.today + 1.month, name: "month") %>
+																	<%= select_tag("date", options_for_select(@months, @date)) %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
-																	<%= select_year(Date.today, name: "year", start_year: Date.today.year, end_year: 1.years.from_now.year) %>
+																	<%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: params[:lease_length], class: "styled-select", name: "category" ) %>
 															</div><!-- /.form-group -->
-															<div class="form-group">
-																	  <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
-															</div><!-- /.form-group -->
-															<div class="form-group">
-																  <%= text_field_tag(:max, nil, {placeholder: "Max Price"}) %>
+															<div class="form-group input-group">
+                                <span class="input-group-addon">$</span>
+																  <%= text_field_tag(:max, params[:max], {placeholder: "Your Max Rent"}) %>
 																	<!-- <div class="price-range">
 																			<input id="price-input" type="text" name="price" value="1000;299000">
 																	</div> -->
@@ -29,7 +27,7 @@
 															<div class="form-group">
 																	<%= submit_tag "Search", { class:"btn btn-default"} %>
 															</div><!-- /.form-group -->
-															<% end %>
+														<% end %>
 											</aside><!-- /#edit-search -->
 
 									</section><!-- /#sidebar -->
@@ -38,48 +36,79 @@
                 <!-- Results -->
                 <div class="col-md-9 col-sm-9">
                     <section id="results">
-                        <header><h1>Properties Listing</h1></header>
 
+                      <h3 style="float: right;"><%= link_to "All Results", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max] } %></h3>
+                        <header><h1>Properties</h1></header>
                         <section id="properties">
-													<% @listings.in_groups_of 3 do |triplets| %>
-														<div class="row">
-										          <% triplets.each do |listing| %>
-																<% if listing %>
-																	<div class="col-md-4 col-sm-4">
-			                                <div class="property">
-																					<%= link_to listing_path(id: listing.id, date: @date, lease_length: @lease_length)  do %>
-																						<div class="property-image">
-																								<img alt="" src="assets/img/properties/property-09.jpg">
-																						</div>
-			                                        <div class="overlay">
-			                                            <div class="info">
-			                                                <div class="tag price" style="float: right;">$ <%= listing.price %></div>
-																											<h3><%= listing.title %></h3>
-			                                                <figure><%= listing.city%>, <%= listing.state %></figure>
-			                                            </div>
-			                                            <ul class="additional-info">
-																											<li>
-																													<header>Furnished:</header>
-																													<figure><%= listing.furnished ? "Yes" : "No" %></figure>
-																											</li>
-			                                                <li>
-			                                                    <header>Beds:</header>
-			                                                    <figure><%= listing.bedrooms %></figure>
-			                                                </li>
-			                                                <li>
-			                                                    <header>Baths:</header>
-			                                                    <figure><%= listing.bathrooms %></figure>
-			                                                </li>
-			                                            </ul>
-			                                        </div>
-			                                    <% end %>
-			                                </div><!-- /.property -->
-			                            </div><!-- /.col-md-3 -->
-										          	<% end %>
-										          <% end %>
-										        </div><!-- End row -->
-														</br>
-										      <% end %>
+                        <% if params[:roommates] || params[:max].blank? %>
+        													<% @listings.in_groups_of 3 do |triplets| %>
+        														<div class="row">
+        										          <% triplets.each do |listing| %>
+        																<% if listing %>
+        																	<%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+        										          	<% end %>
+                                      <% end %>
+                                    </div>
+        										      <% end %>
+        										        <!-- End row -->
+        														</br>
+                        <% else %>
+                          <% if @listings_1.any? %>
+                          <h2><%= link_to "1 Roommate", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                              <% @listings_1.in_groups_of 3 do |triplets| %>
+                                <div class="row">
+                                  <% triplets.each do |listing| %>
+                                    <% if listing %>
+                                      <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                    <% end %>
+                                  <% end %>
+                                </div>
+                                </br>
+                              <% end %>
+                            <% end %>
+                            <% if @listings_2.any? %>
+                            <h2><%= link_to "2 Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                                <% @listings_2.in_groups_of 3 do |triplets| %>
+                                  <div class="row">
+                                    <% triplets.each do |listing| %>
+                                      <% if listing %>
+                                        <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+                                  </br>
+                                <% end %>
+                            <% end %>
+
+                            <% if @listings_3.any? %>
+                              <h2><%= link_to "3 Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+
+                                    <% @listings_3.in_groups_of 3 do |triplets| %>
+                                      <div class="row">
+                                        <% triplets.each do |listing| %>
+                                          <% if listing %>
+                                            <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                          <% end %>
+                                        <% end %>
+                                      </div>
+                                    </br>
+                                    <% end %>
+                              <% end %>
+                              <% if @listings_more.any? %>
+                                <h2><%= link_to "More Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+
+                                    <% @listings_more.in_groups_of 3 do |triplets| %>
+                                      <div class="row">
+                                        <% triplets.each do |listing| %>
+                                          <% if listing %>
+                                            <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                          <% end %>
+                                        <% end %>
+                                      </div>
+                                      </br>
+                                    <% end %>
+                              <% end %>
+                        <% end %>
                         <!-- Pagination -->
                         <!-- <div class="center"> -->
                             <!-- <ul class="pagination">
@@ -99,136 +128,4 @@
 
             </div><!-- /.row -->
         </div><!-- /.container -->
-
-
-
- <style>
-       #map {
-         width: 100%;
-         height: 400px;
-       }
- </style>
- <script src="https://maps.googleapis.com/maps/api/js"></script>
- <script>
- $('#collapseMap').on('shown.bs.collapse', function(e){
-	(function(A) {
-
-	if (!Array.prototype.forEach)
-		A.forEach = A.forEach || function(action, that) {
-			for (var i = 0, l = this.length; i < l; i++)
-				if (i in this)
-					action.call(that, this[i], i, this);
-			};
-
-		})(Array.prototype);
-
-		var
-		mapObject,
-		markers = [],
-		markersData = {
-			'Listings': [
-				<% @listings.each do |listing| %>
-				{
-					name: '<%= listing.title %>',
-					location_latitude: <%= listing.latitude %>,
-					location_longitude: <%= listing.longitude %>,
-					map_image_url: 'img/thumb_map_1.jpg',
-					name_point: '<%= listing.title %>',
-					description_point: '<%= listing.description %>',
-					url_point: '<%= listing_path(listing) %>'
-				},
-
-			<% end %>
-			]
-		};
-
-
-			var mapOptions = {
-				zoom: 12,
-				center: new google.maps.LatLng(<%= @coordinates.first %>, <%= @coordinates.last %>),
-				mapTypeId: google.maps.MapTypeId.ROADMAP,
-
-				mapTypeControl: false,
-				mapTypeControlOptions: {
-					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-					position: google.maps.ControlPosition.LEFT_CENTER
-				},
-				panControl: false,
-				panControlOptions: {
-					position: google.maps.ControlPosition.TOP_RIGHT
-				},
-				zoomControl: true,
-				zoomControlOptions: {
-					style: google.maps.ZoomControlStyle.LARGE,
-					position: google.maps.ControlPosition.TOP_RIGHT
-				},
-				scrollwheel: false,
-				scaleControl: false,
-				scaleControlOptions: {
-					position: google.maps.ControlPosition.TOP_LEFT
-				},
-				streetViewControl: true,
-				streetViewControlOptions: {
-					position: google.maps.ControlPosition.LEFT_TOP
-				},
-				styles: [/*map styles*/]
-			};
-			var
-			marker;
-			mapObject = new google.maps.Map(document.getElementById('map'), mapOptions);
-			for (var key in markersData)
-				markersData[key].forEach(function (item) {
-					marker = new google.maps.Marker({
-						position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
-						map: mapObject,
-						icon: '<%= asset_path("home_pin.png") %>',
-					});
-
-					if ('undefined' === typeof markers[key])
-						markers[key] = [];
-					markers[key].push(marker);
-					google.maps.event.addListener(marker, 'click', (function () {
-			 closeInfoBox();
-			 getInfoBox(item).open(mapObject, this);
-			 mapObject.setCenter(new google.maps.LatLng(item.location_latitude, item.location_longitude));
-			}));
-
-	});
-
-		function hideAllMarkers () {
-			for (var key in markers)
-				markers[key].forEach(function (marker) {
-					marker.setMap(null);
-				});
-		};
-
-		function closeInfoBox() {
-			$('div.infoBox').remove();
-		};
-
-		function getInfoBox(item) {
-			return new InfoBox({
-				content:
-				'<div class="marker_info" id="marker_info">' +
-				'<img src="' + item.map_image_url + '" alt=""/>' +
-				'<h3>'+ item.name_point +'</h3>' +
-				'<span>'+ item.description_point +'</span>' +
-				'<a href="'+ item.url_point + '" class="btn_1">Details</a>' +
-				'</div>',
-				disableAutoPan: true,
-				maxWidth: 0,
-				pixelOffset: new google.maps.Size(40, -190),
-				closeBoxMargin: '5px -20px 2px 2px',
-				closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-				isHidden: false,
-				pane: 'floatPane',
-				enableEventPropagation: true
-			});
-
-
-		};
-
-		 });
- </script>
- <!-- Map -->
  </div>
