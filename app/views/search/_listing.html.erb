@@ -1,0 +1,34 @@
+<div class="col-md-4 col-sm-4">
+    <div class="property">
+        <%= link_to listing_path(id: listing.id, date: date, lease_length: lease_length)  do %>
+          <div class="property-image property-container" style="width: 262px;
+          height: 262px;
+          display: block;
+          position: relative;
+          overflow: hidden;">
+              <%= image_tag listing.pictures.first.image.url(:medium), class: "listing-image", id: "image" %>
+          </div>
+            <div class="overlay">
+                <div class="info">
+                    <div class="tag price" style="float: right;">$ <%= listing.price %></div>
+                    <h3><%= listing.title %></h3>
+                    <figure><%= listing.city%>, <%= listing.state %></figure>
+                </div>
+                <ul class="additional-info">
+                    <li>
+                        <header>Furnished:</header>
+                        <figure><%= listing.furnished ? "Yes" : "No" %></figure>
+                    </li>
+                    <li>
+                        <header>Beds:</header>
+                        <figure><%= listing.bedrooms %></figure>
+                    </li>
+                    <li>
+                        <header>Baths:</header>
+                        <figure><%= listing.bathrooms %></figure>
+                    </li>
+                </ul>
+            </div>
+        <% end %>
+    </div><!-- /.property -->
+</div><!-- /.col-md-3 -->
