@@ -8,7 +8,6 @@ class SearchController < ApplicationController
 
     @lease_length = params[:lease_length].to_i
     @roommates = params[:roommates].to_i if params[:roommates]
-    @all = !!params[:true] ? true : false
 
     @start_date = params[:date].to_date
     @end_date = end_date(@start_date, @lease_length)
