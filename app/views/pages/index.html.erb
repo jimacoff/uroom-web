@@ -20,10 +20,11 @@
                                   <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
                             </div>
                             <div class="col-md-2 col-sm-4">
+                              <div class="input-group">
+                                  <span class="input-group-addon">$</span>
                                   <%= text_field_tag(:max, nil, {placeholder: "Your Max Rent", class: "form-control"}) %>
+                              </div>
                             </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= check_box_tag :furnished, 0, checked: true, class: "js-switch" %> Furnished?
                             <div class="col-md-2 col-sm-4">
                                   <%= submit_tag "Search", { class:"btn btn-default", style: "background-color: #073855;" } %>
                             </div>
