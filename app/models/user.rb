@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" },
       default_url: "/images/:style/missing.png",
       url: "/system/:id/:style/:hash.:extension",
-      hash_secret:Test2::Application.config.secret_token
+      hash_secret: ENV['HASH_SECRET']
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   has_many :crew_requests
