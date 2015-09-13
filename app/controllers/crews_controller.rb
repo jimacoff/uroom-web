@@ -18,9 +18,10 @@ class CrewsController < ApplicationController
     crew_requests = []
     params[:users].each do |user_id|
       crew_request = CrewRequest.new
-      crew_request.user_id = user_id
+      requested_user = User.find(user_id)
+      crew_request.user_id = requested_user.id if requested_user
       crew_request.crew = crew
-
+      
       crew_requests << crew_request
     end
 
