@@ -165,9 +165,9 @@
                                   <% end %>
                                   <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
                             <% elsif @orbit.present? %>
-                            <% if @not_available %>
-                              <h4 style="color: red;">These dates are no longer available</h4></br>
-                            <% end %>
+                                <% if @not_available %>
+                                  <h4 style="color: red;">These dates are no longer available</h4></br>
+                                <% end %>
                                   <%= form_tag({controller: "listings", action: "update_date"}, method: "post", class: "form-group") do %>
                                     <%= hidden_field_tag :id , @listing.id %>
                                     <div class="form-group">
