@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post 'listings/update_date'
   post 'listings/land'
   post 'crews/create'
-  post 'crews/leave' => 'crews/leave_crew'
+  get  'crews/leave' => 'crews/leave_crew'
 
   get '/requests/accept' => 'crew_requests#accept_request'
   get '/requests/reject' => 'crew_requests#reject_request'
