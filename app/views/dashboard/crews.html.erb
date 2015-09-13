@@ -75,7 +75,7 @@
                                               <% other_requested_users = [] %>
                                               <% crew.crew_requests.each do |other_request| %>
                                                   <% if other_request.user != current_user %>
-                                                      other_requested_users << other_request.user
+                                                      <% other_requested_users << other_request.user %>
                                                   <% end %>
                                               <% end %>
                                               <% if other_requested_users.any? %>
