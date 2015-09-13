@@ -31,16 +31,10 @@ class ListingsController < ApplicationController
     @crew = @orbit.crew if @orbit.present?
     @chat = @crew.chat if @crew
     @message = Message.new
-    @followers = @listing.users
-    @followers = @followers -= [current_user]
     @new_orbit = Orbit.new
 
     if params[:date]
       get_params
-      if user_signed_in?
-        @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false })
-        @followers -= [current_user] if @followers
-      end
     else
       if @orbit.present?
         @start_date = @orbit.start_date
@@ -50,6 +44,9 @@ class ListingsController < ApplicationController
         # calculate lease length
       end
     end
+
+    @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false }) if @start_date
+    @followers = @followers -= [current_user] if @followers
 
     if @start_date.nil?
       @start_date = @listing.start_date
