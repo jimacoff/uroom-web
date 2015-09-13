@@ -17,6 +17,7 @@ class CrewRequestsController < ApplicationController
     orbit = Orbit.find_by(user: current_user, listing: crew.listing)
     orbit.start_date = crew.start_date
     orbit.end_date = crew.end_date
+    orbit.crew = crew
 
     crew.users << current_user
     crew.crew_requests.delete(request)
