@@ -21,7 +21,7 @@ class CrewsController < ApplicationController
       requested_user = User.find(user_id)
       crew_request.user_id = requested_user.id if requested_user
       crew_request.crew = crew
-      
+
       crew_requests << crew_request
     end
 
@@ -81,22 +81,23 @@ class CrewsController < ApplicationController
   # If a user leaves the crew, everyone in crew no longer is ready_to_land
   # and is no longer landed
   def leave_crew
-    crew = Crew.find(:crew)
+    crew = Crew.find(params[:crew])
     listing = crew.listing
 
     crew.users.each do |user|
-      orbit = Orbit.find_by(user: user, listing: crew.listing)
+      orbit = Orbit.find_by(user: user, listing: listing)
       if user == current_user
         orbit.has_crew = false
+        orbit.crew = nil
         crew.users.delete(current_user)
       end
       orbit.ready_to_land = false
-      oribt.landed = false
+      orbit.landed = false
       orbit.save
     end
 
-    if crew.admin == current_user
-      crew.admin = crew.users.first
+    if crew.crew_admin == current_user
+      crew.crew_admin = crew.users.first
     end
 
     if crew.users.count == 0
