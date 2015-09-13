@@ -163,7 +163,8 @@
                                     </div>
                                   </br>
                                   <% end %>
-                                  <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn_full_outline" %>
+                                  <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default" %>
+                                  <%= link_to "Leave Crew", crews_leave_path(crew: @crew), class: "btn btn-default", style: "background-color: #073855;"%>
                             <% elsif @orbit.present? %>
                                 <% if @not_available %>
                                   <h4 style="color: red;">These dates are no longer available</h4></br>
