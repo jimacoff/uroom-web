@@ -9,7 +9,7 @@
 														<%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-search", role: "form", id: "form-sidebar") do %>
 
 															<div class="form-group">
-																	<%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], params[:location]), name: "form-sale-city" %>
+																	<%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], params[:location]) %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
 																	<%= select_tag("date", options_for_select(@months, @date)) %>

@@ -11,7 +11,7 @@
                         <div class="row center">
                           <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
                             <div class="col-md-2 col-sm-4">
-                                  <%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], selected: :location, name: "form-sale-city" ) %>
+                                  <%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], selected: :location ) %>
                             </div>
                             <div class="col-md-2 col-sm-4">
                                   <%= select_tag("date", options_for_select(@months, @date)) %>
