@@ -11,7 +11,7 @@ class ListingPolicy
   end
 
   def create?
-    user
+    @user
   end
 
   def new?
@@ -19,7 +19,7 @@ class ListingPolicy
   end
 
   def update?
-    listing.owner == user || user.admin?
+    @listing.owner == @user || @user.admin?
   end
 
   def edit?
@@ -27,15 +27,20 @@ class ListingPolicy
   end
 
   def destroy?
-    listing.owner == user || user.admin?
+    @listing.owner == @user || @user.admin?
   end
 
   def orbit?
-    user.regular_user || user.admin?
+    @user.regular_user || @user.admin?
   end
 
   def unorbit?
-    user.regular_user || user.admin?
+    @user.regular_user || @user.admin?
+  end
+
+  def request?
+    crew = Crew.where(listing: @listing, user: @user).first
+    @user == crew.crew_admin
   end
 
 

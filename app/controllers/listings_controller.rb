@@ -180,6 +180,13 @@ class ListingsController < ApplicationController
     # Create Signatures
   end
 
+  def request
+    @listing = Listing.find(params[:id])
+    # Only can request listing if crew admin
+    # Create booking request in owner inbox
+    # Send owner email if not registered user
+  end
+
   private
 
     def get_params
