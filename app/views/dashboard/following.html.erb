@@ -54,7 +54,9 @@
                                   <% listing = orbit.listing %>
                                     <tr>
                                         <td class="image">
-                                            <a href="property-detail.html"><img alt="" src="assets/img/properties/property-04.jpg"></a>
+                                              <%= link_to listing do %>
+                                              <%= image_tag listing.pictures.first.image.url(:medium) %>
+                                              <% end %>
                                         </td>
                                         <td><div class="inner">
                                             <%= link_to listing do %>
