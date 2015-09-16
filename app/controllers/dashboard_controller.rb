@@ -8,6 +8,9 @@ class DashboardController < ApplicationController
     @crew_requests = current_user.crew_requests
     @followed_listings = current_user.orbits
     @my_crews = current_user.crews
+    if current_user.landlord && !current_user.regular_user
+      redirect_to dashboard_myproperties_path
+    end
   end
 
   def properties

@@ -11,7 +11,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_profile
     current_user.update(profile_params)
-    debugger
     if current_user.save
       redirect_to :edit_profile
     else
@@ -28,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :regular_user, :landlord)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :regular_user, :landlord, :invited_booking_request, :invited_crew)
   end
 
   def account_update_params

@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
+  attr_writer :invitation_instructions
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" },
       default_url: "/images/:style/missing.png",
@@ -19,6 +20,9 @@ class User < ActiveRecord::Base
 
   has_many :crew_approval_requests
   has_many :owned_listings, class_name: "Listing", foreign_key: "owner_id"
+
+  belongs_to :invited_booking_request, class_name: "BookingRequest", foreign_key: "invited_booking_request_id"
+  belongs_to :invited_crew, class_name: "Crew", foreign_key: "invited_crew_id"
 
   def full_name
     "#{first_name} #{last_name}"
@@ -41,5 +45,25 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def deliver_invitation
+   if @invitation_instructions.present?
+     ::Devise.mailer.send(@invitation_instructions, self).deliver
+   else
+     super
+   end
+  end
+
+  def self.invite_landlord!(attributes={}, invited_by=nil)
+   self.invite!(attributes, invited_by) do |invitable|
+     invitable.invitation_instructions = :landlord_invitation_instructions
+   end
+  end
+
+  def self.invite_friend!(attributes={}, invited_by=nil)
+   self.invite!(attributes, invited_by) do |invitable|
+     invitable.invitation_instructions = :friend_invitation_instructions
+   end
   end
 end
