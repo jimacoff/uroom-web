@@ -6,7 +6,9 @@
           display: block;
           position: relative;
           overflow: hidden;">
-              <%= image_tag listing.pictures.first.image.url(:medium), class: "listing-image", id: "image" %>
+          <% if listing.pictures.any? %>
+              <%= image_tag listing.pictures.first.image.url(:medium), class: "listing-image", id: "image"%>
+          <% end %>
           </div>
             <div class="overlay">
                 <div class="info">

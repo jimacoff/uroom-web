@@ -1,5 +1,5 @@
 <div class="image-container">
-  <%= image_tag @listing.pictures.first.image.url(:medium), class: "listing-header" %>
+  <%= image_tag @listing.pictures.first.image.url(:medium), class: "listing-header"  if @listing.pictures.any? %>
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
@@ -112,7 +112,7 @@
                                         <div class="property-detail-map" id="property-detail-map"></div>
                                     </div>
                                 </section>< /#property-map -->
-
+                            <% if @listing.owner.present? %>
                                 <section class="agent-form">
                                   <header><h2>About the Owner</h2></header>
                                         <aside class="agent-info clearfix">
@@ -127,6 +127,7 @@
                                             </div>
                                         </aside><!-- /.agent-info -->
                                 </section><!-- /.agent-form -->
+                              <% end %>
                               </section><!-- /#property-detail -->
                 </div><!-- /.row -->
 
@@ -134,7 +135,7 @@
                 <div class="col-md-3 col-sm-3">
                     <section id="sidebar">
                         <aside id="edit-search">
-                          <% if @listing.owner == current_user %>
+                          <% if @listing.owner.present? && @listing.owner == current_user %>
                             <header><h3>Follow Stats</h3></header>
                             <ul>
                                 <li><strong>Followers: &nbsp;</strong> <%= @listing.users.count %></li>
@@ -163,7 +164,7 @@
                                     </div>
                                   </br>
                                   <% end %>
-                                  <%= link_to "Land", listings_land_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default" %>
+                                  <%= button_to "Request", listings_request_path(id: @listing.id, crew: @crew, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default" if @crew.crew_admin == current_user %>
                                   <%= link_to "Leave Crew", crews_leave_path(crew: @crew), class: "btn btn-default", style: "background-color: #073855;"%>
                             <% elsif @orbit.present? %>
                                 <% if @not_available %>
