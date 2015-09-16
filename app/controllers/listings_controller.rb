@@ -49,7 +49,7 @@ class ListingsController < ApplicationController
     @followers = @followers -= [current_user] if @followers
 
     if @start_date.nil?
-      @start_date = @listing.start_date
+      @start_date = @listing.start_date > Date.today.beginning_of_month.next_month ? @listing.start_date : Date.today.beginning_of_month.next_month
     end
 
     length = (@listing.end_date.year * 12 + @listing.end_date.month) - (@listing.start_date.year * 12 + @listing.start_date.month)
@@ -180,11 +180,22 @@ class ListingsController < ApplicationController
     # Create Signatures
   end
 
-  def request
+  def booking_request
     @listing = Listing.find(params[:id])
-    # Only can request listing if crew admin
-    # Create booking request in owner inbox
-    # Send owner email if not registered user
+    @crew = @listing.crews.find(params[:crew])
+
+    if @crew.crew_admin == current_user
+      if BookingRequest.create(crew: @crew, listing: @listing)
+        crew.update(requested: true)
+        flash[:success] = "Your request has been sent to the owner"
+      else
+        flash[:error] = "Sorry, we couldn't create your request right now. Try again later."
+      end
+      redirect_to @listing
+    else
+      flash[:error] = "Sorry, only the crew admin can do that."
+      redirect_to @listing
+    end
   end
 
   private

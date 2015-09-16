@@ -7,8 +7,10 @@ class CreateCrews < ActiveRecord::Migration
       t.integer    :size
 
       t.boolean    :ready_to_land,  default: false
-      t.boolean    :approved,       default: false
       t.boolean    :landed,         default: false
+
+      t.boolean    :requested,      default: false
+      t.boolean    :approved,       default: false
 
       t.belongs_to :listing,      index: true
       t.references :crew_admin,   index: true
