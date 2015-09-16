@@ -29,6 +29,7 @@ gem 'hellosign-ruby-sdk'
 gem 'slick_rails'
 gem 'font-awesome-rails'
 gem 'paperclip', "~> 4.3"
+gem 'devise_invitable', '~> 1.5.2'
 
 gem 'mandrill-api'
 # Use jquery as the JavaScript library

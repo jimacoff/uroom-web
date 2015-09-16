@@ -66,6 +66,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_invitable (1.5.2)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.2.0)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -270,6 +273,7 @@ DEPENDENCIES
   braintree
   byebug (~> 6.0.1)
   devise
+  devise_invitable (~> 1.5.2)
   figaro
   font-awesome-rails
   geocoder
