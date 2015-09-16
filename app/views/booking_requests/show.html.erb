@@ -1,0 +1,6 @@
+<div id="page-content" style="margin-top: 150px;">
+  <%= @request %>
+  <%= button_to "Accept", bookingrequests_accept_path(id: @request), method: :post, class: "btn btn-default" %>
+  <%= button_to "Reject", bookingrequests_reject_path(id: @request), method: :post, class: "btn btn-default" %>
+
+</div>
