@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { registrations: "registrations", invitations: "users/invitations", omniauth_callbacks: "users/omniauth_callbacks" }
   devise_scope :user do
     get 'users/profile' => 'users#show', as: :show_profile
     get 'users/profile/edit' => 'registrations#edit_profile', as: :edit_profile
@@ -17,10 +17,15 @@ Rails.application.routes.draw do
     end
   end
 
+  get  'bookingrequests/'  => 'booking_requests#index'
+  get  'bookingrequest/'   => 'booking_requests#show'
+  post 'bookingrequests/accept' => 'booking_requests#accept'
+  post 'bookingrequests/reject' => 'booking_requests#reject'
+
   post 'listings/orbit'
   post 'listings/unorbit'
   post 'listings/update_date'
-  post 'listings/land'
+  post 'listings/request' => 'listings#booking_request'
   post 'crews/create'
   get  'crews/leave' => 'crews#leave_crew'
 
