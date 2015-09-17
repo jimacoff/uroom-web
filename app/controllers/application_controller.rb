@@ -6,17 +6,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.invited_booking_request
-      request = BookingRequest.find(resource.invited_booking_request_id)
-      resource.invited_booking_request_id = nil
-      bookingrequest_path(id: request)
+      booking_request = resource.invited_booking_request
+      resource.update_attributes(invited_booking_request: nil)
+      bookingrequest_path(id: booking_request)
     elsif resource.invited_crew
-      request = CrewRequest.find(resource.invited_booking_request_id)
-      listing = request.listing
-      if add_invited_crew_member(request, listing)
-
-      else
-        flash[:error] = "Could not add you to the crew"
-      end
+      listing = resource.invited_crew.crew.listing
+      resource.update_attributes(invited_crew: nil)
       listing_path(id: listing)
     elsif resource.sign_in_count == 1
        edit_profile_path
