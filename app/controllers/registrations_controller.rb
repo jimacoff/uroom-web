@@ -32,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def account_update_params
     debugger
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :passowrd, :password_confirmation, :current_password, :about, :avatar)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :passowrd, :password_confirmation, :current_password, :about, :avatar, :landlord)
   end
 
   def profile_params
