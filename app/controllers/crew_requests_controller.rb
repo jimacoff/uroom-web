@@ -13,17 +13,20 @@ class CrewRequestsController < ApplicationController
   def accept_request
     request = CrewRequest.find(params[:id])
     crew = request.crew
+    crew.users << current_user
 
     orbit = Orbit.find_by(user: current_user, listing: crew.listing)
+    if orbit.nil?
+      orbit = Orbit.new
+      orbit.user = current_user
+      orbit.listing = crew.listing
+    end
     orbit.start_date = crew.start_date
     orbit.end_date = crew.end_date
     orbit.crew = crew
 
-    crew.users << current_user
-    crew.crew_requests.delete(request)
-    request.destroy # This might be redundant
-
-    if crew.save && orbit.save
+    if orbit.save
+      request.destroy
       redirect_to orbit.listing
     else
       flash[:error] = "Could not accept request"
@@ -34,13 +37,11 @@ class CrewRequestsController < ApplicationController
   # Reject request
   # Remove request from crew
   def reject_request
-    request = CrewRequest.find(params[:id])
-    crew = request.crew
-
-    crew.crew_requests.delete(request)
-    crew.save # Might not be necessary
-    request.destroy
-
+    request = CrewRequest.find(params[:id]).destroy
     redirect_to dashboard_requests_path
+  end
+
+  def invite
+
   end
 end
