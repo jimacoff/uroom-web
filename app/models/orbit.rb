@@ -7,4 +7,8 @@ class Orbit < ActiveRecord::Base
   def lease_length
     (end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month)
   end
+
+  def has_crew?
+    self.crew.present?
+  end
 end

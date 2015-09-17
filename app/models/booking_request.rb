@@ -6,13 +6,11 @@ class BookingRequest < ActiveRecord::Base
 
   def notify
     owner = self.listing.owner
-    if owner
+    if owner.present?
       # send notification email
     else
       # send invitation
-      email = self.listing.email
-      username = email.split("@").first
-      User.invite_landlord!(email: email, username: username, first_name: "", last_name: "", invited_booking_request: self, landlord: true)
+      User.invite_landlord!(email: self.listing.email, username: self.listing.email, first_name: "", last_name: "", invited_booking_request: self, landlord: true)
     end
   end
 end
