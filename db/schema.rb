@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911164840) do
+ActiveRecord::Schema.define(version: 20150915051603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booking_requests", force: :cascade do |t|
+    t.integer  "crew_id",                    null: false
+    t.integer  "listing_id",                 null: false
+    t.boolean  "accepted",   default: false
+    t.boolean  "rejected",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "chats", force: :cascade do |t|
     t.integer  "crew_id"
@@ -55,8 +64,9 @@ ActiveRecord::Schema.define(version: 20150911164840) do
     t.integer  "lease_length"
     t.integer  "size"
     t.boolean  "ready_to_land", default: false
-    t.boolean  "approved",      default: false
     t.boolean  "landed",        default: false
+    t.boolean  "requested",     default: false
+    t.boolean  "approved",      default: false
     t.integer  "listing_id"
     t.integer  "crew_admin_id"
     t.datetime "created_at",                    null: false
@@ -129,7 +139,8 @@ ActiveRecord::Schema.define(version: 20150911164840) do
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
     t.date     "start_date",                                                            null: false
-    t.date     "end_date",                                                              null: false
+    t.date     "end_date"
+    t.text     "email"
   end
 
   add_index "listings", ["active"], name: "index_listings_on_active", using: :btree
@@ -192,19 +203,19 @@ ActiveRecord::Schema.define(version: 20150911164840) do
   add_index "user_crew_memberships", ["user_id"], name: "index_user_crew_memberships_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                               null: false
-    t.string   "first_name",                             null: false
-    t.string   "last_name",                              null: false
-    t.boolean  "landlord",               default: false
-    t.boolean  "regular_user",           default: false
-    t.text     "about",                  default: ""
+    t.string   "username",                                   null: false
+    t.string   "first_name",                                 null: false
+    t.string   "last_name",                                  null: false
+    t.boolean  "landlord",                   default: false
+    t.boolean  "regular_user",               default: false
+    t.text     "about",                      default: ""
     t.string   "merchant_account_id"
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                      default: "",    null: false
+    t.string   "encrypted_password",         default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",              default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -215,17 +226,30 @@ ActiveRecord::Schema.define(version: 20150911164840) do
     t.string   "unconfirmed_email"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "admin",                      default: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",          default: 0
+    t.integer  "invited_booking_request_id"
+    t.integer  "invited_crew_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
