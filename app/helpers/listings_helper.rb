@@ -5,6 +5,6 @@ module ListingsHelper
   end
 
   def end_date(start_date, lease_length)
-    end_date = start_date + lease_length.months
+    lease_length > 0 ? start_date + lease_length.months : nil
   end
 end
