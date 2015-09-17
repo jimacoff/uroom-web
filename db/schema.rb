@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20150915051603) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "booking_requests", ["accepted"], name: "index_booking_requests_on_accepted", using: :btree
+  add_index "booking_requests", ["crew_id"], name: "index_booking_requests_on_crew_id", using: :btree
+  add_index "booking_requests", ["listing_id"], name: "index_booking_requests_on_listing_id", using: :btree
+  add_index "booking_requests", ["rejected"], name: "index_booking_requests_on_rejected", using: :btree
+
   create_table "chats", force: :cascade do |t|
     t.integer  "crew_id"
     t.boolean  "includes_landlord", default: false
@@ -242,7 +247,7 @@ ActiveRecord::Schema.define(version: 20150915051603) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",          default: 0
     t.integer  "invited_booking_request_id"
-    t.integer  "invited_crew_id"
+    t.integer  "invited_crew_request_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

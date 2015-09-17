@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :listings
   resources :transactions, only: [:new, :create]
   resources :messages, only: [:create]
+  resources :crews, only: [:create]
 
   resources :signatures, only: [:show, :create] do
     collection do
@@ -26,8 +27,8 @@ Rails.application.routes.draw do
   post 'listings/unorbit'
   post 'listings/update_date'
   post 'listings/request' => 'listings#booking_request'
-  post 'crews/create'
   get  'crews/leave' => 'crews#leave_crew'
+  patch 'crews/add_user'
 
   get '/requests/accept' => 'crew_requests#accept_request'
   get '/requests/reject' => 'crew_requests#reject_request'

@@ -15,7 +15,7 @@ class CrewsController < ApplicationController
       user = User.find_by(email: email)
       crew_request = CrewRequest.create(user: user, crew: crew)
       if user.nil?
-        user = User.invite_friend!(email: email, username: email, first_name: "", last_name: "", invited_crew: crew_request, regular_user: true)
+        user = User.invite_friend!(email: email, username: email, first_name: "", last_name: "", invited_crew_request: crew_request, regular_user: true)
         crew_request.update(user: user)
       end
     end
@@ -37,7 +37,7 @@ class CrewsController < ApplicationController
       crew_request = CrewRequest.create(crew: crew, user: user)
       if user.nil?
         username = email.split("@").first
-        user = User.invite_friend!(email: email, username: username, first_name: "", last_name: "", invited_crew: crew_request, regular_user: true)
+        user = User.invite_friend!(email: email, username: username, first_name: "", last_name: "", invited_crew_request: crew_request, regular_user: true)
         crew_request.update(user: user)
       end
       crew.crew_requests << crew_request
@@ -70,7 +70,7 @@ class CrewsController < ApplicationController
     else
       flash[:error] = "You don't have permission to do that"
     end
-    
+
     redirect_to crew.listing
   end
 

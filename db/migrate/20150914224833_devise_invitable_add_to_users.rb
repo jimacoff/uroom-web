@@ -12,7 +12,7 @@ class DeviseInvitableAddToUsers < ActiveRecord::Migration
       t.index      :invitation_token, unique: true # for invitable
       t.index      :invited_by_id
       t.references :invited_booking_request
-      t.references :invited_crew
+      t.references :invited_crew_request
     end
   end
 

@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
       booking_request = resource.invited_booking_request
       resource.update_attributes(invited_booking_request: nil)
       bookingrequest_path(id: booking_request)
-    elsif resource.invited_crew
-      listing = resource.invited_crew.crew.listing
-      resource.update_attributes(invited_crew: nil)
+    elsif resource.invited_crew_request
+      listing = resource.invited_crew_request.crew.listing
+      resource.update_attributes(invited_crew_request: nil)
       listing_path(id: listing)
     elsif resource.sign_in_count == 1
        edit_profile_path

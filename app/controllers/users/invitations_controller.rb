@@ -6,8 +6,8 @@ class Users::InvitationsController < Devise::InvitationsController
       if resource.invited_booking_request
         resource.invited_booking_request.listing.update(owner: resource)
         resource.update(landlord: true)
-      elsif resource.invited_crew
-        crew_request = resource.invited_crew
+      elsif resource.invited_crew_request
+        crew_request = resource.invited_crew_request
         crew = crew_request.crew
         orbit = Orbit.create(listing: crew.listing, crew: crew, user: resource, start_date: crew.start_date, end_date: crew.end_date, has_crew: true)
         crew.users << resource
