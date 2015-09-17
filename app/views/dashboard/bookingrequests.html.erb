@@ -27,7 +27,7 @@
                             <i class="fa fa-home"></i><span>My Properties</span></a>
                             <% end %>
                           </li>
-                          <li><%= link_to bookingrequests_path do %>
+                          <li class="active"><%= link_to bookingrequests_path do %>
                             <i class="fa fa-home"></i><span>Booking Requests</span></a>
                             <% end %>
                           </li>
@@ -86,7 +86,7 @@
                                             </td>
                                             <td class="actions">
                                                 <%= link_to bookingrequest_path(id: request), class: "edit" do %>
-                                                  <i class="fa fa-times"></i>See Request
+                                                  <i class="fa fa-pencil"></i>See Request
                                                 <% end %>
                                             </td>
                                         </tr>
