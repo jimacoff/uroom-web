@@ -1,0 +1,23 @@
+<div class="your-class">
+    <% crew.users.each do |user| %>
+      <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= user.avatar.url(:medium) %>);" id="<%= user.id %>"></div>
+    <% end %>
+
+<div class="row col-md-9">
+  <%= form_for crew, url: crews_add_user_path(crew: crew) do |f| %>
+    <%= text_field_tag :emails %>
+    <%= f.submit "Invite Members", class: "btn_full_outline", id: "create-crew-button" %>
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+   $(document).ready(function(){
+     $('.your-class').slick({
+       slidesToShow: 3,
+       draggable: false,
+       infinite: false,
+       variableWidth: true,
+     });
+   });
+ </script>

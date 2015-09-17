@@ -1,6 +1,6 @@
 <div class="your-class">
     <% followers.each do |follower| %>
-      <div class="follower" style="height: 85px; width: 85px;" onclick="selectUser(this)" id="<%= follower.id %>"></div>
+      <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= follower.avatar.url(:medium) %>);" onclick="selectUser(this)" id="<%= follower.id %>"></div>
     <% end %>
 
 <% if followers.any? %>
@@ -8,11 +8,18 @@
 <div class="selected-users row">
   <div class="holder" style="height: 85px; width: 85px;"></div>
   <div class="holder" style="height: 85px; width: 85px;"></div>
-  <%= link_to "Create Crew", crews_create_path(orbit: orbit), method: :post, class: "btn_full_outline", id: "create-crew-button" %>
 </div>
 <% else %>
   <h4>No one else is following yet</h4>
 <% end %>
+<div class="row col-md-9">
+<%= form_for crew do |f| %>
+  <%= hidden_field_tag :orbit, orbit.id %>
+  <%= hidden_field_tag :users, selected_users, id: 'submit-users' %>
+  <%= text_field_tag :emails, nil, placeholder: "Invite users by email" %>
+  <%= f.submit "Create Crew", class: "btn_full_outline", id: "create-crew-button" %>
+<% end %>
+</div>
 
 
 
@@ -25,18 +32,6 @@
        variableWidth: true,
      });
    });
- </script>
-
- <script type="text/javascript">
-   document.addEventListener('click', function(event) {
-      if(event.target.id === "create-crew-button") {
-          var href = event.target.href;
-          href += "&users%5B%5D=" + selected.join("&ampusers%5B%5D=")
-          // change the URL
-          event.target.href = href;
-          event.preventDefault();
-      }
-  }, true);
  </script>
 
 
@@ -58,5 +53,11 @@ function selectUser(divObj) {
     divObj.style.boxShadow = "0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)";
   }
 };
+
+$('#new_crew').submit(function(){ //listen for submit event
+    $('#submit-users').val(selected);
+
+    return true;
+});
 </script>
 <!-- users%5B%5D=2&amp -->

@@ -37,7 +37,7 @@
                 <div class="col-md-9 col-sm-9">
                     <section id="results">
 
-                      <h3 style="float: right;"><%= link_to "All Results", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max] } %></h3>
+                      <h3 style="float: right;"><%= link_to "All Results", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max] } %></h3>
                         <header><h1>Properties</h1></header>
                         <section id="properties">
                         <% if params[:roommates] || params[:max].blank? %>
@@ -45,7 +45,7 @@
         														<div class="row">
         										          <% triplets.each do |listing| %>
         																<% if listing %>
-        																	<%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+        																	<%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
         										          	<% end %>
                                       <% end %>
                                     </div>
@@ -54,12 +54,12 @@
         														</br>
                         <% else %>
                           <% if @listings_1.any? %>
-                          <h2><%= link_to "1 Roommate", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                          <h2><%= link_to "1 Roommate", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
                               <% @listings_1.in_groups_of 3 do |triplets| %>
                                 <div class="row">
                                   <% triplets.each do |listing| %>
                                     <% if listing %>
-                                      <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                      <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                     <% end %>
                                   <% end %>
                                 </div>
@@ -67,12 +67,12 @@
                               <% end %>
                             <% end %>
                             <% if @listings_2.any? %>
-                            <h2><%= link_to "2 Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                            <h2><%= link_to "2 Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
                                 <% @listings_2.in_groups_of 3 do |triplets| %>
                                   <div class="row">
                                     <% triplets.each do |listing| %>
                                       <% if listing %>
-                                        <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                        <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                       <% end %>
                                     <% end %>
                                   </div>
@@ -81,13 +81,13 @@
                             <% end %>
 
                             <% if @listings_3.any? %>
-                              <h2><%= link_to "3 Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                              <h2><%= link_to "3 Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
 
                                     <% @listings_3.in_groups_of 3 do |triplets| %>
                                       <div class="row">
                                         <% triplets.each do |listing| %>
                                           <% if listing %>
-                                            <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                            <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                           <% end %>
                                         <% end %>
                                       </div>
@@ -95,13 +95,13 @@
                                     <% end %>
                               <% end %>
                               <% if @listings_more.any? %>
-                                <h2><%= link_to "More Roommates", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
+                                <h2><%= link_to "More Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
 
                                     <% @listings_more.in_groups_of 3 do |triplets| %>
                                       <div class="row">
                                         <% triplets.each do |listing| %>
                                           <% if listing %>
-                                            <%= render partial: 'search/listing', locals: {listing: listing, date: @date, lease_length: @lease_length} %>
+                                            <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                           <% end %>
                                         <% end %>
                                       </div>
