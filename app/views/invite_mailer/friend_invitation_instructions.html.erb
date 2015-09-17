@@ -1,0 +1,7 @@
+<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<% crew_request = CrewRequest.find(@resource.invited_crew.id) %>
+<% crew = crew_request.crew %>
+<p><%= t("You were invited to join #{crew.crew_admin.full_name}'s crew.") %></p>
+<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>

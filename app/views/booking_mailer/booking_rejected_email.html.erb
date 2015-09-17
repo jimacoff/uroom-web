@@ -6,18 +6,16 @@
   <body>
     <h1>Roomie Booking</h1>
     <p>
-      Hi all, and welcome to Roomie booking! <%= @users_names.to_sentence %> have requested a booking,
-      and <%= @listing.owner.first_name %> has accepted.
+      Hi<%= @users_names.to_sentence %>, <br>
+      Your request for the <%= @listing.title %> listing has been denied.
     </p>
     <p>
-      Here are the booking details:</br>
       Listing: <%= @listing.title %> (<%= url_for @listing %>)</br>
       Start: <%= @start_date.to_formatted_s(:long) %></br>
       End: <%= @end_date.to_formatted_s(:long) %>
     </p>
     <p>
-      Please keep me in the loop and use this email chain to take care of any arrangements, lease signing, and payment confirmations.</br>
-      That way we can ensure all of you have a great experience!
+      Keep in mind, you can always send another request.
     </p>
     <p>Thanks for using Roomie and have a great day!</br>
     The Roomie team.</p>

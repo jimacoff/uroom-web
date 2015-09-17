@@ -2,8 +2,8 @@ Hi all, and welcome to Roomie booking! <%= @users.to_sentence %> have requested 
 
 Here are the booking details:
 Listing: <%= @listing.title %> (<%= url_for @listing %>)
-Start: <%= @start_date %>
-End: <%= @end_date %>
+Start: <%= @start_date.to_formatted_s(:long) %>
+End: <%= @end_date.to_formatted_s(:long) %>
 
 Please keep me in the loop and use this email chain to take care of any arrangements, lease signing, and payment confirmations.
 That way we can ensure all of you have a great experience!
