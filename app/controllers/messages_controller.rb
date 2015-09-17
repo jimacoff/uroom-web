@@ -1,12 +1,11 @@
 class MessagesController < ApplicationController
 
   def create
-    @message = Message.new
+    text = params[:message][:text]
+    chat = Chat.find(params[:chat])
     @chat = Chat.find(params[:chat])
-    @message.text = params[:message][:text]
-    @message.chat = Chat.find(params[:chat])
-    @message.sender = current_user
-    @message.save
+    @message = Message.create!(chat: @chat, sender: current_user, text: text)
+
     # redirect_to Listing.find(params[:listing])
     # check if user is part of crew
     Pusher.trigger("#{@chat.id}", 'new_message', {
