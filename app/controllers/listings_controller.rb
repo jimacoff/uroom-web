@@ -27,34 +27,35 @@ class ListingsController < ApplicationController
     # get parameters
     @listing = Listing.find(params[:id])
     @orbit = Orbit.find_by(user: current_user, listing: @listing)
-    @follower_count = Orbit.where(listing: @listing).count
-    @crew = @orbit.crew if @orbit.present?
-    @chat = @crew.chat if @crew
-    @message = Message.new
-    @new_orbit = Orbit.new
+    @crew = @orbit.crew if @orbit
+    get_params if params[:start_date]
+    @has_crew = @crew.present?
+    @is_orbitting = @orbit.present?
 
-    if params[:date]
-      get_params
+    if @has_crew
+      @chat = @crew.chat
+      @has_crew = true
+      @message = Message.new
+      @start_date = @orbit.start_date
+      @end_date = @orbit.end_date
+    elsif @is_orbitting
+      @crew = Crew.new
+      @start_date = @orbit.start_date if (@start_date.nil? || params[:lease_length].to_i <= 0)
+      @end_date = @orbit.end_date if (@start_date.nil? || params[:lease_length].to_i <= 0)
+
+      @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, crew: nil })
+      @followers = @followers -= [current_user] if @followers
     else
-      if @orbit.present?
-        @start_date = @orbit.start_date
-        @end_date = @orbit.end_date
-        @date = @start_date
-        @not_available = !(@start_date >= @listing.start_date && @end_date <= @listing.end_date)
-        # calculate lease length
-      end
+      @orbit = Orbit.new
+      @crew = Crew.new
+      @start_date = (@listing.start_date > Date.today.beginning_of_month.next_month ? @listing.start_date : Date.today.beginning_of_month.next_month) if @start_date.nil?
     end
 
-    @followers = @listing.users.references( :orbits ).where( orbits: { start_date: @start_date, end_date: @end_date, has_crew: false }) if @start_date
-    @followers = @followers -= [current_user] if @followers
-
-    if @start_date.nil?
-      @start_date = @listing.start_date > Date.today.beginning_of_month.next_month ? @listing.start_date : Date.today.beginning_of_month.next_month
-    end
-
-    length = (@listing.end_date.year * 12 + @listing.end_date.month) - (@listing.start_date.year * 12 + @listing.start_date.month)
+    @selected_users = []
+    @not_available = !(@start_date >= @listing.start_date && @end_date <= @listing.end_date) if params[:start_date]
 
     @months = []
+    length = (@listing.end_date.year * 12 + @listing.end_date.month) - (@listing.start_date.year * 12 + @listing.start_date.month)
     (0..length).each do |m|
       @months << [@listing.start_date.next_month(m).strftime("%b %Y"), @listing.start_date.next_month(m)]
     end
@@ -62,17 +63,8 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @begin_date = Date.today.at_beginning_of_month.next_month
-    @start_months = []
-    (0..11).each do |m|
-      @start_months << [@begin_date.next_month(m).strftime("%b %Y"), @begin_date.next_month(m)]
-    end
-
-    @final_date = Date.today.at_beginning_of_month.next_month.next_month
-    @end_months = []
-    (0..11).each do |m|
-      @end_months << [@final_date.next_month(m).strftime("%b %Y"), @final_date.next_month(m)]
-    end
+    @start_months = start_months
+    @end_months = end_months
   end
 
   def create
@@ -88,7 +80,6 @@ class ListingsController < ApplicationController
     listing.active = true
     listing.gallery = gallery
     if listing.save
-      current_user.save
       redirect_to listing
     else
       flash[:error] = "Could not create listing."
@@ -138,7 +129,7 @@ class ListingsController < ApplicationController
     else
       flash[:error] = "You've already followed this listing"
     end
-    reload_page
+    redirect_to @listing
   end
 
   def unorbit
@@ -153,13 +144,10 @@ class ListingsController < ApplicationController
 
   def update_date
     get_params
-    @user_orbit = Orbit.find_by(user: current_user, listing: @listing)
-    @user_orbit.start_date = @start_date
-    @user_orbit.end_date = @end_date
-
     available = (@start_date >= @listing.start_date && @end_date <= @listing.end_date)
+    @user_orbit = Orbit.find_by(user: current_user, listing: @listing)
 
-    if available && @user_orbit.save
+    if available && @user_orbit.update_attributes(start_date: @start_date, end_date: @end_date)
       flash[:success] = "Updated follow dates"
     else
       flash[:error] = "This listing is not available for those dates"
@@ -167,26 +155,26 @@ class ListingsController < ApplicationController
     reload_page
   end
 
-  def land
-    @listing = Listing.find(params[:id])
-    # If crew is approved
-    # Set listing to not active
-    # Set tenant crew to current Crew
-    # Set user's tenant listing to this listing
-    # Delete orbit
-    # Redirect to lease registration
-
-    # Create Lease Object
-    # Create Signatures
-  end
+  # def land
+  #   @listing = Listing.find(params[:id])
+  #   # If crew is approved
+  #   # Set listing to not active
+  #   # Set tenant crew to current Crew
+  #   # Set user's tenant listing to this listing
+  #   # Delete orbit
+  #   # Redirect to lease registration
+  #
+  #   # Create Lease Object
+  #   # Create Signatures
+  # end
 
   def booking_request
     @listing = Listing.find(params[:id])
-    @crew = @listing.crews.find(params[:crew])
+    @crew = Crew.find(params[:crew])
 
     if @crew.crew_admin == current_user
       if BookingRequest.create(crew: @crew, listing: @listing)
-        crew.update(requested: true)
+        @crew.update(requested: true)
         flash[:success] = "Your request has been sent to the owner"
       else
         flash[:error] = "Sorry, we couldn't create your request right now. Try again later."
@@ -202,21 +190,14 @@ class ListingsController < ApplicationController
 
     def get_params
       @listing = Listing.find(params[:id])
-      @roommates = params[:roommates].to_i
+      @start_date = params[:start_date].to_date if params[:start_date]
       @lease_length = params[:lease_length].to_i
-      @date = params[:date].to_date if params[:date]
-
-      if params[:start_date]
-        @start_date = params[:start_date].to_date
-      else
-        @start_date = @date
-      end
       @end_date = end_date(@start_date, @lease_length) if @start_date
     end
 
     def reload_page
       redirect_to action: :show,  id: @listing,
-                                  date: @date,
+                                  start_date: @start_date,
                                   roommates: @roommates,
                                   lease_length: @lease_length
     end
@@ -238,6 +219,23 @@ class ListingsController < ApplicationController
                                               :end_date,
                                               :security_deposit,
                                               :furnished)
+    end
+
+    def start_months
+      begin_date = Date.today.at_beginning_of_month.next_month
+      (0..11).each do |m|
+        start_months << [begin_date.next_month(m).strftime("%b %Y"), begin_date.next_month(m)]
+      end
+      start_months
+    end
+
+    def end_months
+      final_date = Date.today.at_beginning_of_month.next_month.next_month
+      end_months = []
+      (0..11).each do |m|
+        end_months << [final_date.next_month(m).strftime("%b %Y"), final_date.next_month(m)]
+      end
+      end_months
     end
 
 end
