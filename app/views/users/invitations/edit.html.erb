@@ -1,23 +1,40 @@
-<h2><%= t 'devise.invitations.edit.header' %></h2>
-
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :invitation_token %>
-
-  <p><%= f.label :first_name %><br />
-  <%= f.text_field :first_name %></p>
-
-  <p><%= f.label :last_name %><br />
-  <%= f.text_field :last_name %></p>
-
-  <p><%= f.label :username %><br />
-  <%= f.text_field :username %></p>
-
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
-<% end %>
+<!-- Page Content -->
+<div id="page-content" style="margin-top: 150px;">
+    <div class="container">
+        <header><h1><%= t 'devise.invitations.edit.header' %></h1></header>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+                  <%= devise_error_messages! %>
+                  <%= f.hidden_field :invitation_token %>
+                    <div class="form-group">
+                        <%= f.label :first_name %>
+                        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <%= f.label :last_name %>
+                        <%= f.text_field :last_name, class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <%= f.label :username %>
+                        <%= f.text_field :username, class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <%= f.label :password %>
+                        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <%= f.label :password_confirmation %>
+                        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+                    </div><!-- /.form-group -->
+                    <div class="form-group clearfix">
+                        <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn pull-right btn-default" %>
+                    </div><!-- /.form-group -->
+                <% end %>
+                <hr>
+                <div class="center"><%= render "users/shared/links" %></div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- end Page Content -->
