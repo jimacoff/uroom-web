@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :owned_listings, class_name: "Listing", foreign_key: "owner_id"
 
   belongs_to :invited_booking_request, class_name: "BookingRequest", foreign_key: "invited_booking_request_id"
-  belongs_to :invited_crew, class_name: "CrewRequest", foreign_key: "invited_crew_id"
+  belongs_to :invited_crew, class_name: "CrewRequest", foreign_key: "invited_crew_request_id"
 
   def full_name
     "#{first_name} #{last_name}"

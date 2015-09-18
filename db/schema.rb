@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20150915051603) do
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
     t.date     "start_date",                                                            null: false
-    t.date     "end_date"
+    t.date     "end_date",                                                              null: false
     t.text     "email"
   end
 
