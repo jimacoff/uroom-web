@@ -1,11 +1,6 @@
 <div class="dropdown dropdown-access">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link" style="color: black;">Sign in</a>
     <div class="dropdown-menu">
-        <% "Facebook Login" %>
-        <div class="login-or">
-            <hr class="hr-or">
-            <span class="span-or">or</span>
-        </div>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
             <%= f.email_field :email, class: "form-control", id: "inputUsernameEmail", placeholder: "Email" %>
