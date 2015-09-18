@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
   attr_writer :invitation_instructions
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" },
+  has_attached_file :avatar, styles: { medium: "300x300>", square: '200x200#', thumb: "100x100>" },
       default_url: "/images/:style/missing.png",
       url: "/system/:id/:style/:hash.:extension",
       hash_secret: '3dc4ae38d8884935e31bde595c06001d153982069650c1c4e326a47c69e723ee970e7cb0ef334b1fdf32e1e8d7e7cd31a92abaa828c349360b81293d47af2d41'
