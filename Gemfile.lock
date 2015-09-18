@@ -274,7 +274,6 @@ DEPENDENCIES
   byebug (~> 6.0.1)
   devise
   devise_invitable (~> 1.5.2)
-  execjs
   figaro
   font-awesome-rails
   geocoder
