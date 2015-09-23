@@ -3,23 +3,23 @@
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
-              <div class="col-md-8 col-sm-8">
-                  <h1><%= @listing.title %></h1>
-                  <span><%= @listing.full_address %></span>
+              <div class="col-md-12 col-sm-12">
+                <div id="banner">
+                    <span class="listing-title col-md-8"><%= @listing.title %></span>
+                    <span class="listing-price col-md-4">$<%= @listing.price %>0</span></br>
+                    <span class="listing-address col-md-8"><%= @listing.full_address %></span>
               </div>
-              <div class="col-md-2 col-sm-2" style="float: right; margin-top: 10px; margin-right: 10px;">
-                <h1>$<%= @listing.price %></h1>
-              </div>
+            </div>
           </div>
       </div>
   </div>
 </img>
 </div>
-<div id="page-content" style="margin-top: 25px;">
-<div class="container">
+<div id="page-content">
+<div class="container page">
             <div class="row">
                 <!-- Property Detail Content -->
-                <div class="col-md-9 col-sm-9">
+                <div class="col-md-8 col-sm-8">
                     <section id="property-detail">
                         <!-- <header class="property-title">
                             <h1></h1>
@@ -76,21 +76,17 @@
                                         <li><strong>Accommodates: &nbsp;</strong> <%= @listing.accommodates %></li>
 
                                         <li><strong>Bedrooms: &nbsp;</strong> <%= @listing.bedrooms %></li>
-                                        <li><strong>Furnished: &nbsp;</strong> <%= @listing.furnished ? "Yes" : "No" %></li>
-                                        <li><strong>Bathrooms: &nbsp;</strong> <%= @listing.bathrooms %></li>
-
                                         <li><strong>Security Deposit: &nbsp;</strong> $<%= @listing.security_deposit %></li>
 
-                                        <% if @listing.included_appliances.present? %>
+                                        <li><strong>Bathrooms: &nbsp;</strong> <%= @listing.bathrooms %></li>
                                         <li><strong>Included Appliances: &nbsp;</strong> <%= @listing.included_appliances %></li>
-                                        <% end%>
-
                                         <li><strong>Pet Policy: &nbsp;</strong> <%= @listing.pet_policy %></li>
-                                        <li><strong>Parking Notes: &nbsp;</strong> <%= @listing.parking_notes %></li>
 
-                                        <% if @listing.utility_notes.present? %>
+                                        <li><strong>Parking Notes: &nbsp;</strong> <%= @listing.parking_notes %></li>
+                                        <li><strong>Furnished: &nbsp;</strong> <%= @listing.furnished ? "Yes" : "No" %></li>
+
+
                                         <li><strong>Utilities Notes: &nbsp;</strong> <%= @listing.utility_notes %></li>
-                                        <% end%>
 
 
                                     </ul>
@@ -138,7 +134,7 @@
                 </div><!-- /.row -->
 
                 <!-- sidebar -->
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-4 col-sm-4">
                     <section id="sidebar">
                         <aside id="edit-search">
                           <% if @listing.owner.present? && @listing.owner == current_user %>
@@ -153,7 +149,7 @@
                                 edit_listing_path(id: @listing.id),
                                 class: "btn btn-default", method: "get" %>
                           <% else %>
-                            <header><h3>Follow</h3></header>
+                            <h3 class="inner">Follow</h3>
                             <% if @has_crew %>
                               <% if @not_available %>
                                 <h4 style="color: red;">These dates are no longer available</h4></br>
@@ -170,7 +166,7 @@
                                     </div>
                                   </br>
                                   <% end %>
-                                  <%= button_to "Request", listings_request_path(id: @listing.id, crew: @crew, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default" if @crew.crew_admin == current_user %>
+                                  <%= button_to "Request", listings_request_path(id: @listing.id, crew: @crew, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default btn-submit" if @crew.crew_admin == current_user %>
                                   <%= link_to "Leave Crew", crews_leave_path(crew: @crew), class: "btn btn-default", style: "background-color: #073855;"%>
                             <% elsif @is_orbitting %>
                                 <% if @not_available %>
@@ -187,7 +183,7 @@
                                       <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length) %>
                                     </div>
                                   </br>
-                                    <%= submit_tag "Update Dates", { class:"btn btn-default" } %>
+                                    <%= submit_tag "Update Dates", { class:"btn btn-default btn-submit" } %>
                                   <% end %>
                                   <div class="form-group">
                                       <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default", style: "background-color: #073855; width: 263px;"%>
@@ -203,7 +199,7 @@
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>
                                     </div>
-                                    <%= submit_tag "Follow", { class:"btn btn-default" } %>
+                                    <%= submit_tag "Follow", { class:"btn btn-default btn-submit" } %>
                                   <% end %>
                             <% end %>
                           <% end %>

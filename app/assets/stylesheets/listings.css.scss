@@ -3,9 +3,37 @@
   They will automatically be included in application.css.
 */
 
+#sidebar h3.inner{
+	margin:-1px -21px 10px -21px;
+	background-color:#565a5c;
+	padding:10px 20px 10px 18px;
+	color:#fff;
+	border:1px solid #fff;
+	text-align:center;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.listing-title {
+  font-size: 33px;
+}
+
+.listing-price {
+  float: right;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  padding-top: 15px;
+}
+
+.listing-address {
+  font-size: 13px;
+  font-weight: 100;
+}
+
 .image-container {
   width:100%;
-  height:650px;
+  height:550px;
   display:block;
   position:relative;
   overflow:hidden;

@@ -141,11 +141,12 @@ h1 {
 
 h2 {
   font-size: 24px;
-  font-weight: lighter;
+  font-weight: 400;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
   margin-top: 10px;
   padding-bottom: 15px;
+  text-align: center;
 }
 
 h3 {
@@ -196,6 +197,10 @@ ul.list-links li a {
 ul.list-links li a:hover {
   color: #1396e2;
   padding-left: 5px;
+}
+
+.page {
+  padding-top: 25px;
 }
 
 /* 2. Styling for specific pages */
@@ -497,7 +502,7 @@ ul.list-links li a:hover {
     -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
     /*margin-bottom: 20px;*/
     position: relative;
     width: 100%;
@@ -1867,6 +1872,8 @@ ul.list-links li a:hover {
   margin-bottom: 30px;
   padding: 0 20px 15px 80px;
   position: relative;
+  background-color: #fff;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
 }
 .feature-box .description h3 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -1875,21 +1882,22 @@ ul.list-links li a:hover {
   padding-bottom: 10px;
 }
 .feature-box .icon {
-  background-color: #1396e2;
+  background-color: #51bce6;
   height: 60px;
   left: -2px;
   padding: 20px;
   position: absolute;
   top: -2px;
   width: 60px;
+  border-radius: 3px;
 }
 .feature-box .icon:after {
-  bottom: -8px;
+  bottom: -5px;
   content: "";
   height: 0px;
   border-style: solid;
   border-width: 0 8px 8px 0;
-  border-color: transparent #1396e2 transparent transparent;
+  border-color: transparent #51bce6 transparent transparent;
   position: absolute;
   right: 0;
   width: 0px;
@@ -2469,6 +2477,11 @@ ul.list-links li a:hover {
   overflow: hidden;
   position: relative;
   width: 100%;
+  background-color: white;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
 .property:hover img, .property:active img, .property:focus img {
   -moz-backface-visibility: hidden;
@@ -2522,12 +2535,12 @@ ul.list-links li a:hover {
   font-weight: lighter;
 }
 .property .overlay .additional-info {
-  background-color: #073855;
+  background: rgba(0, 0, 0, 0.75);
   display: table;
   height: 30px;
   list-style: none;
   margin-bottom: 0;
-  width: 100%;
+  width: 101%;
   padding: 8px 12px;
 }
 .property .overlay .additional-info li {
@@ -2550,12 +2563,7 @@ ul.list-links li a:hover {
   font-weight: bold;
 }
 .property .overlay .info {
-  background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.75)));
-  background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
-  background: -o-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
-  background: -ms-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+  background: rgba(0, 0, 0, 0.5);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
   padding: 12px;
 }
@@ -2843,7 +2851,9 @@ ul.list-links li a:hover {
   margin-bottom: 25px;
 }
 #property-detail section h2 {
-  margin-bottom: 25px;
+  text-align: left;
+  font-size: large;
+  margin-bottom: 5px;
 }
 
 .property-detail-map-wrapper {
@@ -2872,7 +2882,7 @@ ul.list-links li a:hover {
   line-height: 1;
   text-transform: none;
   content: "\f111";
-  color: #1396e2;
+  color: #51bce6;
   font-size: 8px;
   position: relative;
   bottom: 2px;
@@ -3041,7 +3051,18 @@ ul.list-links li a:hover {
   font-size: 24px;
 }
 
+#sidebar {
+  background-color: white;
+  border-radius: 5px;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 #sidebar aside {
+  padding-top: 1px;
   margin-bottom: 50px;
 }
 #sidebar h3 {
@@ -3154,11 +3175,22 @@ ul.list-links li a:hover {
 }
 
 #bg {
-  height: 650px;
+  height: 700px;
   position: relative;
   overflow: hidden;
   background-image: image-url("bg.jpg");
   background-size:cover;
+}
+
+#title {
+  color: white;
+  font-size: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: 225px;
+  position: absolute;
+  font-weight: 600;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 #slider {
@@ -3513,11 +3545,13 @@ ul.list-links li a:hover {
   padding: 3px 8px;
 }
 .tag.price {
-  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
-  background-color: #1396e2;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  background-color: rgba(0,0,0,0);
   color: #fff;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 300;
+  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
 }
 .tag.article {
   background-color: #f3f3f3;
@@ -4048,6 +4082,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   padding: 10px 9px 11px 9px;
   width: 100%;
   height: inherit;
+  border-radius: 3px;
 }
 input[type="text"]:active, input[type="text"]:focus, input[type="email"]:active, input[type="email"]:focus, input[type="search"]:active, input[type="search"]:focus, input[type="password"]:active, input[type="password"]:focus, input[type="number"]:active, input[type="number"]:focus, input[type="tel"]:active, input[type="tel"]:focus, textarea.form-control:active, textarea.form-control:focus {
   -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -4320,6 +4355,8 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="search"]:hover,
   -webkit-border-radius: 0px;
   border-radius: 0px;
   border: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 .input-group .search {
@@ -4449,7 +4486,7 @@ form label.error:before {
   font-variant: normal;
   line-height: 1;
   text-transform: none;
-  color: #1396e2;
+  color: #e14d67;
   content: "\f107";
   font-size: 18px;
   position: absolute;
