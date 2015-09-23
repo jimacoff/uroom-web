@@ -1,10 +1,11 @@
 <!-- Page Content -->
-<div id="page-content" style="margin-top: 150px;">
-    <div class="container">
+<div id="page-content">
+    <div class="container page">
         <header><h1><%= t 'devise.invitations.edit.header' %></h1></header>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+          </br></br></br>
+            <div class="col-md-5 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:class => "user_sign", :method => :put } do |f| %>
                   <%= devise_error_messages! %>
                   <%= f.hidden_field :invitation_token %>
                     <div class="form-group">
@@ -28,10 +29,10 @@
                         <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
                     </div><!-- /.form-group -->
                     <div class="form-group clearfix">
-                        <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn pull-right btn-default" %>
+                        <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn btn-default", style: "margin-top: 5px; width: 100%;" %>
                     </div><!-- /.form-group -->
                 <% end %>
-                <hr>
+                <br>
                 <div class="center"><%= render "users/shared/links" %></div>
             </div>
         </div><!-- /.row -->

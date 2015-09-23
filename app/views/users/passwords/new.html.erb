@@ -1,20 +1,21 @@
 <!-- Page Content -->
-<div id="page-content" style="margin-top: 150px;">
-    <div class="container">
+<div id="page-content">
+    <div class="container page">
         <header><h1>Forgot your password?</h1></header>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        </br></br></br>
+            <div class="col-md-5 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                <%= form_for(resource, html: {class: "user_sign", method: :post}, as: resource_name, url: password_path(resource_name)) do |f| %>
                   <%= devise_error_messages! %>
                     <div class="form-group">
-                        <%= f.label :email %>
+                        <%= f.label :email, html: "text-align: center; padding-bottom: 5px;" %>
                         <%= f.email_field :email, autofocus: true, class: "form-control" %>
                     </div><!-- /.form-group -->
                     <div class="form-group clearfix">
-                        <%= f.submit "Send me reset password instructions", class: "btn pull-right btn-default" %>
+                        <%= f.submit "Send me reset password instructions", class: "btn btn-default", style: "margin-top: 5px; width: 100%;" %>
                     </div><!-- /.form-group -->
                 <% end %>
-                <hr>
+                <br>
                 <div class="center"><%= render "users/shared/links" %></div>
             </div>
         </div><!-- /.row -->
