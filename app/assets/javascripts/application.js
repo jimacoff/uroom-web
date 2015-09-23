@@ -15,3 +15,12 @@
 //= require bootstrap-sprockets
 //= require slick
 //= require_tree .
+
+
+$(document).ready(function() {
+  setTimeout(function() {
+    $(".flash-head").fadeOut("slow", function() {
+      $(this).remove();
+    })
+  }, 4500);
+});

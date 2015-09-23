@@ -18,12 +18,18 @@
  *= require slick-theme
  */
 
- .flash-head {
-   position: fixed;
-   margin: auto;
-   width: 100%;
-   height: 75px;
-   top: 0;
-   z-index: 999999999;
-   background-color: black;
- }
+  .flash-head {
+     position: absolute;
+     margin: 0;
+     width: 100%;
+     text-align: center;
+     color: white;
+     padding: 21px;
+     top: 0;
+     z-index: 999;
+     background-color: rgba(118, 151, 247, 0.77);
+  }
+
+  .alert-notice {
+    background-color: rgba(149, 208, 123, 0.77);
+  }
