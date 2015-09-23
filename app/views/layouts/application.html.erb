@@ -28,7 +28,10 @@
                       </div>
                   </div>
                   <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-                      <ul class="nav navbar-nav">
+                      <ul class="nav navbar-nav" style="font-size: medium;">
+                        <li style="font-size: small; margin-right: -30px; margin-top: 2px;">
+                          <%= link_to "Add Property", new_listing_path %>
+                        </li>
                         <% if user_signed_in? %>
                         <li class="has-child"> <%= current_user.first_name %>
                             <ul class="child-navigation">
@@ -46,11 +49,7 @@
                         <% end %>
                       </ul>
                   </nav><!-- /.navbar collapse-->
-                  <div class="add-your-property">
-                    <%= link_to new_listing_path, class: "btn btn-default" do %>
-                      <i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
-                    <% end %>
-                  </div>
+
               </header><!-- /.navbar -->
           </div><!-- /.container -->
       </div><!-- /.navigation -->
