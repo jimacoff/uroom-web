@@ -515,7 +515,7 @@ ul.list-links li a:hover {
     border: none;
     margin-bottom: 0;
     min-height: inherit;
-    padding: 30px 0;
+    padding: 15px 0;
     /**/
     display: table;
     width: 100%;
@@ -524,6 +524,7 @@ ul.list-links li a:hover {
     display: table-cell !important;
     vertical-align: middle;
     float: none !important;
+    padding-top: 10px;
 }
 .navigation .navbar .navbar-brand {
     height: inherit;
@@ -540,6 +541,13 @@ ul.list-links li a:hover {
 }
 .navigation .navbar .navbar-nav > li:last-child a {
     padding-right: 0;
+    font-size: medium;
+}
+
+.navigation .navbar .navbar-nav > li:last-child a #Sign_up {
+    padding-right: 0;
+    padding-top: 15px;
+    background-color: black;
 }
 .navigation .navbar .navbar-nav > li.active a {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
@@ -873,7 +881,7 @@ ul.list-links li a:hover {
 
 .navigation-fixed-top .navigation {
     top: 0;
-    position: fixed;
+    position: relative;
     bottom: inherit;
 }
 
@@ -900,7 +908,7 @@ ul.list-links li a:hover {
     padding: 40px 0;
 }
 #page-footer .inner #footer-copyright {
-    background-color: #073855;
+    background-color: #333;
     color: #fff;
     display: table;
     padding: 20px 0;
@@ -3971,7 +3979,8 @@ ul.list-links li a:hover {
 .search-box-wrapper {
   position: absolute;
   width: 100%;
-  top: 0px;
+  bottom: 0px;
+  margin-top: -150px;
 }
 .search-box-wrapper .search-box-inner h2 {
   margin-bottom: 20px;
@@ -4088,11 +4097,12 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="search"]:hover,
   -moz-transition: 0.2s;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  background-color: #1396e2;
+  background-color: #e14d67;
   color: #fff;
+  border-radius: 3px;
 }
 .btn.btn-default:hover, select.btn-default:hover {
-  background-color: #128dd4;
+  background-color: #E05D74;;
 }
 .btn.btn-default:active, select.btn-default:active {
   -moz-box-shadow: 0px 2px 2px transparent, inset 0px 2px 2px rgba(0, 0, 0, 0.2);
@@ -4403,7 +4413,6 @@ form label.error:before {
 .bootstrap-select .selectpicker {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
-  box-shadow: none;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
@@ -4415,6 +4424,8 @@ form label.error:before {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   background-color: #f3f3f3;
   color: #5a5a5a;
+  border-radius: 3px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .bootstrap-select .selectpicker:focus, .bootstrap-select .selectpicker:active {
   -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -4427,6 +4438,7 @@ form label.error:before {
 }
 .bootstrap-select .selectpicker .caret {
   border: none;
+  color: #e14d67;
 }
 .bootstrap-select .selectpicker .caret:after {
   text-shadow: none;
@@ -4492,7 +4504,7 @@ form label.error:before {
 }
 .bootstrap-select .dropdown-menu li:first-child a, .bootstrap-select .dropdown-menu li.selected a {
   background-color: transparent;
-  color: #9c9c9c;
+  color: #e14d67;
   padding-left: 15px;
 }
 .bootstrap-select .dropdown-menu li:first-child a:hover, .bootstrap-select .dropdown-menu li.selected a:hover {
@@ -4633,6 +4645,7 @@ form label.error:before {
 }
 .search-box .btn {
   width: 100%;
+  background-color: #e14d67
 }
 .search-box .nav-pills li a {
   -moz-border-radius: 0px;
@@ -4685,7 +4698,7 @@ form label.error:before {
   padding: 20px 0;
   position: relative !important;
   top: inherit !important;
-  background-color: #1396e2;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .horizontal-search .search-box-wrapper .search-box {
   padding-right: 0;
@@ -4743,11 +4756,14 @@ form label.error:before {
 .horizontal-search .search-box-wrapper .search-box .form-map {
   background-color: transparent;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 .horizontal-search .search-box-wrapper .search-box .form-map input[type="text"], .horizontal-search .search-box-wrapper .search-box .form-map input[type="email"], .horizontal-search .search-box-wrapper .search-box .form-map input[type="search"], .horizontal-search .search-box-wrapper .search-box .form-map input[type="password"], .horizontal-search .search-box-wrapper .search-box .form-map input[type="number"], .horizontal-search .search-box-wrapper .search-box .form-map textarea, .horizontal-search .search-box-wrapper .search-box .form-map select, .horizontal-search .search-box-wrapper .search-box .form-map .selectpicker, .horizontal-search .search-box-wrapper .search-box .form-map .price-range {
   background-color: #fff;
   color: #5a5a5a;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 .horizontal-search .search-box-wrapper .search-box .form-map input[type="text"]:hover, .horizontal-search .search-box-wrapper .search-box .form-map input[type="email"]:hover, .horizontal-search .search-box-wrapper .search-box .form-map input[type="search"]:hover, .horizontal-search .search-box-wrapper .search-box .form-map input[type="password"]:hover, .horizontal-search .search-box-wrapper .search-box .form-map input[type="number"]:hover, .horizontal-search .search-box-wrapper .search-box .form-map textarea:hover, .horizontal-search .search-box-wrapper .search-box .form-map select:hover, .horizontal-search .search-box-wrapper .search-box .form-map .selectpicker:hover, .horizontal-search .search-box-wrapper .search-box .form-map .price-range:hover {
   background-color: #f3f3f3;
@@ -4756,7 +4772,7 @@ form label.error:before {
   background-color: #073855;
 }
 .horizontal-search .search-box-wrapper .search-box .form-map .selectpicker .caret:after {
-  color: #1396e2;
+  color: #e14d67;
 }
 .horizontal-search .search-box-wrapper .search-box .form-map .jslider-label, .horizontal-search .search-box-wrapper .search-box .form-map .jslider-value {
   color: #5a5a5a;
@@ -4946,6 +4962,7 @@ body, html {
 
 #page-content {
   height: auto;
+  background-color: #f9f9f9;
 }
 
 #page-footer {
@@ -5900,4 +5917,138 @@ body, html {
 @page {
   page-break-after: auto;
   margin: 0;
+}
+
+
+/* Drop down cart / login / search  */
+.dropdown.dropdown-search, .dropdown.dropdown-cart{
+	float:right;
+	font-size:13px !important;
+}
+.dropdown-cart .dropdown-menu, .dropdown-access .dropdown-menu, .dropdown-search .dropdown-menu {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  float: right;
+  left: auto;
+  min-width: 0;
+  padding: 15px;
+  right: 0;
+  width: 250px;
+  top:100%;
+  font-size:12px;
+  font-weight: normal;
+    text-shadow:none;
+	text-transform:none !important;
+	border-top: 2px solid #e04f67;
+}
+
+.dropdown-cart .dropdown-menu:before, .dropdown-access .dropdown-menu:before, .dropdown-search .dropdown-menu:before {
+	bottom: 100%;
+	right: 10%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-bottom-color: #e04f67;
+	border-width: 7px;
+	margin-left: -7px;
+}
+.dropdown-menu{
+	margin-top:14px;
+}
+.dropdown-cart .dropdown-menu a.button_drop{
+	display:inline-block;
+}
+.dropdown- .dropdown-menu{
+	margin-top:7px;
+}
+.login-or {
+    position: relative;
+    font-size: 16px;
+    color: #aaa;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    margin-left: -30px;
+    background-color: #fff;
+    width: 60px;
+    text-align: center;
+  }
+  .hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+a#forgot_pw{
+	color:#999 !important;
+	font-size:11px;
+	padding-top: 10px;
+	margin:-5px 0 10px 0;
+	display:block;
+  }
+  a#forgot_pw:hover{
+	color:#333 !important;
+  }
+
+.dropdown-search .dropdown-menu{
+	margin-top:15px;
+	right:-25px;
+}
+
+.btn-drop {
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  padding: 0px;
+  width: 45%;
+  align: center;
+  margin-left: 3.25%;
+  margin-right: 1.25%;
+}
+
+.btn-drop-other {
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  width: 45%;
+  align: center;
+  padding: 0px;
+  margin-left: 1.25%;
+  margin-right: 3.25%;
+  background-color: #e14d67;
+  padding-top: 15px;
+  color: white;
+  border-radius: 3px;
+}
+
+.all-results {
+  float: right;
+  padding-top: 12px;
+  font-size: larger;
+}
+
+.all-results a {
+  color: #51bce6;
+}
+
+#banner {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.btn-submit {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
