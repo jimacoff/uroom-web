@@ -47,6 +47,8 @@ group :development, :test do
   gem 'byebug', '~> 6.0.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'guard-livereload'
+  gem 'rb-readline'
 end
 
 group :production do
