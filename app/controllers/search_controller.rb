@@ -6,7 +6,7 @@ class SearchController < ApplicationController
   def results
     # Get the paramters
 
-    @lease_length = params[:lease_length].to_i
+    @lease_length = params[:lease_length].to_i > 0 ? params[:lease_length].to_i : 3
     @roommates = params[:roommates].to_i if params[:roommates]
 
     @start_date = params[:date].to_date

@@ -1,5 +1,5 @@
-<div id="page-content" style="margin-top: 150px;">
-<div class="container">
+<div id="page-content">
+<div class="container page">
             <div class="row">
 							<!-- sidebar -->
 							<div class="col-md-3 col-sm-3">
@@ -15,7 +15,7 @@
 																	<%= select_tag("date", options_for_select(@months, @date)) %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
-																	<%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: params[:lease_length], class: "styled-select", name: "category" ) %>
+																	<%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: params[:lease_length], class: "styled-select", name: "category" ) %>
 															</div><!-- /.form-group -->
 															<div class="form-group input-group">
                                 <span class="input-group-addon">$</span>
@@ -25,7 +25,7 @@
 																	</div> -->
 															</div>
 															<div class="form-group">
-																	<%= submit_tag "Search", { class:"btn btn-default"} %>
+																	<%= submit_tag "Search", { class:"btn btn-default", style:"margin-top: 10px; margin-bottom: 30px;"} %>
 															</div><!-- /.form-group -->
 														<% end %>
 											</aside><!-- /#edit-search -->
@@ -37,13 +37,13 @@
                 <div class="col-md-9 col-sm-9">
                     <section id="results">
 
-                      <h3 style="float: right;"><%= link_to "All Results", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max] } %></h3>
+                      <div class="all-results"><%= link_to "All Results", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max] } %></div>
                         <header><h1>Properties</h1></header>
                         <section id="properties">
                         <% if params[:roommates] || params[:max].blank? %>
-        													<% @listings.in_groups_of 3 do |triplets| %>
+        													<% @listings.in_groups_of 2 do |pairs| %>
         														<div class="row">
-        										          <% triplets.each do |listing| %>
+        										          <% pairs.each do |listing| %>
         																<% if listing %>
         																	<%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
         										          	<% end %>
@@ -55,9 +55,9 @@
                         <% else %>
                           <% if @listings_1.any? %>
                           <h2><%= link_to "1 Roommate", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
-                              <% @listings_1.in_groups_of 3 do |triplets| %>
+                              <% @listings_1.in_groups_of 2 do |pairs| %>
                                 <div class="row">
-                                  <% triplets.each do |listing| %>
+                                  <% pairs.each do |listing| %>
                                     <% if listing %>
                                       <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                     <% end %>
@@ -68,9 +68,9 @@
                             <% end %>
                             <% if @listings_2.any? %>
                             <h2><%= link_to "2 Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
-                                <% @listings_2.in_groups_of 3 do |triplets| %>
+                                <% @listings_2.in_groups_of 2 do |triplets| %>
                                   <div class="row">
-                                    <% triplets.each do |listing| %>
+                                    <% pairs.each do |listing| %>
                                       <% if listing %>
                                         <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                       <% end %>
@@ -83,9 +83,9 @@
                             <% if @listings_3.any? %>
                               <h2><%= link_to "3 Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
 
-                                    <% @listings_3.in_groups_of 3 do |triplets| %>
+                                    <% @listings_3.in_groups_of 2 do |pairs| %>
                                       <div class="row">
-                                        <% triplets.each do |listing| %>
+                                        <% pairs.each do |listing| %>
                                           <% if listing %>
                                             <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                           <% end %>
@@ -97,9 +97,9 @@
                               <% if @listings_more.any? %>
                                 <h2><%= link_to "More Roommates", url_options={location: params[:location], start_date: @date, lease_length: params[:lease_length], max: params[:max], roommates: 1} %></h2>
 
-                                    <% @listings_more.in_groups_of 3 do |triplets| %>
+                                    <% @listings_more.in_groups_of 2 do |pairs| %>
                                       <div class="row">
-                                        <% triplets.each do |listing| %>
+                                        <% pairs.each do |listing| %>
                                           <% if listing %>
                                             <%= render partial: 'search/listing', locals: {listing: listing, start_date: @date, lease_length: @lease_length} %>
                                           <% end %>

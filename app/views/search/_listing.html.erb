@@ -1,6 +1,6 @@
-<div class="col-md-4 col-sm-4">
+<div class="col-md-6 col-sm-6">
     <div class="property">
-        <%= link_to listing_path(id: listing.id, date: date, lease_length: lease_length)  do %>
+        <%= link_to listing_path(id: listing.id, start_date: start_date, lease_length: lease_length)  do %>
           <div class="property-image property-container" style="width: 262px;
           height: 262px;
           display: block;
@@ -14,7 +14,6 @@
                 <div class="info">
                     <div class="tag price" style="float: right;">$ <%= listing.price %></div>
                     <h3><%= listing.title %></h3>
-                    <figure><%= listing.city%>, <%= listing.state %></figure>
                 </div>
                 <ul class="additional-info">
                     <li>
