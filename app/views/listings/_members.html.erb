@@ -3,10 +3,10 @@
       <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= user.avatar.url(:medium) %>);" id="<%= user.id %>"></div>
     <% end %>
 
-<div class="row col-md-9">
+<div class="row col-md-12">
   <%= form_for crew, url: crews_add_user_path(crew: crew) do |f| %>
-    <%= text_field_tag :emails %>
-    <%= f.submit "Invite Members", class: "btn_full_outline", id: "create-crew-button" %>
+      <%= text_field_tag :emails %>
+      <%= f.submit "Invite Members", class: "btn_full_outline", id: "btn btn-default" %>
   <% end %>
 </div>
 

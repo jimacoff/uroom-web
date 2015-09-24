@@ -1,1 +1,5 @@
-<p><%= "#{message.sender.first_name}: #{message.text}" %></p>
+<% if message.sender == current_user %>
+<div class="col-md-12 you-are-sender"><p class="you-are-sender"><strong>You</strong><%= ": #{message.text}" %></p></div></br></br></br>
+<% else %>
+<div class="col-md-12" style="padding-left:0;"><p><strong><%= "#{message.sender.first_name}"%></strong><%= ": #{message.text}" %></p></div>
+<% end %>

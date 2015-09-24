@@ -1,3 +1,7 @@
 $('#message_text').val('');
 
 $('#messages').append('<%= escape_javascript(render @message) %>');
+
+
+var myDiv = $('#messages');
+myDiv.animate({ scrollTop: myDiv.prop("scrollHeight") - myDiv.height() }, 300);

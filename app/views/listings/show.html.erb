@@ -29,29 +29,28 @@
                         <% if @has_crew %>
                                 <section id="crew">
                                     <header><h2>Your Crew</h2></header>
-
-                                    <div class="col-md-6">
-                                      <%= render 'chats/chat', chat: @chat%>
-                                      <div id="messages">
-                                        <%= render @crew.chat.messages %>
+                                    <div class="col-md-10 messaging-container">
+                                      <div class="col-md-12">
+                                        <%= render 'chats/chat', chat: @chat%>
+                                        <div id="messages" class="messages">
+                                          <%= render @crew.chat.messages %>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <%= form_for @message, url: messages_path(@message, listing: @listing, chat: @chat), remote: true do |f| %>
+                                          <div>
+                                            <%= f.text_field :text, class: "new-messages", placeholder: "Type message" %>
+                                          <div style="display:none">
+                                            <%= hidden_field_tag :socket_id %>
+                                          </div>
+                                            <%= f.submit 'Send', class: "btn", id: "send-message" %>
+                                          </div>
+                                        <% end %>
                                       </div>
                                     </div>
-
-                                    <div class="row">
-                                      <%= form_for @message, url: messages_path(@message, listing: @listing, chat: @chat), remote: true do |f| %>
-                                        <div>
-                                          <%= f.text_area :text, rows: 5, cols: 40 %>
-                                        </div>
-                                        <div style="display:none">
-                                          <%= hidden_field_tag :socket_id %>
-                                        </div>
-                                        <div>
-                                          <%= f.submit 'Send' %>
-                                        </div>
-                                      <% end %>
+                                    <div class="col-md-12">
+                                      <%= render 'members', crew: @crew, selected_users: @selected_users  %>
                                     </div>
-
-                                  <%= render 'members', crew: @crew, selected_users: @selected_users  %>
 
                                 </section><!-- /#crew -->
 
@@ -135,7 +134,7 @@
 
                 <!-- sidebar -->
                 <div class="col-md-4 col-sm-4">
-                    <section id="sidebar">
+                    <section id="sidebar" class="listing-border">
                         <aside id="edit-search">
                           <% if @listing.owner.present? && @listing.owner == current_user %>
                             <header><h3>Follow Stats</h3></header>
@@ -160,14 +159,17 @@
                                       <%= label_tag(:start_date, "Move in") %>
                                       <%= select_tag("start_date", options_for_select(@months, @start_date), disabled: true) %>
                                     </div><!-- /.form-group -->
+                                  <% if @crew.crew_admin == current_user %>
                                     <div class="form-group">
+                                  <% else %>
+                                    <div class="form-group" style="margin-bottom: 25px;">
+                                  <% end %>
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length, disabled: true) %>
                                     </div>
-                                  </br>
                                   <% end %>
                                   <%= button_to "Request", listings_request_path(id: @listing.id, crew: @crew, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default btn-submit" if @crew.crew_admin == current_user %>
-                                  <%= link_to "Leave Crew", crews_leave_path(crew: @crew), class: "btn btn-default", style: "background-color: #073855;"%>
+                                  <%= link_to "Leave Crew", crews_leave_path(crew: @crew), class: "btn btn-default btn-unfollow" %>
                             <% elsif @is_orbitting %>
                                 <% if @not_available %>
                                   <h4 style="color: red;">These dates are no longer available</h4></br>
@@ -178,15 +180,15 @@
                                       <%= label_tag(:start_date, "Move in") %>
                                       <%= select_tag("start_date", options_for_select(@months, @start_date)) %>
                                     </div><!-- /.form-group -->
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 0;">
                                       <%= label_tag(:lease_length, "Lease Length", class: "icon-clock") %>
                                       <%= select_tag :lease_length, options_for_select({'3 Months' => 3, '6 Months' => 6, '9 Months' => 9, '12 Months' => 12}, selected: @orbit.lease_length) %>
                                     </div>
                                   </br>
-                                    <%= submit_tag "Update Dates", { class:"btn btn-default btn-submit" } %>
+                                    <%= submit_tag "Update Dates", { class:"btn btn-default" } %>
                                   <% end %>
-                                  <div class="form-group">
-                                      <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default", style: "background-color: #073855; width: 263px;"%>
+                                  <%= link_to "Unfollow", listings_unorbit_path(id: @listing.id, date: @date, lease_length: @lease_length, roommates: @roommates), method: :post, class: "btn btn-default btn-unfollow" %>
+
                                   </div>
                             <% else %>
                                   <%= form_tag({controller: "listings", action: "orbit"}, method: "post", class: "form-group") do %>
@@ -215,21 +217,8 @@
 </div><!-- End Map -->
 
 <script type="text/javascript">
-$( document ).ready(function( $ ) {
-  $( '#Img_carousel' ).sliderPro({
-    width: 960,
-    height: 500,
-    fade: true,
-    arrows: true,
-    buttons: false,
-    fullScreen: false,
-    smallSize: 500,
-    startSlide: 0,
-    mediumSize: 1000,
-    largeSize: 3000,
-    thumbnailArrows: true,
-    autoplay: false
-  });
-});
+var d = $('#messages');
+d.scrollTop(d.prop("scrollHeight"));
 </script>
+
   </div>

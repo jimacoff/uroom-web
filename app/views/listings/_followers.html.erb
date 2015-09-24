@@ -12,14 +12,14 @@
 <% else %>
   <h4>No one else is following yet</h4>
 <% end %>
-<div class="row col-md-9">
 <%= form_for crew do |f| %>
   <%= hidden_field_tag :orbit, orbit.id %>
   <%= hidden_field_tag :users, selected_users, id: 'submit-users' %>
-  <%= text_field_tag :emails, nil, placeholder: "Invite users by email" %>
-  <%= f.submit "Create Crew", class: "btn_full_outline", id: "create-crew-button" %>
+  <div class="email-form">
+    <%= text_field_tag :emails, nil, placeholder: "Invite users by email", class: "email-invite" %>
+    <%= f.submit "Create Crew", class: "btn btn-default btn-email-create", id: "create-crew-button"%>
+  </div>
 <% end %>
-</div>
 
 
 
