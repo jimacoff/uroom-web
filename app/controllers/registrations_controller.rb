@@ -27,11 +27,11 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :regular_user, :landlord, :invited_booking_request, :invited_crew_request)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :regular_user, :landlord, :invited_booking_request, :invited_crew_request)
   end
 
   def account_update_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :passowrd, :password_confirmation, :current_password, :about, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :email, :passowrd, :password_confirmation, :current_password, :about, :avatar)
   end
 
   def profile_params

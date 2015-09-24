@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  before_create :set_email_as_username
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
 
   belongs_to :invited_booking_request, class_name: "BookingRequest", foreign_key: "invited_booking_request_id"
   belongs_to :invited_crew_request, class_name: "CrewRequest", foreign_key: "invited_crew_request_id"
+
+  def set_email_as_username
+    self.username = self.email
+  end
 
   def full_name
     "#{first_name} #{last_name}"
