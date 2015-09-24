@@ -1,8 +1,8 @@
 
 <!-- Page Content -->
-<div id="page-content" style="margin-top: 150px;">
+<div id="page-content">
 
-    <div class="container">
+    <div class="container page">
         <div class="row">
         <!-- sidebar -->
         <div class="col-md-3 col-sm-2">
@@ -32,41 +32,13 @@
                           <%= form_for(current_user, url: update_profile_path, html: { multipart: true, method: "put" }) do |f| %>
                             <div class="col-md-3 col-sm-3">
                                 <%= image_tag current_user.avatar.url(:medium), class: "image", id: "avatar-image" %>
-                                <%= f.file_field :avatar, id: "pictureInput" %>
+                                <%= f.file_field :avatar, id: "pictureInput", style: "width: 100%;" %>
                             </div>
                             <div class="col-md-9 col-sm-9">
-                                    <section id="contact">
-                                        <h2><%= current_user.username %></h2>
-                                    </section>
                                     <section id="about-me">
                                         <h3>About Me</h3>
                                         <div class="form-group">
                                           <%= f.text_area :about, rows: 5, class: 'form-control' %>
-                                        </div><!-- /.form-group -->
-                                    </section>
-                                    <br>
-                                    <section id="social">
-                                        <h3>My Social Network</h3>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
-                                                <input type="text" class="form-control" id="account-social-twitter" name="account-social-twitter">
-                                            </div>
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-                                                <input type="text" class="form-control" id="account-social-facebook" name="account-social-facebook" >
-                                            </div>
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
-                                                <input type="text" class="form-control" id="account-social-pinterest" name="account-social-pinterest">
-                                            </div>
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group clearfix">
-                                            <%= f.submit "Update", class: "btn pull-right btn-default", id: "account-submit" %>
                                         </div><!-- /.form-group -->
                                     </section>
 

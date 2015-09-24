@@ -33,18 +33,30 @@
                           <%= link_to "Add Property", new_listing_path %>
                         </li>
                         <% if user_signed_in? %>
-                        <li class="has-child"> <%= current_user.first_name %>
+                        <li>
+                          <ul>
+                            <div class="dropdown dropdown-access">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link"><%= current_user.first_name %></a>
+                              <div class="dropdown-menu" style="width: auto; padding-top: 5px; padding-bottom: 5px; padding-right: 15px; padding-left: 15px;">
+                                    <li class="logged-in-menu"><%= link_to "Dashboard", dashboard_path, style: "font-size: larger;" %></li>
+                                    <li class="logged-in-menu"><%= link_to "Account Settings", edit_user_registration_path, style: "font-size: larger;" %></li>
+                                    <li class="logged-in-menu" style="padding-bottom: 10px; border-bottom: none;"><%= link_to "Sign out", destroy_user_session_path, method: 'delete', style: "font-size: larger;" %></li>
+                              </div>
+                            </div>
+                          </ul>
+                        </li>
+                        <!-- <li class="has-child"> <%= current_user.first_name %>
                             <ul class="child-navigation">
                                 <li><%= link_to "Dashboard", dashboard_path %></li>
                                 <li><%= link_to "Account Settings", edit_user_registration_path %></li>
                                 <li><%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <% else %>
                         <li>
                           <ul>
                             <%= render 'users/shared/login_dropdown' %>
-                        </ul>
+                          </ul>
                         </li>
                         <% end %>
                       </ul>

@@ -33,3 +33,13 @@
   .alert-notice {
     background-color: rgba(149, 208, 123, 0.77);
   }
+
+  li .logged-in-menu {
+    float: right;
+    padding-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: right;
+    padding-left: 20px;
+    padding-top: 5px;
+  }

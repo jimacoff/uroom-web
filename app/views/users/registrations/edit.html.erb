@@ -1,7 +1,7 @@
 <!-- Page Content -->
-    <div id="page-content" style="margin-top: 150px;">
+    <div id="page-content">
 
-        <div class="container">
+        <div class="container page">
             <div class="row">
             <!-- sidebar -->
             <div class="col-md-3 col-sm-2">
@@ -25,13 +25,13 @@
             <!-- My Properties -->
                 <div class="col-md-9 col-sm-10">
                     <section id="profile">
-                        <header><h1>Profile</h1></header>
+                        <header><h1>My Account</h1></header>
                         <div class="account-profile">
                             <div class="row">
-                                <div class="col-md-9 col-sm-9">
+                                <div class="col-md-12 col-sm-9">
                                       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                                         <%= devise_error_messages! %>
-                                        <section id="contact">
+                                        <section id="contact" class="form-border">
                                             <h3>Contact</h3>
                                             <dl class="contact-fields">
                                                 <dt><%= f.label :first_name %></dt>
@@ -50,19 +50,19 @@
                                             </dl>
                                         </section>
 
-                                    <section id="change-password">
-                                        <header><h2>Change Your Password</h2></header>
+                                    <section id="change-password" class="form-border" style="margin-top: 30px;">
+                                        <header><h3>Change Your Password</h3></header>
 
                                               <dl class="contact-fields">
-                                                  <dt><label for="form-account-name">Current Password</label></dt>
+                                                  <dt><label class="account-label">Current Password</label></dt>
                                                   <dd><div class="form-group">
                                                       <%= f.password_field :current_password, autocomplete: "off" %>
                                                   </div><!-- /.form-group --></dd>
-                                                  <dt><label for="form-account-phone">New Password</label></dt>
+                                                  <dt><label class="account-label">New Password</label></dt>
                                                   <dd><div class="form-group">
                                                       <%= f.password_field :password, autocomplete: "off" %>
                                                   </div><!-- /.form-group --></dd>
-                                                  <dt><label for="form-account-email">Confirm New Password</label></dt>
+                                                  <dt><label class="account-label">Confirm New Password</label></dt>
                                                   <dd><div class="form-group">
                                                       <%= f.password_field :password_confirmation, autocomplete: "off" %>
                                                   </div><!-- /.form-group --></dd>
@@ -73,8 +73,8 @@
                                     </section>
                                   <% end %>
                                 </br>
-                                  <section id="change-password">
-                                      <header><h2>Deactivate Account</h2></header>
+                                  <section id="change-password" class="form-border" style="margin-top: 10px;">
+                                      <header><h3>Deactivate Account</h3></header>
                                       <dl class="contact-fields">
                                           <dt><label style="padding-top: 10px;">This cannot be undone!</label></dt>
                                           <dd><div class="form-group">
