@@ -223,19 +223,20 @@ class ListingsController < ApplicationController
 
     def start_months
       begin_date = Date.today.at_beginning_of_month.next_month
+      months = []
       (0..11).each do |m|
-        start_months << [begin_date.next_month(m).strftime("%b %Y"), begin_date.next_month(m)]
+        months << [begin_date.next_month(m).strftime("%b %Y"), begin_date.next_month(m)]
       end
-      start_months
+      months
     end
 
     def end_months
       final_date = Date.today.at_beginning_of_month.next_month.next_month
-      end_months = []
+      months = []
       (0..11).each do |m|
-        end_months << [final_date.next_month(m).strftime("%b %Y"), final_date.next_month(m)]
+        months << [final_date.next_month(m).strftime("%b %Y"), final_date.next_month(m)]
       end
-      end_months
+      months
     end
 
 end
