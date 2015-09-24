@@ -1,13 +1,19 @@
-<div class="your-class">
-    <% crew.users.each do |user| %>
-      <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= user.avatar.url(:medium) %>);" id="<%= user.id %>"></div>
-    <% end %>
-
-<div class="row col-md-12">
-  <%= form_for crew, url: crews_add_user_path(crew: crew) do |f| %>
-      <%= text_field_tag :emails %>
-      <%= f.submit "Invite Members", class: "btn_full_outline", id: "btn btn-default" %>
-  <% end %>
+<div class="selected-block" style="margin-top: 10px;">
+  <div class="selected-users">
+      <% crew.users.each do |user| %>
+        <div class="profile-whole">
+          <div class=" member-item" style="background-image: url(<%= user.avatar.url(:medium) %>);" id="<%= user.id %>"></div>
+          <section class="profile-block">
+            <h3>
+              <%= link_to user.full_name, show_profile_path(user.id) %>
+            </h3>
+            <p>
+              <%= user.about %>
+            </p>
+          </section>
+        </div>
+      <% end %>
+  </div>
 </div>
 
 

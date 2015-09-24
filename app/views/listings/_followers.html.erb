@@ -1,16 +1,20 @@
-<div class="your-class">
+<div class="your-class" style="padding-left: 15px; padding-right: 15px;">
     <% followers.each do |follower| %>
-      <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= follower.avatar.url(:medium) %>);" onclick="selectUser(this)" id="<%= follower.id %>"></div>
+      <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= follower.avatar.url(:square) %>);" onclick="selectUser(this)" id="<%= follower.id %>"></div>
     <% end %>
+  </div>
 
 <% if followers.any? %>
-<h3>Selected:</h3>
-<div class="selected-users row">
-  <div class="holder" style="height: 85px; width: 85px;"></div>
-  <div class="holder" style="height: 85px; width: 85px;"></div>
+<h3 style="margin-bottom: 5px; padding-left: 15px;">Selected:</h3>
+<div class="selected-block">
+  <div class="selected-users">
+    <% orbit.listing.accommodates.times do %>
+      <div class="holder" style="height: 85px; width: 85px;"></div>
+    <% end %>
+  </div>
 </div>
 <% else %>
-  <h4>No one else is following yet</h4>
+  <h4 style="text-align: center; padding: 15px;">No one else is following yet</h4>
 <% end %>
 <%= form_for crew do |f| %>
   <%= hidden_field_tag :orbit, orbit.id %>
@@ -25,12 +29,7 @@
 
 <script type="text/javascript">
    $(document).ready(function(){
-     $('.your-class').slick({
-       slidesToShow: 3,
-       draggable: false,
-       infinite: false,
-       variableWidth: true,
-     });
+     $('.your-class').owlCarousel();
    });
  </script>
 
@@ -45,7 +44,7 @@ function selectUser(divObj) {
     $selectedUser.prependTo(".selected-users");
     $(".holder").last().remove();
     selected.push(id);
-    divObj.style.boxShadow = "0 0 0 4px green, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)";
+    divObj.style.boxShadow = "0 0 0 4px rgb(137, 208, 106), inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)";
   } else {
     selected.splice($.inArray(id, selected),1);
     $(".selected-users").find("#" + id).remove('#' + id);

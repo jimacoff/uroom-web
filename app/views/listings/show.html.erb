@@ -27,9 +27,10 @@
                         </header> -->
 
                         <% if @has_crew %>
+                        <div class="col-md-12">
                                 <section id="crew">
                                     <header><h2>Your Crew</h2></header>
-                                    <div class="col-md-10 messaging-container">
+                                    <div class="col-md-12 messaging-container" style="margin-top: 15px; margin-left: 0;">
                                       <div class="col-md-12">
                                         <%= render 'chats/chat', chat: @chat%>
                                         <div id="messages" class="messages">
@@ -53,16 +54,19 @@
                                     </div>
 
                                 </section><!-- /#crew -->
+                              </div>
 
                         <% elsif @is_orbitting %>
+                          <div class="col-md-12">
                               <section id="followers">
                                 <header><h2>Make a Crew</h2></header>
                                 <div class="row">
                                     <%= render 'followers', followers: @followers, orbit: @orbit, crew: @crew, selected_users: @selected_users %>
                                 </div>
                               </section><!-- /#crew -->
+                            </div>
                         <% end %>
-
+                          <div class="col-md-12">
                                 <section id="description">
                                     <header><h2>Property Description</h2></header>
                                     <h4>
@@ -90,6 +94,8 @@
 
                                     </ul>
                                 </section><!-- /#property-features -->
+                              </div>
+                              <div class="col-md-12">
                                 <section id="property-gallery">
                                   <div class="owl-carousel property-carousel">
                                     <% @listing.pictures.each do |picture| %>
@@ -101,6 +107,7 @@
                                     <% end %>
                                   </div><!-- /.property-carousel -->
                               </section>
+                            </div>
                               <script type="text/javascript">
                                 $(window).load(function(){
                                       initializeOwl(false);
@@ -114,6 +121,7 @@
                                     </div>
                                 </section>< /#property-map -->
                             <% if @listing.owner.present? %>
+                            <div class="col-md-12">
                                 <section class="agent-form">
                                   <header><h2>About the Owner</h2></header>
                                         <aside class="agent-info clearfix">
@@ -128,6 +136,7 @@
                                             </div>
                                         </aside><!-- /.agent-info -->
                                 </section><!-- /.agent-form -->
+                              </div>
                               <% end %>
                               </section><!-- /#property-detail -->
                 </div><!-- /.row -->
@@ -135,7 +144,7 @@
                 <!-- sidebar -->
                 <div class="col-md-4 col-sm-4">
                     <section id="sidebar" class="listing-border">
-                        <aside id="edit-search">
+                        <aside id="edit-search" style="margin-bottom: 20px;">
                           <% if @listing.owner.present? && @listing.owner == current_user %>
                             <header><h3>Follow Stats</h3></header>
                             <ul>
@@ -207,6 +216,14 @@
                           <% end %>
                         </aside><!-- /#edit-search -->
                     </section><!-- /#sidebar -->
+                    <% if @has_crew %>
+                      <div class="form-border" style="text-align: center; margin-bottom: 15px;">
+                        <%= form_for @crew, url: crews_add_user_path(crew: @crew) do |f| %>
+                            <%= text_field_tag :emails, nil, placeholder: "Invite users by email", class: "sidebar-invite" %>
+                            <%= f.submit "Invite Members", class: "btn btn-default btn-email-create", id: "btn btn-default", style: "width: 100%; background-color: #85c99d;" %>
+                        <% end %>
+                      </div>
+                    <% end %>
                 </div><!-- /.col-md-3 -->
                 <!-- end Sidebar -->
             </div><!-- /.row -->
