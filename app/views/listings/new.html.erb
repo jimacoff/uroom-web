@@ -1,6 +1,6 @@
-<div id="page-content" style="margin-top: 150px;">
+<div id="page-content">
 
-        <div class="container">
+        <div class="container page">
             <header><h1>Add Your Property</h1></header>
             <%= form_for @listing, multipart: true do |f| %>
               <%= render 'shared/error_messages' %>
@@ -9,7 +9,7 @@
                     <div class="block">
                         <div class="col-md-9 col-sm-9">
                             <section id="submit-form">
-                                <section id="basic-information">
+                                <section id="basic-information" class="form-border">
                                     <header><h2>Basic Information</h2></header>
                                     <div class="row">
                                         <div class="col-md-8">
@@ -34,12 +34,12 @@
                                         <%= f.text_area :description, rows: 8, class: 'form-control' %>
                                     </div><!-- /.form-group -->
                                 </section><!-- /#basic-information -->
-                                <section id="availability">
+                                <section id="availability" class="form-border">
                                     <div class="row">
                                         <div class="col-md-6">
                                           <header><h2>Availablity Start</h2></header>
                                             <div class="row">
-                                              <div class="col-md-9">
+                                              <div class="col-md-12">
                                                 <div class="form-group">
                                                   <%= f.select :start_date, options_for_select(@start_months) %>
                                                 </div><!-- /.form-group -->
@@ -50,7 +50,7 @@
                                         <div class="col-md-6">
                                           <header><h2>Availablity End</h2></header>
                                           <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-12">
                                               <div class="form-group">
                                                   <%= f.select :end_date, options_for_select(@end_months) %>
                                               </div><!-- /.form-group -->
@@ -63,7 +63,7 @@
                                     <div class="row">
                                         <div class="block clearfix">
                                             <div class="col-md-6 col-sm-6">
-                                                <section id="summary">
+                                                <section id="summary" class="form-border">
                                                     <header><h2>Summary</h2></header>
                                                     <!-- <div class="form-group">
                                                         <label for="submit-location">Property Type</label>
@@ -122,7 +122,7 @@
                                                         <%= f.label :pet_policy %>
                                                         <%= f.text_field :pet_policy, class: 'form-control' %>
                                                     </div><!-- /.form-group -->
-                                                    <div class="checkbox">
+                                                    <div class="checkbox" style="margin-top: 20px;">
                                                         <label>
                                                             <%= f.check_box :furnished %> Furnished<i class="fa fa-question-circle tool-tip"  data-toggle="tooltip" data-placement="right" title="Is the property already furnished for the lease period?"></i>
                                                         </label>
@@ -131,7 +131,7 @@
                                                 </section><!-- /#summary -->
                                             </div><!-- /.col-md-6 -->
                                             <div class="col-md-6 col-sm-6">
-                                                <section id="place-on-map">
+                                                <section id="place-on-map" class="form-border">
                                                     <header class="section-title">
                                                         <h2>Location</h2>
 
@@ -181,20 +181,19 @@
                                 </section>
 
 
-                                <section class="block" id="gallery">
+                                <section class="block form-border" id="gallery">
                                     <header><h2>Gallery</h2></header>
                                     <div class="center">
                                         <div class="form-group">
                                           <%= f.file_field :pictures, type: :file, multiple: true, class: "file",
                                           accept: "image/jpeg,image/png", data: {
                                           show_upload: false, show_caption: false, show_remove: false,
-                                          browse_class: "btn btn-default", browse_label: "Browse Images"} %>
+                                          browse_class: "btn btn-images", browse_label: "Browse Images"} %>
                                           <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
                                         </div>
                                     </div>
                                 </section>
 
-                                <hr>
                             </section>
                         </div><!-- /.col-md-9 -->
                         <div class="col-md-3 col-sm-3">
@@ -207,10 +206,19 @@
                                 </div>
                             </aside><!-- /.submit-step -->
                         </div><!-- /.col-md-3 -->
-                      </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
                                 <figure class="step-number">2</figure>
+                                <div class="description">
+                                    <h4>Set Availability</h4>
+                                    <p>Set the date range the listing is available for.
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">3</figure>
                                 <div class="description">
                                     <h4>Add Some More Details</h4>
                                     <p>Add the address and anything else tenants should know.
@@ -218,23 +226,30 @@
                                 </div>
                             </aside><!-- /.submit-step -->
                         </div><!-- /.col-md-3 -->
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">4</figure>
+                                <div class="description">
+                                    <h4>Add Pictures</h4>
+                                    <p>Better pictures increase the number of quality leads.
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
                     </div>
                 </div><!-- /.row -->
                 <div class="row">
-                    <div class="block">
                         <div class="col-md-9 col-sm-9">
                             <div class="center">
                                 <div class="form-group">
-                                    <%= f.submit "Create Listing", class: "btn btn-primary large" %>
+                                    <%= f.submit "Create Listing", class: "btn btn-primary large", style: "margin-top: 20px;" %>
                                 </div><!-- /.form-group -->
-                                <figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
                             </aside><!-- /.submit-step -->
                         </div><!-- /.col-md-3 -->
-                    </div>
                 </div>
               <% end %>
         </div><!-- /.container -->
