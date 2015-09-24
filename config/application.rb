@@ -32,8 +32,8 @@ module Workspace
       :address            => 'smtp.gmail.com',
       :domain             => 'mail.google.com',
       :port               => 587,
-      :user_name          => "hello@roomieapp.io",
-      :password           => "stayfoolishstayhungry1955",
+      :user_name          => ENV['GMAIL_EMAIL'],
+      :password           => ENV['GMAIL_PASSWORD'],
       :authentication     => 'login',
       :enable_starttls_auto => true
     }
