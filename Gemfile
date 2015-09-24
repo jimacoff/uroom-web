@@ -30,7 +30,7 @@ gem 'font-awesome-rails'
 gem 'paperclip', "~> 4.3"
 gem 'devise_invitable', '~> 1.5.2'
 gem 'execjs'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 gem 'mandrill-api'
 # Use jquery as the JavaScript library
