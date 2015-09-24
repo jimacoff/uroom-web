@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  before_create :set_email_as_username
+  before_create :set_email_as_username, :check_if_landlord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
 
   def set_email_as_username
     self.username = self.email
+  end
+
+  def check_if_landlord
+    self.landlord = true if self.regular_user == false
   end
 
   def full_name
