@@ -19,4 +19,12 @@ module ApplicationHelper
     return exists
   end
 
+  def search_options
+    [['Penn State', 0]]
+  end
+
+  def search_locations
+    ["State College, PA", "Pittsburgh, PA"]
+  end
+
 end

@@ -13,7 +13,7 @@
                         <div class="row center">
                           <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
                             <div class="col-md-3 col-sm-4">
-                                  <%= select_tag :location, options_for_select([['San Francisco', 0], ['Silicon Valley', 1], ['New York', 2], ['Pittsburgh', 3]], selected: :location ) %>
+                                  <%= select_tag :location, options_for_select(search_options, selected: :location ) %>
                             </div>
                             <div class="col-md-3 col-sm-4">
                                   <%= select_tag("date", options_for_select(@months, @date)) %>

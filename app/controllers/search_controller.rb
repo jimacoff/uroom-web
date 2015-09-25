@@ -14,7 +14,7 @@ class SearchController < ApplicationController
 
 
 
-    @locations = ["San Francisco, CA", "Foster City, CA", "New York City, NY", "Pittsburgh, PA"]
+    @locations = search_locations
     @location = @locations[params[:location].to_i]
     @coordinates = Geocoder.coordinates(@location)
 
@@ -40,7 +40,7 @@ class SearchController < ApplicationController
       @listings   =     Listing.near(@location).where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
                                 .where('price <= ?', @max_price).where('accommodates >= ?', @tenants)
     else
-      @listings   =     Listing.near(@location).where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
+      @listings   =     Listing.near(@location, 5).where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
       @listings_1 =     @listings.where('price <= ?', @max_price_1).where('accommodates >= ?', 2).limit(max_results)
       @listings_2 =     @listings.where('price <= ? AND price > ?', @max_price_2, @max_price_1).where('accommodates >= ?', 3).limit(max_results)
       @listings_3 =     @listings.where('price <= ? AND price > ?', @max_price_3, @max_price_2).where('accommodates >= ?', 4).limit(max_results)
