@@ -68,6 +68,15 @@
       <% flash.each do |message_type, message| %>
         <div class="flash-head alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
+      <script>
+        $(document).ready(function() {
+          setTimeout(function() {
+            $(".flash-head").fadeOut("slow", function() {
+              $(this).remove();
+            })
+          }, 4500);
+        });
+      </script>
 
         <%= yield %>
 
