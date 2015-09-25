@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def search_locations
-    ["State College, PA", "Pittsburgh, PA"]
+    ["University Park, PA", "Pittsburgh, PA"]
   end
 
 end
