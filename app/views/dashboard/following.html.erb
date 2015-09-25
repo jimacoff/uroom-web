@@ -59,12 +59,12 @@
                                     <tr>
                                         <td class="image">
                                               <%= link_to listing do %>
-                                              <%= image_tag listing.pictures.first.image.url(:medium) %>
+                                              <%= image_tag listing.pictures.first.image.url(:medium) if listing.pictures.any? %>
                                               <% end %>
                                         </td>
                                         <td><div class="inner">
                                             <%= link_to listing do %>
-                                            <h2><%= listing.title %></h2>
+                                            <h2 style="text-align: left;"><%= listing.title %></h2>
                                             <% end %>
                                             <figure><%= listing.full_address %></figure>
                                             <div class="tag price">$ <%= listing.price %></div>

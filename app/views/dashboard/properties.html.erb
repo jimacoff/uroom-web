@@ -60,7 +60,9 @@
                                               <a href="property-detail.html"><img alt="" src="assets/img/properties/property-04.jpg"></a>
                                           </td>
                                           <td><div class="inner">
-                                              <a href="property-detail.html"><h2><%= listing.title %></h2></a>
+                                              <%= link_to listing do %>
+                                                <h2 style="text-align: left;"><%= listing.title %></h2>
+                                              <% end %>
                                               <figure><%= listing.full_address %></figure>
                                               <div class="tag price">$ <%= listing.price %></div>
                                           </div>
