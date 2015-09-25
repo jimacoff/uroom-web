@@ -1,6 +1,16 @@
 <div class="your-class" style="padding-left: 15px; padding-right: 15px;">
     <% followers.each do |follower| %>
+    <div class="profile-whole">
       <div class="follower" style="height: 85px; width: 85px; background-image: url(<%= follower.avatar.url(:square) %>);" onclick="selectUser(this)" id="<%= follower.id %>"></div>
+      <section class="profile-block" style="margin-top: -85px;">
+        <h3>
+          <%= link_to follower.full_name, show_profile_path(follower.id) %>
+        </h3>
+        <p>
+          <%= follower.about %>
+        </p>
+      </section>
+    </div>
     <% end %>
   </div>
 
