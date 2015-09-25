@@ -173,7 +173,7 @@ class ListingsController < ApplicationController
     @crew = Crew.find(params[:crew])
 
     if @crew.crew_admin == current_user
-      if BookingRequest.create(crew: @crew, listing: @listing)
+      if BookingRequest.create!(crew: @crew, listing: @listing)
         @crew.update(requested: true)
         flash[:success] = "Your request has been sent to the owner"
       else

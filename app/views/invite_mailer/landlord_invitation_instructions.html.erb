@@ -1,7 +1,7 @@
 <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
 <% booking_request = BookingRequest.find(@resource.invited_booking_request.id) %>
 <% listing = booking_request.listing %>
-<p><%= t("Users on #{root_url} want to rent your Craigslist listing.") %></p>
+<p><%= t("Students on #{root_url} want to rent your listing.") %></p>
 <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>

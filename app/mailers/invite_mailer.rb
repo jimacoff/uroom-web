@@ -1,7 +1,7 @@
 class InviteMailer < Devise::Mailer
 
   def landlord_invitation_instructions(record, opts={})
-    opts = {subject: "Craigslist listing"}
+    opts = {subject: "Rental listing"}
     @token = record.raw_invitation_token
     devise_mail(record, :landlord_invitation_instructions, opts)
   end

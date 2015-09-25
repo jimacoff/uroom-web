@@ -10,7 +10,7 @@ class BookingRequest < ActiveRecord::Base
       # send notification email
     else
       # send invitation
-      User.invite_landlord!(email: self.listing.email, username: self.listing.email, first_name: "", last_name: "", invited_booking_request: self, landlord: true)
+      User.invite_landlord!(email: self.listing.email, first_name: "", last_name: "", invited_booking_request: self, regular_user: false)
     end
   end
 end
