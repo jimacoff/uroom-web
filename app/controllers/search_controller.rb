@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   include ListingsHelper
+  include ApplicationHelper
   # Get search results for a search query
   # Listings are stored in array @listings
   # 1 roommate listings, 2 roommate listings, 3 roommates, more
