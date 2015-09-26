@@ -114,15 +114,9 @@
                                   });
                               </script>
 
-                                <!-- <section id="property-map">
-                                    <header><h2>Map</h2></header>
-                                    <div class="property-detail-map-wrapper">
-                                        <div class="property-detail-map" id="property-detail-map"></div>
-                                    </div>
-                                </section>< /#property-map -->
                             <% if @listing.owner.present? %>
                             <div class="col-md-12">
-                                <section class="agent-form">
+                                <section class="agent-form" style="height: 140px;">
                                   <header><h2>About the Owner</h2></header>
                                         <aside class="agent-info clearfix">
                                             <figure><%= image_tag @listing.owner.avatar.url(:medium) %></figure>
@@ -131,7 +125,6 @@
                                                 <p>
                                                     <%= @listing.owner.about %>
                                                 </p>
-                                                <hr>
                                                 <%= link_to "Full Profile", show_profile_path(@listing.owner) %>
                                             </div>
                                         </aside><!-- /.agent-info -->
@@ -146,16 +139,16 @@
                     <section id="sidebar" class="listing-border">
                         <aside id="edit-search" style="margin-bottom: 20px;">
                           <% if @listing.owner.present? && @listing.owner == current_user %>
-                            <header><h3>Follow Stats</h3></header>
+                            <header><h3 class="inner">Follow Stats</h3></header>
                             <ul>
-                                <li><strong>Followers: &nbsp;</strong> <%= @listing.users.count %></li>
-                                <li><strong>Availablity Start: &nbsp;</strong> <%= @listing.start_date.to_formatted_s(:long)  %></li>
-                                <li><strong>Availablity End: &nbsp;&nbsp;&nbsp;</strong> <%= @listing.end_date.to_formatted_s(:long)  %></li>
-                                <li><strong>Created: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <%= @listing.created_at.to_date.to_formatted_s(:long)  %></li>
+                                <li style="margin-bottom: 5px;"><strong>Followers: &nbsp;</strong> <%= @listing.users.count %></li>
+                                <li style="margin-bottom: 5px;"><strong>Availablity Start: &nbsp;</strong> <%= @listing.start_date.to_formatted_s(:long)  %></li>
+                                <li style="margin-bottom: 5px;"><strong>Availablity End: &nbsp;&nbsp;&nbsp;</strong> <%= @listing.end_date.to_formatted_s(:long)  %></li>
+                                <li style="margin-bottom: 5px;"><strong>Created: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <%= @listing.created_at.to_date.to_formatted_s(:long)  %></li>
                             </ul>
                             <%= button_to "Edit",
                                 edit_listing_path(id: @listing.id),
-                                class: "btn btn-default", method: "get" %>
+                                class: "btn btn-default", method: "get", style: "margin-bottom: 15px;" %>
                           <% else %>
                             <h3 class="inner">Follow</h3>
                             <% if @has_crew %>

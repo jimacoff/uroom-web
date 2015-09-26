@@ -9,6 +9,10 @@ class BookingRequestsController < ApplicationController
 
   def show
     @request = BookingRequest.find(params[:id])
+    @users = @request.crew.users
+    @listing = @request.listing
+    @start_date = @request.crew.start_date
+    @end_date = @request.crew.end_date
     if @request.listing.owner != current_user
       direct_to bookingrequests_path
     end
