@@ -69,6 +69,8 @@ class ListingsController < ApplicationController
 
   def create
     listing = Listing.new(listing_params)
+    listing.start_date = Date.new(params[:date][:start_year].to_i, params[:date][:start_month].to_i, 1)
+    listing.end_date = Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1)
     listing.owner = current_user
     gallery = Gallery.create
     if params[:listing][:pictures]
@@ -89,12 +91,14 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
-    @start_months = start_months
-    @end_months = end_months
+    @start_date = @listing.start_date
+    @end_date = @listing.end_date
   end
 
   def update
     @listing = Listing.find(params[:id])
+    @listing.start_date = Date.new(params[:date][:start_year].to_i, params[:date][:start_month].to_i, 1)
+    @listing.end_date = Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1)
     if @listing.update_attributes(listing_params)
       if params[:listing][:pictures]
           params[:listing][:pictures].each { |image|

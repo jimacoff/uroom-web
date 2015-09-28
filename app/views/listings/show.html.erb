@@ -1,5 +1,5 @@
 <div class="image-container">
-  <%= image_tag @listing.pictures.first.image.url(:medium), class: "listing-header"  if @listing.pictures.any? %>
+  <%= image_tag @listing.pictures.first.image.url(:large), class: "listing-header"  if @listing.pictures.any? %>
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
@@ -101,7 +101,7 @@
                                     <% @listing.pictures.each do |picture| %>
                                       <div class="property-slide">
                                         <div style="height: 400px;">
-                                          <%= image_tag picture.image.url(:medium), style: "height: 400px; object-fit: scale-down;" %>
+                                          <%= image_tag picture.image.url(:large), style: "height: 400px; object-fit: scale-down;" %>
                                         </div>
                                       </div><!-- /.property-slide -->
                                     <% end %>

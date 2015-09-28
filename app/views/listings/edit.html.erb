@@ -39,9 +39,14 @@
                                         <div class="col-md-6">
                                           <header><h2>Availablity Start</h2></header>
                                             <div class="row">
-                                              <div class="col-md-9">
+                                              <div class="col-md-12">
                                                 <div class="form-group">
-                                                  <%= f.select :start_date, options_for_select(@start_months) %>
+                                                  <div class="col-md-6">
+                                                    <%= select_month(@start_date, name: "start_month", field_name: "start_month") %>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <%= select_year(@start_date, name: "start_year", start_year: Date.today.year, end_year: 1.years.from_now.year, field_name: "start_year") %>
+                                                  </div>
                                                 </div><!-- /.form-group -->
                                               </div>
                                             </div><!-- /.form-group -->
@@ -50,9 +55,14 @@
                                         <div class="col-md-6">
                                           <header><h2>Availablity End</h2></header>
                                           <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-12">
                                               <div class="form-group">
-                                                  <%= f.select :end_date, options_for_select(@end_months) %>
+                                                <div class="col-md-6">
+                                                  <%= select_month(@end_date, name: "end_month", field_name: "end_month") %>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <%= select_year(@end_date, name: "end_year", start_year: Date.today.year, end_year: 2.years.from_now.year, field_name: "end_year") %>
+                                                </div>
                                               </div><!-- /.form-group -->
                                             </div>
                                           </div><!-- /.form-group -->

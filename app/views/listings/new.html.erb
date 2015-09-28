@@ -41,7 +41,13 @@
                                             <div class="row">
                                               <div class="col-md-12">
                                                 <div class="form-group">
-                                                  <%= f.select :start_date, options_for_select(@start_months) %>
+
+                                                  <div class="col-md-6">
+                                                    <%= select_month(Date.today + 1.month, name: "start_month", field_name: "start_month") %>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <%= select_year(Date.today, name: "start_year", start_year: Date.today.year, end_year: 1.years.from_now.year, field_name: "start_year") %>
+                                                  </div>
                                                 </div><!-- /.form-group -->
                                               </div>
                                             </div><!-- /.form-group -->
@@ -52,7 +58,12 @@
                                           <div class="row">
                                             <div class="col-md-12">
                                               <div class="form-group">
-                                                  <%= f.select :end_date, options_for_select(@end_months) %>
+                                                <div class="col-md-6">
+                                                  <%= select_month(Date.today + 1.month, name: "end_month", field_name: "end_month") %>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <%= select_year(Date.today, name: "end_year", start_year: Date.today.year, end_year: 2.years.from_now.year, field_name: "end_year") %>
+                                                </div>
                                               </div><!-- /.form-group -->
                                             </div>
                                           </div><!-- /.form-group -->
@@ -189,7 +200,7 @@
                                           accept: "image/jpeg,image/png", data: {
                                           show_upload: false, show_caption: false, show_remove: false,
                                           browse_class: "btn btn-images", browse_label: "Browse Images"} %>
-                                          <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
+                                          <figure class="note"><strong>Hint:</strong> The first photo will be your cover photo! Select all photos at once.</figure>
                                         </div>
                                     </div>
                                 </section>
