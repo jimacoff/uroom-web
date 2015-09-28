@@ -70,7 +70,6 @@ class ListingsController < ApplicationController
   def create
     listing = Listing.new(listing_params)
     listing.owner = current_user
-    listing.owner.landlord = true
     gallery = Gallery.create
     if params[:listing][:pictures]
         params[:listing][:pictures].each { |image|
@@ -80,6 +79,7 @@ class ListingsController < ApplicationController
     listing.active = true
     listing.gallery = gallery
     if listing.save
+      current_user.update(landlord: true, regular_user: false)
       redirect_to listing
     else
       flash[:error] = "Could not create listing."
