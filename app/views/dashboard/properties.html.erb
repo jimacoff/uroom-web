@@ -73,7 +73,7 @@
                                               <%= link_to edit_listing_path(id: listing), class: "edit" do %>
                                                 <i class="fa fa-pencil"></i>Edit
                                               <% end %>
-                                              <%= link_to controller: :listings, action: :destroy, method: "delete", id: listing do %>
+                                              <%= button_to listing, controller: "listings", action: "destroy", method: "delete", style: "background-color: rgba(0,0,0,0); border:none;" do %>
                                                 <i class="delete">Delete
                                               <% end %>
                                           </td>
