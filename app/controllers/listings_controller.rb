@@ -89,6 +89,8 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
+    @start_months = start_months
+    @end_months = end_months
   end
 
   def update
