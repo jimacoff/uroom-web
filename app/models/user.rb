@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
   attr_writer :invitation_instructions
-  require_dependency 'validators/email_validator.rb'
   validates :email, :presence => true, :email => true, if: :regular_user
 
   has_attached_file :avatar, styles: { medium: "300x300>", square: '200x200#', thumb: "100x100>" },
