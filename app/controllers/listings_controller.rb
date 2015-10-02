@@ -224,7 +224,12 @@ class ListingsController < ApplicationController
                                               :start_date,
                                               :end_date,
                                               :security_deposit,
-                                              :furnished)
+                                              :furnished,
+                                              :included_appliances,
+                                              :pet_policy,
+                                              :utility_notes,
+                                              :parking_notes
+                                              )
     end
 
     def start_months
