@@ -1,6 +1,6 @@
-<div id="page-content" style="margin-top: 150px;">
+<div id="page-content">
 
-        <div class="container">
+        <div class="container page">
             <header><h1>Edit Your Property</h1></header>
             <%= form_for @listing do |f| %>
               <%= render 'shared/error_messages' %>
@@ -190,12 +190,24 @@
 
                                 </section>
 
+                                <section class="block" id="cover-photo">
+                                    <header><h2>Cover Photo</h2></header>
+                                    <div class="center">
+                                        <div class="form-group">
+                                          <%= image_tag @cover_photo.image.url(:medium), style: "height: 150px; object-fit: scale-down;" if @cover_photo.image.present? %>
+                                           <%= file_field_tag 'cover_picture', type: :file, multiple: false, class: "file",
+                                           accept: "image/jpeg,image/png", data: {
+                                           show_upload: false, show_caption: false, show_remove: false,
+                                           browse_class: "btn btn-default", browse_label: "Choose Cover Photo"} %>
+                                        </div>
+                                    </div>
+                                </section>
 
                                 <section class="block" id="gallery">
                                     <header><h2>Gallery</h2></header>
                                     <div class="center">
                                         <div class="form-group">
-                                           <% @listing.pictures.each do |picture| %>
+                                           <% @images.each do |picture| %>
                                             <%= image_tag picture.image.url(:medium), style: "height: 150px; object-fit: scale-down;" %>
                                            <% end %>
                                          <hr>

@@ -1,5 +1,5 @@
 <div class="image-container">
-  <%= image_tag @listing.pictures.first.image.url(:large), class: "listing-header"  if @listing.pictures.any? %>
+  <%= image_tag @cover_photo.image.url(:large), class: "listing-header" if @cover_photo.image.present? %>
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
@@ -98,7 +98,7 @@
                               <div class="col-md-12">
                                 <section id="property-gallery">
                                   <div class="owl-carousel property-carousel">
-                                    <% @listing.pictures.each do |picture| %>
+                                    <% @images.each do |picture| %>
                                       <div class="property-slide">
                                         <div style="height: 400px;">
                                           <%= image_tag picture.image.url(:large), style: "height: 400px; object-fit: scale-down;" %>

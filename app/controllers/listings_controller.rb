@@ -26,6 +26,8 @@ class ListingsController < ApplicationController
   def show
     # get parameters
     @listing = Listing.find(params[:id])
+    @cover_photo = @listing.pictures.first
+    @images = @listing.pictures.drop(1)
     @orbit = Orbit.find_by(user: current_user, listing: @listing)
     @crew = @orbit.crew if @orbit
     get_params if params[:start_date]
@@ -73,6 +75,12 @@ class ListingsController < ApplicationController
     listing.end_date = Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1)
     listing.owner = current_user
     gallery = Gallery.create
+    if params[:cover_picture]
+      gallery.pictures.create(image: params[:cover_picture])
+    else
+      gallery.pictures.create()
+    end
+    debugger
     if params[:listing][:pictures]
         params[:listing][:pictures].each { |image|
           gallery.pictures.create(image: image)
@@ -91,21 +99,26 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
+    @cover_photo = @listing.pictures.first if @listing.pictures.first.image
+    @images = @listing.pictures.drop(1)
     @start_date = @listing.start_date
     @end_date = @listing.end_date
   end
 
   def update
-    @listing = Listing.find(params[:id])
-    @listing.start_date = Date.new(params[:date][:start_year].to_i, params[:date][:start_month].to_i, 1)
-    @listing.end_date = Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1)
-    if @listing.update_attributes(listing_params)
+    listing = Listing.find(params[:id])
+    listing.start_date = Date.new(params[:date][:start_year].to_i, params[:date][:start_month].to_i, 1)
+    listing.end_date = Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1)
+    if listing.update_attributes(listing_params)
+      if params[:cover_picture]
+        listing.pictures.first.update(image: params[:cover_picture])
+      end
       if params[:listing][:pictures]
           params[:listing][:pictures].each { |image|
-            @listing.gallery.pictures.create(image: image)
+            listing.gallery.pictures.create(image: image)
           }
       end
-      redirect_to @listing
+      redirect_to listing
     else
       flash[:error] = "Could not update listing."
       render 'edit'

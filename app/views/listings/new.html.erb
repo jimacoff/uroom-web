@@ -192,6 +192,19 @@
                                 </section>
 
 
+                                <section class="block form-border" id="cover-photo" style="margin-bottom: 25px;">
+                                    <header><h2>Cover Photo</h2></header>
+                                    <div class="center">
+                                        <div class="form-group">
+                                           <%= file_field_tag 'cover_picture', type: :file, multiple: false, class: "file",
+                                           accept: "image/jpeg,image/png", data: {
+                                           show_upload: false, show_caption: false, show_remove: false,
+                                           browse_class: "btn btn-images", browse_label: "Choose Cover Photo"} %>
+                                        </div>
+                                    </div>
+                                </section>
+
+
                                 <section class="block form-border" id="gallery">
                                     <header><h2>Gallery</h2></header>
                                     <div class="center">
@@ -200,7 +213,7 @@
                                           accept: "image/jpeg,image/png", data: {
                                           show_upload: false, show_caption: false, show_remove: false,
                                           browse_class: "btn btn-images", browse_label: "Browse Images"} %>
-                                          <figure class="note"><strong>Hint:</strong> The first photo will be your cover photo! Select all photos at once.</figure>
+                                          <figure class="note"><strong>Hint:</strong> Select all photos at once.</figure>
                                         </div>
                                     </div>
                                 </section>
@@ -211,6 +224,16 @@
                             <aside class="submit-step">
                                 <figure class="step-number">1</figure>
                                 <div class="description">
+                                    <h4>Cost</h4>
+                                    <p>None, it's free during our beta!
+                                    </p>
+                                </div>
+                            </aside><!-- /.submit-step -->
+                        </div><!-- /.col-md-3 -->
+                        <div class="col-md-3 col-sm-3">
+                            <aside class="submit-step">
+                                <figure class="step-number">2</figure>
+                                <div class="description">
                                     <h4>Enter Information About Property</h4>
                                     <p>Type information about your property. Be descriptive.
                                     </p>
@@ -219,7 +242,7 @@
                         </div><!-- /.col-md-3 -->
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
-                                <figure class="step-number">2</figure>
+                                <figure class="step-number">3</figure>
                                 <div class="description">
                                     <h4>Set Availability</h4>
                                     <p>Set the date range the listing is available for.
@@ -229,7 +252,7 @@
                         </div><!-- /.col-md-3 -->
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
-                                <figure class="step-number">3</figure>
+                                <figure class="step-number">4</figure>
                                 <div class="description">
                                     <h4>Add Some More Details</h4>
                                     <p>Add the address and anything else tenants should know.
@@ -239,7 +262,7 @@
                         </div><!-- /.col-md-3 -->
                         <div class="col-md-3 col-sm-3">
                             <aside class="submit-step">
-                                <figure class="step-number">4</figure>
+                                <figure class="step-number">5</figure>
                                 <div class="description">
                                     <h4>Add Pictures</h4>
                                     <p>Better pictures increase the number of quality leads.
