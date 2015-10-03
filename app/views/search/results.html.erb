@@ -12,7 +12,7 @@
 																	<%= select_tag :location, options_for_select(search_options, params[:location]) %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
-																	<%= select_tag("date", options_for_select(@months, @date)) %>
+																	<%= select_tag("date", options_for_select(@months, @start_date)) %>
 															</div><!-- /.form-group -->
 															<div class="form-group">
 																	<%= select_tag :lease_length, options_for_select([['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: params[:lease_length], class: "styled-select", name: "category" ) %>
