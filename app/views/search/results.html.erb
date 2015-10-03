@@ -37,7 +37,7 @@
                 <div class="col-md-9 col-sm-9">
                     <section id="results">
 
-                      <div class="all-results"><%= link_to "All Results", url_options={location: params[:location], date: @date, lease_length: params[:lease_length], max: params[:max] } %></div>
+                      <div class="all-results"><%= link_to "All Results", url_options={location: params[:location], date: @start_date, lease_length: params[:lease_length], max: params[:max] } %></div>
                         <header><h1>Properties</h1></header>
                         <section id="properties">
                         <% if params[:roommates] || params[:max].blank? %>
