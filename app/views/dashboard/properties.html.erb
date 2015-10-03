@@ -10,11 +10,11 @@
                         <ul class="sidebar-navigation">
                           <% if current_user.regular_user %>
                             <li><%= link_to dashboard_path do %>
-                              <i class="fa fa-user"></i><span>My Crews</span></a>
+                              <i class="fa fa-users"></i><span>My Crews</span></a>
                               <% end %>
                             </li>
                             <li><%= link_to dashboard_requests_path do %>
-                              <i class="fa fa-home"></i><span>Crew Requests</span></a>
+                              <i class="fa fa-exclamation-circle"></i><span>Crew Requests</span></a>
                               <% end %>
                             </li>
                             <li><%= link_to dashboard_following_path do %>
@@ -28,7 +28,7 @@
                               <% end %>
                             </li>
                             <li><%= link_to bookingrequests_path do %>
-                              <i class="fa fa-home"></i><span>Booking Requests</span></a>
+                              <i class="fa fa-exclamation-circle"></i><span>Booking Requests</span></a>
                               <% end %>
                             </li>
                           <% end %>
