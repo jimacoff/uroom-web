@@ -35,7 +35,8 @@ Rails.application.routes.draw do
 
   get 'search/results'
 
-  get 'dashboard' => 'dashboard#crews'
+  get 'dashboard' => 'dashboard#index'
+  get 'dashboard/crews' => 'dashboard#crews'
   get 'dashboard/myproperties' => 'dashboard#properties'
   get 'dashboard/following' => 'dashboard#following'
   get 'dashboard/requests' => 'dashboard#requests'
