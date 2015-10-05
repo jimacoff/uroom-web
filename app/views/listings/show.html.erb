@@ -1,5 +1,5 @@
 <div class="image-container">
-  <%= image_tag @cover_photo.image.url(:large), class: "listing-header" if @cover_photo.image.present? %>
+  <%= image_tag @cover_photo.image.url(:large), class: "listing-header" if @cover_photo && @cover_photo.image.present? %>
   <div class="parallax-content-2">
       <div class="container">
           <div class="row">
