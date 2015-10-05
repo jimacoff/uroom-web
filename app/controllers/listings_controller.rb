@@ -80,7 +80,6 @@ class ListingsController < ApplicationController
     else
       gallery.pictures.create()
     end
-    debugger
     if params[:listing][:pictures]
         params[:listing][:pictures].each { |image|
           gallery.pictures.create(image: image)
