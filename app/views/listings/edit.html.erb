@@ -194,7 +194,7 @@
                                     <header><h2>Cover Photo</h2></header>
                                     <div class="center">
                                         <div class="form-group">
-                                          <%= image_tag @cover_photo.image.url(:medium), style: "height: 150px; object-fit: scale-down;" if @cover_photo.image.present? %>
+                                          <%= image_tag @cover_photo.image.url(:medium), style: "height: 150px; object-fit: scale-down;" if @cover_photo && @cover_photo.image.present? %>
                                            <%= file_field_tag 'cover_picture', type: :file, multiple: false, class: "file",
                                            accept: "image/jpeg,image/png", data: {
                                            show_upload: false, show_caption: false, show_remove: false,
@@ -208,7 +208,10 @@
                                     <div class="center">
                                         <div class="form-group">
                                            <% @images.each do |picture| %>
-                                            <%= image_tag picture.image.url(:medium), style: "height: 150px; object-fit: scale-down;" %>
+                                           <span class="saved_image_group" id="image-<%= picture.id %>" style="position: relative;">
+                                             <%= image_tag picture.image.url(:medium), style: "height: 150px; object-fit: scale-down;", class: "saved_image" %>
+                                             <%= link_to '', picture, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :style => 'font-size: 24px;', :class => 'delete_picture fa fa-times-circle' %>
+                                           </span>
                                            <% end %>
                                          <hr>
                                            <%= f.file_field :pictures, type: :file, multiple: true, class: "file",

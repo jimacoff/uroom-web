@@ -98,7 +98,7 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
-    @cover_photo = @listing.pictures.first if @listing.pictures.first.image
+    @cover_photo = @listing.pictures.first if @listing.pictures.first && @listing.pictures.first.image
     @images = @listing.pictures.drop(1)
     @start_date = @listing.start_date
     @end_date = @listing.end_date

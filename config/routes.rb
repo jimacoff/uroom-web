@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :transactions, only: [:new, :create]
   resources :messages, only: [:create]
   resources :crews, only: [:create]
+  resources :pictures, only: [:destroy]
 
   resources :signatures, only: [:show, :create] do
     collection do

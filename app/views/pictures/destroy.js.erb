@@ -1,0 +1,5 @@
+$('#image-<%= @id%>').fadeOut();
+$('.delete_picture').bind('ajax:success', function() {
+        console.log("deleted.");
+        $(this).closest('.saved_image_group').fadeOut();
+});
