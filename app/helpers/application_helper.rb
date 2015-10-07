@@ -20,11 +20,11 @@ module ApplicationHelper
   end
 
   def search_options
-    [['Penn State', 0]]
+    [['San Francisco', 0], ['Silicon Valley', 1]]
   end
 
   def search_locations
-    ["University Park, PA", "Pittsburgh, PA"]
+    ["San Francisco, CA", "Silicon Valley, CA"]
   end
 
 end
