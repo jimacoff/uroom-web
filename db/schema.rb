@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915051603) do
+ActiveRecord::Schema.define(version: 20151007233341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20150915051603) do
     t.date     "start_date",                                                            null: false
     t.date     "end_date",                                                              null: false
     t.text     "email"
+    t.integer  "users_count",                                  default: 0
   end
 
   add_index "listings", ["active"], name: "index_listings_on_active", using: :btree

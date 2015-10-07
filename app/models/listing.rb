@@ -6,7 +6,7 @@ class Listing < ActiveRecord::Base
   has_many :pictures, through: :gallery
   has_many :crews
   has_many :orbits
-  has_many :users, through: :orbits
+  has_many :users, through: :orbits, counter_cache: true
   belongs_to :owner, class_name: "User"
 
   accepts_nested_attributes_for :gallery, allow_destroy: true
