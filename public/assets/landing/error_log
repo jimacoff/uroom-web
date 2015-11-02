@@ -1,0 +1,7 @@
+[11-Aug-2015 22:33:40 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/roomslvm/public_html/connect.php on line 11
+[11-Aug-2015 22:34:04 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/roomslvm/public_html/connect.php on line 11
+[11-Aug-2015 22:34:09 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/roomslvm/public_html/connect.php on line 11
+[11-Aug-2015 22:34:44 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/roomslvm/public_html/connect.php on line 11
+[11-Aug-2015 22:34:50 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/roomslvm/public_html/connect.php on line 11
+[11-Aug-2015 22:35:15 America/New_York] PHP Warning:  mysql_connect(): Unknown MySQL server host 'mysql.roomieapp.io' (25) in /home/roomslvm/public_html/connect.php on line 6
+[11-Aug-2015 22:35:23 America/New_York] PHP Warning:  mysql_connect(): Unknown MySQL server host 'mysql.roomieapp.io' (25) in /home/roomslvm/public_html/connect.php on line 6

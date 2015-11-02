@@ -1,94 +1,101 @@
-<div id="page-content">
-    <div id="bg">
-    <div id="title">Partner up. Discover.</div>
-  </div>
+<div id="h">
+      <div class="logo">Roomie</div>
+      <div class="social hidden-xs">
+        <!-- <a href="#"><i class="ion-social-twitter"></i></a>
+        <a href="#"><i class="ion-social-instagram"></i></a>
+        <a href="#"><i class="ion-social-facebook"></i></a> -->
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 centered">
+            <h1>Roomie</h1>
+            <h2>Find roommates the better way.</h2>
+            <div class="mtb">
 
-    <!-- end Slider -->
+              <form role="form" action="registerdb.php" method="post">
+                <input type="email" name="email" class="subscribe-input" placeholder="Add email to waiting list" required>
+                <button class='btn btn-conf btn-green' type="submit"> → </button>
+              </form>
 
-    <div class="search-box-wrapper">
-        <div class="search-box-inner">
-            <div class="container">
-                <div class="search-box map">
-                    <div id="form-map-sale" class="form-map form-search clearfix">
-                        <div class="row center">
-                          <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
-                            <div class="col-md-3 col-sm-4">
-                                  <%= select_tag :location, options_for_select(search_options, selected: :location ) %>
-                            </div>
-                            <div class="col-md-3 col-sm-4">
-                                  <%= select_tag("date", options_for_select(@months, @date)) %>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                              <div class="input-group">
-                                  <span class="input-group-addon">$</span>
-                                  <%= text_field_tag(:max, nil, {placeholder: "Your Max Rent", class: "form-control"}) %>
-                              </div>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= submit_tag "Search", { class:"btn btn-default" } %>
-                            </div>
-                          <% end %>
-                        </div>
-                    </div><!-- /#form-map -->
-                </div><!-- /.search-box -->
-            </div><!-- /.container -->
-        </div><!-- /.search-box-inner -->
+            </div><!--/mt-->
+            <h2>Landlords, submit your listings here:</h2>
+          </div>
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!-- /H -->
 
-    </div>
-    <!-- end Search Box -->
+    <div class="container ptb">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Moving shouldn't be scary</h2>
+          <p align="justify">
+            Roomie is a platform that makes renting homes and apartments affordable and painless.
+          </br>No more creepy roommate listings on craigslist, and no more struggling to find a place you can actually all afford and agree on.</br>Roomie is focused on integrating the lease and roommate processes, so that instead of using a glorified "Tinder," you're finding roommates that you like and can afford to live with. But if you already have roommates in mind, perfect!</br>Request a lease, and if a lister accepts, sign the documents and manage all payments online. Goodbye pen and paper.</p>
+        </div>
+        <div class="col-md-6 centered">
+          <!-- <img src="assets/img/phone.png" class="img-responsive mt" alt=""> -->
+          <img src="assets/img/home.svg" height="330" alt="" margin="auto">
+        </div>
+      </div><!--/row-->
 
-    <!-- Page Content -->
-    <div id="page-content">
-        <section id="our-services" class="block">
-            <div class="container">
-                <header class="section-title"><h2>How it Works</h2></header>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
-                            <figure class="icon"><i class="fa fa-folder"></i></figure>
-                            <aside class="description">
-                                <header><h3>Follow Listings</h3></header>
-                                <p>
-                                     Search listings by time-frame, cost, and furnishing.
-                                     When you find one that fits your needs, follow it!
-                                </p>
-                            </aside>
-                        </div><!-- /.feature-box -->
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
-                            <figure class="icon"><i class="fa fa-users"></i></figure>
-                            <aside class="description">
-                                <header><h3>Form a Crew</h3></header>
-                                <p>
-                                     See who else if following the listing for the time period.
-                                     Select others and form a crew by sending crew requests.
-                                     If they accept, you now have a crew!
-                                </p>
-                            </aside>
-                        </div><!-- /.feature-box -->
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
-                            <figure class="icon"><i class="fa fa-money"></i></figure>
-                            <aside class="description">
-                                <header><h3>Land the Listing</h3></header>
-                                <p>
-                                     Once your entire crew is ready, land the listing.
-                                     The owner can now approve your request so you can
-                                     sign the lease. Welcome to your new home!
-                                </p>
-                            </aside>
-                        </div><!-- /.feature-box -->
-                    </div><!-- /.col-md-4 -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </section><!-- /#our-services -->
+      <div class="row mt centered">
+        <div class="col-lg-6 col-lg-offset-3">
+          <h1>Make life easier</h1>
+        </div>
+        <div class="col-lg-4">
+          <img src="assets/img/conference_call.svg" height="140" alt="">
+          <h4>Find Roommates</h4>
+          <p align="center">Find roommates and listings you all like without uncomfortable introductions and phonecalls.</p>
+        </div><!--/col-lg-4 -->
 
+        <div class="col-lg-4">
+          <img src="assets/img/rules.svg" height="140" alt="">
+          <h4>Secure a Lease</h4>
+          <p align="center">Sign your lease with your new roommates online. No need to send paper documents back and forth.</p>
 
-    </div>
-    <!-- end Page Content -->
-  </div>
+        </div><!--/col-lg-4 -->
+
+        <div class="col-lg-4">
+          <img src="assets/img/money_transfer.svg" height="140" alt="">
+          <h4>Manage Shared Costs</h4>
+          <p align="center">Easily split shared costs like internet and TV with your roommates. Forget awkward confrontations.</p>
+
+        </div><!--/col-lg-4 -->
+      </div><!-- /row -->
+    </div><!--/container-->
+
+    <div id="sep">
+      <div class="container">
+        <div class="row centered">
+          <div class="col-md-8 col-md-offset-2">
+          </br>
+          </br>
+            <h1>Start leasing for Summer 2016</h1>
+            <p><a href="#"><button class="btn btn-conf-2 btn-green btn-bottom">Sign up</button></p></a>
+          </div><!--/col-md-8-->
+        </div>
+      </div>
+    </div><!--/sep-->
+
+    <div id="f">
+      <div class="container">
+        <div class="row centered">
+          <h2>Questions?</h2>
+          <h5>HELLO@ROOMIEAPP.IO</h5>
+          <h6 class="mt">COPYRIGHT 2015 - ROOMIE APP, INC.</h6>
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!--/F-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/retina-1.1.0.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||   function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-61902669-1', 'auto');
+        ga('send', 'pageview');
+    </script>

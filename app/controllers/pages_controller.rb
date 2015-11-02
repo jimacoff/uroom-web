@@ -6,5 +6,6 @@ class PagesController < ApplicationController
     (0..11).each do |m|
       @months << [@date.next_month(m).strftime("%b %Y"), @date.next_month(m)]
     end
+    render :file => 'public/index.html', :layout => false
   end
 end
