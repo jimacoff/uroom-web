@@ -1,55 +1,91 @@
-<div id="page-content">
-    <div id="bg">
-    <div id="title">Partner up. Discover.</div>
-  </div>
 
-    <!-- end Slider -->
+<div id="bg">
+  <div class="navigation nav-index">
 
-    <div class="search-box-wrapper">
-        <div class="search-box-inner">
-            <div class="container">
-                <div class="search-box map">
-                    <div id="form-map-sale" class="form-map form-search clearfix">
-                        <div class="row center">
-                          <%= form_tag({controller: "search", action: "results"}, method: "get", class: "form-group") do %>
-                            <div class="col-md-3 col-sm-4">
-                                  <%= select_tag :location, options_for_select(search_options, selected: :location ) %>
-                            </div>
-                            <div class="col-md-3 col-sm-4">
-                                  <%= select_tag("date", options_for_select(@months, @date)) %>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "styled-select", name: "category" ) %>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                              <div class="input-group">
-                                  <span class="input-group-addon">$</span>
-                                  <%= text_field_tag(:max, nil, {placeholder: "Your Max Rent", class: "form-control"}) %>
-                              </div>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
-                                  <%= submit_tag "Search", { class:"btn btn-default" } %>
-                            </div>
-                          <% end %>
+      <div class="container">
+          <header class="navbar" id="top" role="banner">
+              <div class="navbar-header">
+                  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                  </button>
+                  <div class="navbar-brand nav" id="brand">
+                      <%= link_to image_tag("logo_sticky.png", width: 160, height: 34, data: { src: "logo_sticky.png", src_retina: "logo_sticky@2x.png" }), root_path %>
+                  </div>
+              </div>
+              <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+                  <ul class="nav navbar-nav" style="font-size: medium;">
+                    <li style="font-size: small; margin-right: -30px; margin-top: 2px;">
+                      <%= link_to "Add Property", new_listing_path %>
+                    </li>
+                    <% if user_signed_in? %>
+                    <li>
+                      <ul>
+                        <div class="dropdown dropdown-access">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link"><%= current_user.first_name %></a>
+                          <div class="dropdown-menu" style="width: auto; padding-top: 5px; padding-bottom: 5px; padding-right: 15px; padding-left: 15px;">
+                                <li class="logged-in-menu"><%= link_to "Dashboard", dashboard_path, style: "font-size: larger;" %></li>
+                                <li class="logged-in-menu"><%= link_to "Account Settings", edit_user_registration_path, style: "font-size: larger;" %></li>
+                                <li class="logged-in-menu" style="padding-bottom: 10px; border-bottom: none;"><%= link_to "Sign out", destroy_user_session_path, method: 'delete', style: "font-size: larger;" %></li>
+                          </div>
                         </div>
-                    </div><!-- /#form-map -->
-                </div><!-- /.search-box -->
-            </div><!-- /.container -->
-        </div><!-- /.search-box-inner -->
+                      </ul>
+                    </li>
+                    <% else %>
+                    <li>
+                      <ul>
+                        <%= render 'users/shared/login_dropdown' %>
+                      </ul>
+                    </li>
+                    <% end %>
+                  </ul>
+              </nav><!-- /.navbar collapse-->
 
+          </header><!-- /.navbar -->
+      </div><!-- /.container -->
+  </div><!-- /.navigation -->
+
+    <div class="container">
+      <h1 id="title">Partner up. Discover.</h1>
+      <div id="search" class="row">
+        <h4>Find Listings</h4>
+        <%= form_tag({controller: "search", action: "results"}, method: "get") do %>
+          <div class="col-sm-3">
+                <%= select_tag :location, options_for_select(search_options, selected: :location), data: { icon: 'glyphicon-heart' } %>
+          </div>
+          <div class="col-sm-3">
+                <%= select_tag("date", options_for_select(@months, @date)) %>
+          </div>
+          <div class="col-sm-2">
+                <%= select_tag :lease_length, options_for_select([["Lease Length", ''], ['3 Months', 3], ['6 Months', 6], ['9 Months', 9], ['12 Months', 12]], selected: :lease_length, class: "", name: "category" ) %>
+          </div>
+          <div class="col-sm-2">
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <%= text_field_tag(:max, nil, {placeholder: "Max Rent", class: "form-control"}) %>
+            </div>
+          </div>
+          <div class="col-sm-2 search">
+                <%= submit_tag "Search", { class:"btn btn-default" } %>
+          </div>
+        <% end %>
+      </div>
     </div>
+</div>
+
+
+
     <!-- end Search Box -->
 
     <!-- Page Content -->
     <div id="page-content">
         <section id="our-services" class="block">
             <div class="container">
-                <header class="section-title"><h2>How it Works</h2></header>
+                <header class=""><h2>How it Works</h2></header>
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
+                        <div class="">
                             <figure class="icon"><i class="fa fa-folder"></i></figure>
-                            <aside class="description">
+                            <aside class="">
                                 <header><h3>Follow Listings</h3></header>
                                 <p>
                                      Search listings by time-frame, cost, and furnishing.
@@ -59,9 +95,9 @@
                         </div><!-- /.feature-box -->
                     </div><!-- /.col-md-4 -->
                     <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
+                        <div class="">
                             <figure class="icon"><i class="fa fa-users"></i></figure>
-                            <aside class="description">
+                            <aside class="">
                                 <header><h3>Form a Crew</h3></header>
                                 <p>
                                      See who else if following the listing for the time period.
@@ -72,9 +108,9 @@
                         </div><!-- /.feature-box -->
                     </div><!-- /.col-md-4 -->
                     <div class="col-md-4 col-sm-4">
-                        <div class="feature-box equal-height">
+                        <div class="">
                             <figure class="icon"><i class="fa fa-money"></i></figure>
-                            <aside class="description">
+                            <aside class="">
                                 <header><h3>Land the Listing</h3></header>
                                 <p>
                                      Once your entire crew is ready, land the listing.

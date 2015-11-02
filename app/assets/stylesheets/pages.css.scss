@@ -1,0 +1,97 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.nav-main {
+  display: none;
+}
+
+#title {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 200px;
+}
+
+#bg {
+  width:100%;
+  height:500px;
+  background-image: url("bg.jpg");
+  background-size:cover;
+  text-align: center;
+  .container {
+    display: inline-block;
+  }
+}
+
+#search {
+  margin-top: 50px;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+
+  h4 {text-align: left;}
+  .btn-group { width:100%; }
+  .col-sm-3 {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .col-sm-2 {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  [data-id="location"] {
+    background-color: white;
+    color: #3A96DC;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: white;
+    border-right-color: #D0D0CF;
+  }
+  [data-id="date"] {
+    background-color: white;
+    color: #3A96DC;
+    border-radius: 0;
+    border-color: white;
+    border-right-color: #D0D0CF;
+  }
+  [data-id="lease_length"] {
+    background-color: white;
+    color: #3A96DC;
+    border-radius: 0;
+    border-color: white;
+    border-right-color: #D0D0CF;
+  }
+  .input-group {
+    span {
+      padding-left: 10px;
+      padding-right: 5px;
+      border-radius: 0;
+      background-color: white;
+      color: #3A96DC;
+      border-color: white;
+    }
+    input {
+      border-color: white;
+      border: none;
+      border-radius: 0;
+      outline:0;
+    }
+    border: none;
+  }
+  .search {
+    z-index: 2;
+    .btn-default {
+      width: 100%;
+      margin-left: -5px;
+      background-color: #3A96DC;
+      color: white;
+      border-color: #3A96DC;
+    }
+  }
+}
+
+.searchbar {
+  margin-top: -10px;
+}

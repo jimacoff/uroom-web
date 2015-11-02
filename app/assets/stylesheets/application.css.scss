@@ -18,6 +18,23 @@
  *= require slick-theme
  */
 
+ body {
+      background-color: #121012;
+      color: white;
+      font-family: "Roboto", Roboto, sans-serif;
+  }
+
+  section {
+    background-color: #1F1C1D;
+  }
+
+  footer {
+    margin-top: 10px;
+  }
+
+
+
+
   .flash-head {
      position: absolute;
      margin: 0;
