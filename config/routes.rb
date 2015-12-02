@@ -42,6 +42,10 @@ Rails.application.routes.draw do
   get 'dashboard/following' => 'dashboard#following'
   get 'dashboard/requests' => 'dashboard#requests'
 
+  get 'tos'      => 'pages#tos'
+  get 'privacy'  => 'pages#privacy'
+  get 'equal'    => 'pages#equal'
+
   root to: "pages#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

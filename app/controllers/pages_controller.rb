@@ -8,4 +8,17 @@ class PagesController < ApplicationController
     end
     render :file => 'public/index.html', :layout => false
   end
+
+  def tos
+
+  end
+
+  def privacy
+
+  end
+
+  def equal
+
+  end
+
 end

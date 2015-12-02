@@ -29,7 +29,7 @@
                   </div>
                   <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                       <ul class="nav navbar-nav" style="font-size: medium;">
-                        <li style="font-size: small; margin-right: -30px; margin-top: 2px;">
+                        <li style="font-size: small; margin-right: 30px; margin-top: 2px;">
                           <%= link_to "Add Property", new_listing_path %>
                         </li>
                         <% if user_signed_in? %>
@@ -97,6 +97,7 @@
               <% end %>
               <aside id="footer-copyright">
                   <div class="container">
+                    <span class="pull-left"><%= link_to("Equal Opporutnity Housing", "/equal") %>&nbsp - <%= link_to("Terms of Service", "/tos") %>&nbsp - <%= link_to("Privacy", "/privacy") %></span>
                       <span class="pull-right">Need help?     hello@roomieapp.io</span>
                   </div>
               </aside>
