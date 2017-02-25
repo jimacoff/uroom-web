@@ -1,2 +1,2 @@
-# Welcome to Roomie
-# The code here is visible only for evaluation purposes, and is property of Roomie App, Inc.
+# Roomie #
+This is a Rails site for roommate & housing finding. Takes care of user accounts, payments, messaging, and more.
